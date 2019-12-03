@@ -74,7 +74,7 @@ Batches | 406 | 59
 渲染实体  | 2.26ms | 1.79ms
 渲染影子  | 2.63ms | 2.48ms
 
-在我手机上的测试结果，**SRP Batcher Off** 版本的cpu耗时反而更少。
+在我的手机上，**SRP Batcher Off** 版本的cpu耗时反而更少。
 
 有点不信邪，打开 **多线程渲染** 再测一次，结果一样：**SRP Batcher Off** 的版本cpu耗时更少。
 
