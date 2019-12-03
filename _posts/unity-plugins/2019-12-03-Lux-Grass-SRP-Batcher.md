@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Lux的Grass Shader和SRP Batcher"
+title: "Lux的Grass和SRP Batcher"
 subtitle: ""
 author: "恶毒的狗"
 header-mask: 0.2
@@ -9,7 +9,7 @@ tags:
   - SRP
 ---
 
-### Lux的Grass Shader和SRP Batcher
+### Lux的Grass和SRP Batcher
 
 **Lux** 系列的shader一直以高质量著称，最近在玩 [Lux LWRP Essentials](https://assetstore.unity.com/packages/vfx/shaders/lux-lwrp-essentials-150355?aid=1101l85Tr)，这是 **Lux** 的轻量管线版本。
 
