@@ -26,7 +26,7 @@ tags:
 
 ### 关于SRP Batcher
 
-这里我其实有一点疑惑，按照 [SRP Batcher官方文档](https://blogs.unity3d.com/2019/02/28/srp-batcher-speed-up-your-rendering/) 所介绍，如果一个场景有很多不同的材质，但是shader很少，那么 **SRP Batcher** 可以发挥最大功效，因为材质内容会在 **GPU内存** 中持久保存，那么 **CPU** 设置材质属性的开销就可以大大减少。
+这里我其实有一点疑惑，按照 [SRP Batcher官方文档](https://blogs.unity3d.com/2019/02/28/srp-batcher-speed-up-your-rendering/) 所介绍，如果一个场景有很多不同的材质，但是shader变体很少，那么 **SRP Batcher** 可以发挥最大功效。 
 
 >We aimed to speed up the general case where a Scene uses a lot of different Materials, but very few Shader variants.
 
@@ -36,7 +36,10 @@ tags:
 > 
 > A dedicated code is managing a large “per object” GPU CBUFFER
 
-但是回到上图的测试场景，每一株草的材质都是相同的，并且草的模型也是相同的，**GPU Instancing** 可以良好工作，在这种情况下 **SRP Batcher** 真的会快一点么？ 
+![img](/img/lux-grass/screenshot-04.jpg)
+<center>官方示例：材质不同、Mesh不同、Shader相同</center>
+
+但是回到Lux的测试场景Environment Demo，每一株草的材质都是相同的，并且草的模型也是相同的，**GPU Instancing** 可以良好工作，在这种情况下 **SRP Batcher** 真的会快一点么？ 
 
 还是先做一个测试。
 
@@ -82,16 +85,16 @@ Batches | 406 | 59
 
 ### 测试环境和结论
 
-**小米 Mix 2** 的处理器 **骁龙835** 还是比较强悍的，虽然测试场景的地表复杂度很高，整体也开了实时阴影（包括草的自阴影），但是Profiler并没有发现GPU跟不上的情况。
+**小米 Mix 2** 的处理器 **骁龙835** 还是比较强悍的，虽然测试场景的地表复杂度很高，也开了实时阴影（包括草的自阴影），但是Profiler并没有发现GPU跟不上的情况。
 
-我使用的Unity版本还是比较新的，**2019.2.12f1**，不过 **SRP Batcher** 依然还是标记为 **实验性的(Experimental)**。
+我使用的Unity版本是 **2019.2.12f1**，还是比较新的，不过 **SRP Batcher** 被标记为 **实验性的(Experimental)**。
 
 我看到 **Unity 2019.3** 下，**LWRP** 已经升级为 **URP**，并且 **SRP Batcher** 的 **实验性** 标记已经去掉。考虑到 **Unity 2019.3** 依然处于Beta测试阶段，所以暂且先放一放。
 
 由于移动设备的测试结果不稳定，并且以后可能会升级到 **URP**，目前写 **LWRP Shader** 的策略如下：
 
 + 按照兼容 **SRP Batcher** 的方式去写Shader。
-+ 是否打开 **SRP Batcher**，经过充分测试再决定。
++ 是否打开 **SRP Batcher**，经过充分测试后再决定。
 
 
 
