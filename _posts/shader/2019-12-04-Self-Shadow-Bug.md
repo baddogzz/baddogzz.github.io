@@ -26,7 +26,7 @@ tags:
 
 ### 原因
 
-原因其实很简单：这个Shader是从前项目搬的，前项目没有用Unity的内置阴影，而是自己写的 **ShaderMap**。 
+原因其实很简单：这个Shader是从前项目搬的，前项目没有用Unity的内置阴影，而是自己写的 **ShadowMap**。 
 
 把这个Shader搬到新工程的时候，因为只是做一个封面，我就偷了个懒，阴影改回Unity内置的，并且Shader改成了**Surface Shader**。
 

@@ -26,7 +26,7 @@ tags:
 
 ### 关于SRP Batcher
 
-这里我其实有一点疑惑，按照 [SRP Batcher官方文档](https://blogs.unity3d.com/2019/02/28/srp-batcher-speed-up-your-rendering/) 所介绍，如果一个场景有很多不同的材质，但是shader变体很少，那么 **SRP Batcher** 可以发挥最大功效。 
+这里我其实有一点疑惑，按照 [SRP Batcher官方文档](https://blogs.unity3d.com/2019/02/28/srp-batcher-speed-up-your-rendering/) 所介绍，当一个场景有很多不同的材质但是shader变体很少时，**SRP Batcher** 可以发挥最大功效。 
 
 >We aimed to speed up the general case where a Scene uses a lot of different Materials, but very few Shader variants.
 
