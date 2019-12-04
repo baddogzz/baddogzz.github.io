@@ -15,7 +15,7 @@ tags:
 
 今天把这个模板的Home页面背景图改成 **小甜甜** 了，问了一下 **主美哥** 意见，他看了一眼就立马指出问题：**角色没有自阴影，看起来有点飘。**
 
-<img src="/img/self-shadow-bug/screenshot1.jpg" width = "512" height = "512" alt="没有自阴影的小甜甜" align=center />
+![img](/img/self-shadow-bug/screenshot1.jpg){:height="75%" width="75%"}
 <center>没有自阴影的小甜甜</center>
 
 神马？哥还会犯这种低级错误？
@@ -46,7 +46,7 @@ tags:
   #pragma surface surf BGStandard fullforwardshadows addshadow
 ```
 
-<img src="/img/self-shadow-bug/screenshot2.jpg" width = "512" height = "512" alt="有自阴影的小甜甜" align=center />
+![img](/img/self-shadow-bug/screenshot2.jpg){:height="75%" width="75%"}
 <center>有自阴影的小甜甜</center>
 
 附：一个最简单的 **ShadowCaster** Pass示例，摘自 **Legacy Shaders/VertexLit**
