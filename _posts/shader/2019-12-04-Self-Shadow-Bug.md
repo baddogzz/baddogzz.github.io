@@ -6,6 +6,7 @@ author: "恶毒的狗"
 header-mask: 0.2
 tags:
   - Shader
+  - 小甜甜
 ---
 
 ### 一个自阴影的Bug
@@ -21,6 +22,8 @@ tags:
 
 不过这里还是要佩服一下美术的眼睛，关注点和程序确实不一样。
 
+---
+
 ### 原因
 
 原因其实很简单：这个Shader是从前项目搬的，前项目没有用Unity的内置阴影，而是自己写的 **ShaderMap**。 
@@ -32,6 +35,8 @@ tags:
 > addshadow - Generate a shadow caster pass. Commonly used with custom vertex modification, so that shadow casting also gets any procedural vertex animation. Often shaders don’t need any special shadows handling, as they can just use shadow caster pass from their fallback.
 
 就算漏了，但如果 **FallBack** 指向的Shader有这个Pass也没问题，偏偏 **FallBack** 我也漏了...
+
+---
 
 ### 修正
 
