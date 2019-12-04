@@ -39,7 +39,7 @@ tags:
 ![img](/img/lux-grass/screenshot-04.jpg)
 <center>官方示例：材质不同、Mesh不同、Shader相同</center>
 
-但是回到Lux的测试场景Environment Demo，每一株草的材质都是相同的，并且草的模型也是相同的，**GPU Instancing** 可以良好工作，在这种情况下 **SRP Batcher** 真的会快一点么？ 
+但是回到Lux的测试场景Environment Demo，每一株草的材质都是相同的，并且草的模型也是相同的，**GPU Instancing** 可以良好工作，在这种情况下 **SRP Batcher** 还会快一点么？ 
 
 还是先做一个测试。
 
