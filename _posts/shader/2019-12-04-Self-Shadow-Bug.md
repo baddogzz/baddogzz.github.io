@@ -4,6 +4,7 @@ title: "一个自阴影的Bug"
 subtitle: ""
 author: "恶毒的狗"
 header-mask: 0.2
+catalog: true
 tags:
   - Shader
   - 小甜甜
@@ -30,11 +31,9 @@ tags:
 
 把这个Shader搬到新工程的时候，因为只是做一个封面，我就偷了个懒，阴影改回Unity内置的，并且Shader改成了**Surface Shader**。
 
-我们知道，Unity内置的阴影需要 **ShadowCaster** 这个Pass去写 **ShadowMap**。 想要 **Surface Shader** 生成这个Pass，我们需要添加 **addshadow** 参数，但是我偏偏漏了...
-
+我们知道，Unity内置的阴影需要 **ShadowCaster** 这个Pass去写 **ShadowMap**。 想要 **Surface Shader** 生成这个Pass，我们需要添加 **addshadow** 参数，或者 **FallBack** 指向的Shader包含这个Pass。 遗憾的是我漏了...
+ 
 > addshadow - Generate a shadow caster pass. Commonly used with custom vertex modification, so that shadow casting also gets any procedural vertex animation. Often shaders don’t need any special shadows handling, as they can just use shadow caster pass from their fallback.
-
-就算漏了，但如果 **FallBack** 指向的Shader有这个Pass也没问题，偏偏 **FallBack** 我也漏了...
 
 ---
 

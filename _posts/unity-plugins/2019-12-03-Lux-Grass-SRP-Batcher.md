@@ -4,6 +4,7 @@ title: "Lux的Grass和SRP Batcher"
 subtitle: ""
 author: "恶毒的狗"
 header-mask: 0.2
+catalog: true
 tags:
   - Lux
   - SRP
