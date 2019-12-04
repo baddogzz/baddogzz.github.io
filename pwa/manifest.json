@@ -1,7 +1,7 @@
 {
-  "name": "Hux Blog",
-  "short_name": "Hux Blog",
-  "description": "About an engineer & designer who loves web.",
+  "name": "恶毒的狗",
+  "short_name": "恶毒的狗",
+  "description": "Bad Fat Dog",
   "icons": [{
     "src": "icons/128.png",
     "sizes": "128x128",
