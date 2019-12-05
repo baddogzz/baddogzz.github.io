@@ -101,7 +101,7 @@ Unity官方文档对其的说明如下：
 
 > Enable this option to create a Display Buffer to hold 32-bit color values (16-bit by default). Use it if you see banding, or need alpha in your post-processed effects, because they create Render Textures in the same format as the Display Buffer.
 
-文档说得挺清楚的了，我的 **post-processed effects** 确实需要 **alpha**。
+文档说得挺清楚的了，我的 **post-processed effects** 确实需要 **alpha**，但是我却选择了16位的RT。
 
 ---
 
