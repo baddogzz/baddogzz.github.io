@@ -26,7 +26,7 @@ tags:
 ![img](/img/use-32bit-buffer/screenshot2.jpg){:height="75%" width="75%"}
 <center>_BloomTex一片漆黑</center>
 
-**_BloomTex** 存储的是 **屏幕中的亮色区域经过N次下采样和模糊处理** 后的结果。
+**_BloomTex** 存储的是 **屏幕中的亮色区域经过下采样/上采样和模糊处理** 后的结果。
 
 **Uber** Shader最终会上采样 **_BloomTex**，并且和屏幕颜色做叠加以产生辉光，由于 **_BloomTex** 一片黑，所以辉光基本就没了。
 
