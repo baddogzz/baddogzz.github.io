@@ -60,7 +60,7 @@ tags:
 ![img](/img/use-32bit-buffer/screenshot3.jpg)
 <center>Inputs: R11G11B10_FLOAT</center>
 
-![img](/img/use-32bit-buffer/screenshot3.jpg)
+![img](/img/use-32bit-buffer/screenshot4.jpg)
 <center>Outputs: B5G5R5A1_UNORM</center>
 
 由截图可见，由于我们开了 **HDR**，并且 **HDR Mode** 选择了 **R11G11B10**，作为输入的TempBuffer格式是吻合的。
