@@ -104,5 +104,9 @@ friends: [
     {
         title: "简书|恶毒的狗",
         href: "https://www.jianshu.com/u/8f5bfc31553e"
+    },
+    {
+        title: "csdn|baddogzz",
+        href: "https://blog.csdn.net/weixin_45979158"     
     }
 ]
