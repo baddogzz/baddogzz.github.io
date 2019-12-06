@@ -31,7 +31,6 @@ tags:
 **Uber** Shader最终会上采样 **_BloomTex**，并且和屏幕颜色做叠加以产生辉光，由于 **_BloomTex** 一片黑，所以辉光基本就没了。
 
 ```
-// PostProcessing Stack V1版本
 // HDR Bloom
 #if BLOOM
 {
@@ -67,7 +66,7 @@ tags:
 
 但是输出的格式居然是 **B5G5R5A1**，由于我们选用的 **PostProcessing Stack V1** 版本在移动设备上是通过 **RGBM** 来编码 **HDR** 的，16位的RT显然无法满足编码要求，这就是一切错误的根源了。
 
-```
+```csharp
 // Blur buffer format
 // TODO: Extend the use of RGBM to the whole chain for mobile platforms
 var useRGBM = Application.isMobilePlatform;
