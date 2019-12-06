@@ -108,7 +108,7 @@ Unity官方文档对其的说明如下：
 
 修正很容易，把这个勾勾回去就好了。
 
-不过 **PostProcessing Stack V1** 这里写的也不够严谨啊，对 **HDR** 的兼容性如果做的好一点，也不会有这个bug。
+不过 **PostProcessing Stack V1** 这里写的也不够严谨啊，对 **HDR** 的兼容性如果做的好一点，也不会有这个问题。
 
 当然，现在 **PostProcessing Stack V1** 已经被淘汰了，只是我们还没升级到 [Post-processing Stack v2](https://github.com/Unity-Technologies/PostProcessing)。
 
