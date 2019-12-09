@@ -57,7 +57,7 @@ positionWS.xz += windDir.xz * windStrength;
 
 #### Wind Texture 的生成
 
-**Wind Texture** 是全局的，这样风的计算可以独立出来，不用每个顶点着色器都去计算。
+**Wind Texture** 是全局的，这样风的计算可以独立出来，不用每个顶点着色器都去各自计算。
 
 要生成 **Wind Texture**，我们需要在Unity的 **WindZone** 组件，同时添加 **LuxLWRP_Wind** 脚本，这个脚本会每帧去更新 **Wind Texture** 的信息。
 
@@ -67,11 +67,11 @@ positionWS.xz += windDir.xz * windStrength;
 
 ![img](/img/lux-wind/screenshot5.jpg){:height="50%" width="50%"}
 
-**Wind Base Tex** 的四个通道分别是四种scale的 **perlin noise**，**RGB** 通道主要用于计算 **Wind Strength**， **A** 通道不但影响 **Wind Strength**，更主要的是计算 **Wind Gusting**。
+**Wind Base Tex** 的4个通道分别是 **4种scale** 的 **perlin noise**，**RGB** 通道主要用于计算 **Wind Strength**， **A** 通道不但影响 **Wind Strength**，更主要的是计算 **Wind Gusting**。
 
 ![img](/img/lux-wind/screenshot6.jpg){:height="50%" width="75%"}
 
-注意这里的 **Wind Strength** / **Wind Gusting** 和 **WindZone** 的 **windMain** / **windTurbulence** 是对应的，一个表示主风，一个表示急速变化的风。
+注意这里的 **Wind Strength** / **Wind Gusting** 和 **WindZone** 的 **windMain** / **windTurbulence** 是对应的，一个表示 **主风**，一个表示 **急风**。
 
 合成 **Wind Texture** 的代码比较简单，各个通道采样后做混合，生成最终结果。 **Wind Texture** 的R通道保存的是 **Wind Strength** 的计算结果，B通道保存的是 **Wind Gusting** 的计算结果。
 
@@ -119,7 +119,7 @@ half4 wind = SAMPLE_TEXTURE2D_LOD(_LuxLWRPWindRT, sampler_LuxLWRPWindRT, vertexI
 
 上面的 **_LuxLWRPWindDirSize** 向量，xyz保存的是风的方向，w保存的是 **1/Size In World Space** 的结果。 **vertexInput.positionWS.xz * _LuxLWRPWindDirSize.w** 即顶点的 **世界坐标** 换算成 **Wind Texture的UV坐标**。
 
-**Wind Texture** 的 **wrapMode** 是 **Repeat**，场景的风会按照 **Size In World Space** 定义的大小Tiling和重复。
+**Wind Texture** 的 **wrapMode** 是 **Repeat**，**Lux Wind** 的行为会按照 **Size In World Space** 定义的大小在场景内重复。
 
 
 ### 参考
