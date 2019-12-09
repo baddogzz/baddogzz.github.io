@@ -69,7 +69,7 @@ positionWS.xz += windDir.xz * windStrength;
 
 ![img](/img/lux-wind/screenshot5.jpg){:height="50%" width="50%"}
 
-**Wind Base Tex** 的4个通道分别是 **4种scale** 的 **perlin noise**，**RGB** 通道主要用于计算 **Wind Strength**， **A** 通道不但影响 **Wind Strength**，更主要的是计算 **Wind Gusting**。
+**Wind Base Tex** 的四个通道分别是 **四类scale** 的 **perlin noise**，**RGB** 通道主要用于计算 **Wind Strength**， **A** 通道不但影响 **Wind Strength**，更重要的是计算 **Wind Gusting**。
 
 ![img](/img/lux-wind/screenshot6.jpg){:height="50%" width="75%"}
 
