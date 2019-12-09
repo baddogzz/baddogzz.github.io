@@ -61,7 +61,7 @@ positionWS.xz += windDir.xz * windStrength;
 
 **Wind Texture** 是全局的，这样风的计算可以独立出来，不用每个顶点着色器都去各自计算。
 
-要生成 **Wind Texture**，我们需要在Unity的 **WindZone** 组件，同时添加 **LuxLWRP_Wind** 脚本，这个脚本会每帧去更新 **Wind Texture** 的信息。
+要生成 **Wind Texture**，我们需要Unity的 **WindZone** 组件，同时添加 **LuxLWRP_Wind** 脚本，这个脚本会每帧去更新 **Wind Texture** 的信息。
 
 ![img](/img/lux-wind/screenshot4.jpg){:height="70%" width="70%"}
 
