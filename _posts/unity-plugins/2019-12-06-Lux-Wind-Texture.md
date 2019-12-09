@@ -110,7 +110,7 @@ half4 frag(VertexOutput i) : SV_Target
 
 #### 草的位置和 **Wind Texture** 的对应关系 
 
-**LuxLWRP_Wind** 有一个参数 **Size In World Space**，用来决定 **Wind Texture** 覆盖的世界空间xz范围。 
+**LuxLWRP_Wind** 有一个参数 **Size In World Space**，用来决定 **Wind Texture** 覆盖的世界空间的xz范围。 
 
 草的 **世界坐标xz** 会除以 **Size In World Space** 换算成 **UV** 去 **Wind Texture** 采样。
 
