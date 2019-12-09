@@ -112,16 +112,16 @@ half4 frag(VertexOutput i) : SV_Target
 
 **LuxLWRP_Wind** 有一个参数 **Size In World Space**，用来决定 **Wind Texture** 覆盖的世界空间的xz范围。 
 
-草的 **世界坐标xz** 会除以 **Size In World Space** 换算成 **UV** 去 **Wind Texture** 采样。
+草的 **世界坐标xz** 除以 **Size In World Space** 即可换算成 **UV坐标**，用于 **Wind Texture** 的采样，从而得到当前位置风的强度信息。
 
 ```
 half4 wind = SAMPLE_TEXTURE2D_LOD(_LuxLWRPWindRT, sampler_LuxLWRPWindRT, vertexInput.positionWS.xz * _LuxLWRPWindDirSize.w + phase * _WindMultiplier.z, _WindMultiplier.w);
 
 ```
 
-上面的 **_LuxLWRPWindDirSize** 向量，xyz保存的是风的方向，w保存的是 **1/Size In World Space** 的结果。 **vertexInput.positionWS.xz * _LuxLWRPWindDirSize.w** 即顶点的 **世界坐标** 换算成 **Wind Texture的UV坐标**。
+上面代码中的 **_LuxLWRPWindDirSize** 向量，其xyz保存的是风的方向，w保存的是 **1 / Size In World Space** 的结果。 **vertexInput.positionWS.xz * _LuxLWRPWindDirSize.w** 即顶点的 **世界坐标** 换算成 **Wind Texture的UV坐标**。
 
-**Wind Texture** 的 **wrapMode** 是 **Repeat**，**Lux Wind** 的行为会按照 **Size In World Space** 定义的大小在场景内重复。
+**Wind Texture** 的 **wrapMode** 是 **Repeat**，**Lux Wind** 会按照 **Size In World Space** 定义的大小在场景内重复。
 
 ---
 
