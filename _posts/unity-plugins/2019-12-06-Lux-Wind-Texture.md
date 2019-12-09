@@ -130,7 +130,7 @@ half4 wind = SAMPLE_TEXTURE2D_LOD(_LuxLWRPWindRT, sampler_LuxLWRPWindRT, vertexI
 
 更多细节可以直接参考 [Lux LWRP Essentials](https://assetstore.unity.com/packages/vfx/shaders/lux-lwrp-essentials-150355?aid=1101l85Tr) 的代码。
 
-此外，关于 **Wind Texture的合成**， 作者在他的Shader中也给出了一个参考：[dynamic clouds](http://www.iquilezles.org/www/articles/dynclouds/dynclouds.htm)。
+此外，关于 **Wind Texture的合成**，作者在他的Shader中也给出了一个参考：[dynamic clouds](http://www.iquilezles.org/www/articles/dynclouds/dynclouds.htm)。
 
 好了，拜拜。
 
