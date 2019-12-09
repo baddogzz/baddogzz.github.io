@@ -19,15 +19,17 @@ tags:
 
 ![img](/img/lux-wind/screenshot2.gif){:height="75%" width="75%"}
 
-这里的顶点摆动计算比较简单，没有 **WindZone** 之类的设置，就是周期性的正余弦运动。 效果还不错，计算量也不算大。
+这里其实没有风，草的摆动计算比较简单，就是周期性的正余弦摆动。 效果还不错，计算量也不算大。
 
 如果用 **Lux的风** 来驱动草的摆动，效果如下：
 
 ![img](/img/lux-wind/screenshot1.gif){:height="75%" width="75%"}
 
-摆动不再那么规则，并且风的方向可以调整，表现更加真实（好似我调的摆动频率有点高了......）。
+摆动不再那么规则，并且风的方向可以调整，表现更加真实。
 
 下面就来看一下它的实现细节。
+
+---
 
 ### 实现细节
 
@@ -41,7 +43,7 @@ tags:
 
 #### 草的摆动
 
-草的摆动很简单：采样 **Wind Texture**，根据风的方向计算出摆动的幅度xz，和顶点位置相加即可。
+草的摆动很简单：在顶点着色器采样 **Wind Texture**，结合风的方向计算出摆动的幅度xz，和顶点位置相加即可。
 
 ```
 half4 wind = SAMPLE_TEXTURE2D_LOD(_LuxLWRPWindRT, sampler_LuxLWRPWindRT, positionWS.xz * _LuxLWRPWindDirSize.w + phase * _WindMultiplier.z, _WindMultiplier.w);                
@@ -99,7 +101,7 @@ half4 frag(VertexOutput i) : SV_Target
 
 ```
 
-**Lux Grass** 最终采样 **Wind Texture** 的时候，会把 **Wind Gusting** 应用到 **Wind Strength**，这里有点类似 **解码法线贴图**， 但是为了保证 **急风不要完全打乱主风**，作者用了一个magic number： **0.243**。
+**Lux Grass** 最终采样 **Wind Texture** 的时候，会把 **Wind Gusting** 应用到 **Wind Strength**，这里有点类似 **解码法线贴图**， 但是为了保证 **急风不要完全打乱主风的方向**，作者用了一个magic number： **0.243**。
 
 ```
  /* not a "real" normal as we want to keep the base direction */ 
@@ -120,6 +122,8 @@ half4 wind = SAMPLE_TEXTURE2D_LOD(_LuxLWRPWindRT, sampler_LuxLWRPWindRT, vertexI
 上面的 **_LuxLWRPWindDirSize** 向量，xyz保存的是风的方向，w保存的是 **1/Size In World Space** 的结果。 **vertexInput.positionWS.xz * _LuxLWRPWindDirSize.w** 即顶点的 **世界坐标** 换算成 **Wind Texture的UV坐标**。
 
 **Wind Texture** 的 **wrapMode** 是 **Repeat**，**Lux Wind** 的行为会按照 **Size In World Space** 定义的大小在场景内重复。
+
+---
 
 
 ### 参考
