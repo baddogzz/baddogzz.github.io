@@ -14,7 +14,7 @@ tags:
 
 **侑虎** 的深度测试报告里，有一个关于地表shader的报告：
 
-![img](/img/shader-pow/screenshot1.jpg){:height="75%" width="75%"}
+![img](/img/shader-pow/screenshot1.jpg){:height="90%" width="90%"}
 
 报告提到：
 
