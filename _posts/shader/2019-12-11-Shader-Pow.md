@@ -12,7 +12,7 @@ tags:
 
 ### 关于pow编译后的代码
 
-**侑虎** 的深度测试报告里，有一个关于地表shader的报告：
+**侑虎** 的深度测试文档里，有一个关于地表shader的报告：
 
 ![img](/img/shader-pow/screenshot1.jpg){:height="90%" width="90%"}
 
