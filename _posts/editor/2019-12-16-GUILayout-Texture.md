@@ -11,7 +11,7 @@ tags:
 
 ### GUILayout.Label也可以支持Texture
 
-之前一直不知道，GUILayout.Label函数是支持Texture的，玩 [The Illustrated Nature](https://assetstore.unity.com/packages/3d/vegetation/the-illustrated-nature-153939?aid=1101l85Tr) 的时候才发现。
+之前一直不知道，**GUILayout.Label** 函数是支持 **Texture** 的，玩 [The Illustrated Nature](https://assetstore.unity.com/packages/3d/vegetation/the-illustrated-nature-153939?aid=1101l85Tr) 的时候才发现。
 
 ![img](/img/guilayout-texture/screenshot1.png){:height="65%" width="65%"}
 
