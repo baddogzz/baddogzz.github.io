@@ -13,7 +13,7 @@ tags:
 
 之前一直不知道，GUILayout.Label函数是支持Texture的，玩 [The Illustrated Nature](https://assetstore.unity.com/packages/3d/vegetation/the-illustrated-nature-153939?aid=1101l85Tr) 的时候才发现。
 
-![img](/img/guilayout-texture/screenshot1.png){:height="60%" width="60%"}
+![img](/img/guilayout-texture/screenshot1.png){:height="65%" width="65%"}
 
 代码好简单，如下：
 
