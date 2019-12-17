@@ -1,16 +1,17 @@
 ---
 layout: post
-title: "关于unity_LODFade的骚操作"
+title: "URP管线下unity_LODFade的骚操作"
 subtitle: ""
 author: "恶毒的狗"
 header-mask: 0.2
 catalog: true
 tags:
   - Unity
+  - SRP
   - Shader
 ---
 
-### 关于unity_LODFade的骚操作
+### URP管线下unity_LODFade的骚操作
 
 玩 [The Illustrated Nature](https://assetstore.unity.com/packages/3d/vegetation/the-illustrated-nature-153939?aid=1101l85Tr)，发现他的植物做了Lod，并且Lod的过渡并不是硬切的，有一个渐变，如下：
 
@@ -50,19 +51,23 @@ void LODDitheringTransition(uint2 fadeMaskSeed, float ditherFactor)
 }
 ```
 
-**LODDitheringTransition** 函数先对 **clipPos** 做了一个hash操作，再把hash的结果结合 **unity_LODFade.x** 做 **clip** 操作， 丢弃一些像素以达到 **平滑过渡** 的效果。
+**LODDitheringTransition** 函数先对 **clipPos** 做了一个hash操作生成一个浮点数，再把这个浮点数结合 **unity_LODFade.x** 做 **clip** 操作， 丢弃一些像素以达到 **平滑过渡** 的效果。
+
+---
 
 ### 实现细节
 
 #### 关于unity_LODFade.x的设置
 
-关于LOD，如果作上面的 **平滑过渡** 效果，那么在过渡的阶段，存在2个LOD等级模型共存的情况，这里有一定的性能问题，并且 **clip** 操作在很多平台是很昂贵的。
+关于LOD，如果作上面的 **平滑过渡** 效果，那么在过渡的阶段，存在2个LOD等级共存的情况，这里有一定的性能问题，并且 **clip** 操作在很多平台是很昂贵的。
 
 我们姑且不考虑性能问题，**LODDitheringTransition** 的代码注释写的比Unity文档清楚的地方在于，他告诉了我们 **unity_LODFade.x** 到底是怎么设值的。
 
 > LOD0 must use this function with ditherFactor 1..0 <br>
 > LOD1 must use this function with ditherFactor -1..0 <br>
 > This is what is provided by unity_LODFade
+
+在 **平滑过渡** 的过程中，**当前等级的权重** 从 **1过渡到0**，**下一等级的权重** 从 **-1过渡到0**，裁剪计算会依据这个权重的正负做不同的处理。
 
 #### 关于GenerateHashedRandomFloat
 
@@ -105,7 +110,7 @@ uint JenkinsHash(uint x)
 }
 ```
 
-Hash完毕后，**ConstructFloat** 函数利用Hash的结果再生成一个 **[0,1)** 区间的浮点数用于最后的 **clip** 操作。
+Hash完毕后，**ConstructFloat** 函数利用Hash的结果再生成一个 **[0,1)** 区间的浮点数，用于最后的 **clip** 操作。
 
 ```
 // Construct a float with half-open range [0, 1) using low 23 bits.
@@ -122,11 +127,51 @@ float ConstructFloat(int m) {
 }
 ```
 
-考虑一下 **单精度浮点数的内存布局**
+这里是一个骚操作，考虑一下 **单精度浮点数的内存布局**
 
 ![img](/img/shader-lod-fade/screenshot2.png)
 
-**ConstructFloat** 风骚的利用Hash结果的 **低23位** 做 **尾数**，和 **0x3F800000(浮点数1.0的int表示)** 做 **或操作**，再把得到的结果从int转为float，就得到了 **[1,2)** 区间的浮点数，再减去1.0f，就得到了**[0,1)** 区间的浮点数结果。
+**ConstructFloat** 风骚的利用Hash结果的 **低23位** 做 **尾数**，和 **0x3F800000(浮点数1.0的int表示)** 做 **或操作**，再把得到的结果 **从int转为float**，就得到了 **[1,2)** 区间的浮点数，再减去1.0f，就得到了**[0,1)** 区间的浮点数结果。
+
+
+#### 关于CopySign
+
+拿到 **GenerateHashedRandomFloat** 的计算结果后，最后就是根据 **unity_LODFade.x** 做裁剪操作。前面提到 **unity_LODFade.x** 的取值 **有正有负**，所以这里要对正负做不同的处理。
+
+这里最主要的就是 **CopySign** 这个操作。
+
+```
+// Composes a floating point value with the magnitude of 'x' and the sign of 's'.
+// See the comment about FastSign() below.
+float CopySign(float x, float s, bool ignoreNegZero = true)
+{
+#if !defined(SHADER_API_GLES)
+    if (ignoreNegZero)
+    {
+        return (s >= 0) ? abs(x) : -abs(x);
+    }
+    else
+    {
+        uint negZero = 0x80000000u;
+        uint signBit = negZero & asuint(s);
+        return asfloat(BitFieldInsert(negZero, signBit, asuint(x)));
+    }
+#else
+    return (s >= 0) ? abs(x) : -abs(x);
+#endif
+}
+```
+
+**CopySign** 就是让 **GenerateHashedRandomFloat** 结果的符号和 **unity_LODFade.x** 的符号一样。这样无论 **unity_LODFade.x** 是 **[1,0]** 还是 **[-1,0]**，我们都可以得到正确的裁剪结果。
+
+---
+
+### 关于标准管线
+
+**LODDitheringTransition** 是 **SRP** 特有的函数。 
+
+回到Unity的 **标准管线**，也有一个类似的操作： **UNITY_APPLY_DITHER_CROSSFADE**，这个留待下文介绍。
+
 
 
 
