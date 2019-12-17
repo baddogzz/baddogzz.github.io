@@ -17,7 +17,7 @@ tags:
 
 ![img](/img/shader-lod-fade/screenshot1.gif){:height="90%" width="90%"}
 
-跟了一下代码，发现主要的逻辑如下：
+跟了一下代码，发现主要的逻辑就3行：
 
 ```
 #ifdef LOD_FADE_CROSSFADE
@@ -61,7 +61,7 @@ void LODDitheringTransition(uint2 fadeMaskSeed, float ditherFactor)
 
 #### 关于unity_LODFade.x的设置
 
-关于LOD，如果作上面的 **平滑过渡** 效果，那么在过渡的阶段，存在 **2个LOD等级共存**的情况，这里有一定的性能问题，并且 **clip** 操作在很多平台是很昂贵的。
+关于LOD，如果作上面的 **平滑过渡** 效果，那么在过渡的阶段，存在 **2个LOD等级共存** 的情况，这里有一定的性能问题，并且 **clip** 操作在很多平台是很昂贵的。
 
 我们姑且不考虑性能问题，**LODDitheringTransition** 的代码注释写的比Unity文档清楚的地方在于，他告诉了我们 **unity_LODFade.x** 到底是怎么设值的。
 
