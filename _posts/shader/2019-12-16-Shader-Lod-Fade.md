@@ -53,13 +53,15 @@ void LODDitheringTransition(uint2 fadeMaskSeed, float ditherFactor)
 
 **LODDitheringTransition** 函数先对 **clipPos** 做了一个hash操作生成一个浮点数，再把这个浮点数结合 **unity_LODFade.x** 做 **clip** 操作， 丢弃一些像素以达到 **平滑过渡** 的效果。
 
+下面我们就来看看 **LODDitheringTransition** 的实现细节。
+
 ---
 
 ### 实现细节
 
 #### 关于unity_LODFade.x的设置
 
-关于LOD，如果作上面的 **平滑过渡** 效果，那么在过渡的阶段，存在 **2个LOD等级共存** 的情况，这里有一定的性能问题，并且 **clip** 操作在很多平台是很昂贵的。
+关于LOD，如果作上面的 **平滑过渡** 效果，那么在过渡的阶段，存在 **2个LOD等级共存**的情况，这里有一定的性能问题，并且 **clip** 操作在很多平台是很昂贵的。
 
 我们姑且不考虑性能问题，**LODDitheringTransition** 的代码注释写的比Unity文档清楚的地方在于，他告诉了我们 **unity_LODFade.x** 到底是怎么设值的。
 
@@ -71,7 +73,7 @@ void LODDitheringTransition(uint2 fadeMaskSeed, float ditherFactor)
 
 #### 关于GenerateHashedRandomFloat
 
-GenerateHashedRandomFloat的代码如下：
+**GenerateHashedRandomFloat** 针对不同维度的输入，实现代码如下：
 
 ```
 float GenerateHashedRandomFloat(uint x)
@@ -95,7 +97,9 @@ float GenerateHashedRandomFloat(uint4 v)
 }
 ```
 
-这里首先对 **clipPos** 做一个简化的 [Jenkins hash](https://en.wikipedia.org/wiki/Jenkins_hash_function)，考虑1维的情况，算法如下：
+可以看到它主要包括2步操作： **JenkinsHash** 和 **ConstructFloat**。
+
+**JenkinsHash** 首先对 **clipPos** 做一个简化的 [Jenkins hash](https://en.wikipedia.org/wiki/Jenkins_hash_function)，考虑1维的情况，算法如下：
 
 ```
 // A single iteration of Bob Jenkins' One-At-A-Time hashing algorithm.
@@ -127,7 +131,7 @@ float ConstructFloat(int m) {
 }
 ```
 
-这里是一个骚操作，考虑一下 **单精度浮点数的内存布局**
+这里是一个 **骚操作**，考虑一下 **单精度浮点数的内存布局**
 
 ![img](/img/shader-lod-fade/screenshot2.png)
 
@@ -162,7 +166,9 @@ float CopySign(float x, float s, bool ignoreNegZero = true)
 }
 ```
 
-**CopySign** 就是让 **GenerateHashedRandomFloat** 结果的符号和 **unity_LODFade.x** 的符号一样。这样无论 **unity_LODFade.x** 是 **[1,0]** 还是 **[-1,0]**，我们都可以得到正确的裁剪结果。
+**CopySign** 就是让 **GenerateHashedRandomFloat** 结果的符号和 **unity_LODFade.x** 的符号一样。
+
+这样无论 **unity_LODFade.x** 是 **[1,0]** 还是 **[-1,0]**，我们都可以得到正确的裁剪结果。
 
 ---
 
