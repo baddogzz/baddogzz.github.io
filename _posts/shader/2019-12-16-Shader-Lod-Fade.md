@@ -69,7 +69,7 @@ void LODDitheringTransition(uint2 fadeMaskSeed, float ditherFactor)
 > LOD1 must use this function with ditherFactor -1..0 <br>
 > This is what is provided by unity_LODFade
 
-在 **平滑过渡** 的过程中，**当前等级的权重** 从 **1过渡到0**，**下一等级的权重** 从 **-1过渡到0**，裁剪计算会依据这个权重的正负做不同的处理。
+在 **平滑过渡** 的过程中，**LOD0** 从 **1过渡到0**，**LOD1** 从 **-1过渡到0**，裁剪计算会依据这个权重的正负做不同的处理。
 
 #### 关于GenerateHashedRandomFloat
 
