@@ -25,7 +25,7 @@ tags:
 #endif
 ```
 
-上述代码里的 **unity_LODFade** 是Unity内置变量，**unity_LODFade.x** 表示是 **当前LOD等级的权重**，Unity文档对其有一个简单说明：
+上述代码里的 **clipPos** 即 **齐次裁剪空间** 的坐标，**unity_LODFade** 是Unity内置变量，**unity_LODFade.x** 表示是 **当前LOD等级的权重**，Unity文档对其有一个简单说明：
 
 > Unity doesn’t provide a default built-in technique to blend LOD geometries. You need to implement your own technique according to your game type and Asset production pipeline.
 
