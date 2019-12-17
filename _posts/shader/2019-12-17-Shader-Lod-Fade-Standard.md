@@ -33,6 +33,8 @@ UNITY_APPLY_DITHER_CROSSFADE(i.pos.xy);
 
 更具体的细节，可以参考 **github** 上的一个 [CrassFade示例工程](https://github.com/keijiro/CrossFadingLod)，它不但演示了 **Dither** 过渡，还演示了 **Fade** 过渡。
 
+---
+
 ### 关于示例工程的Fade过渡和Dither过渡
 
 因为比较简单，这里直接贴代码：
