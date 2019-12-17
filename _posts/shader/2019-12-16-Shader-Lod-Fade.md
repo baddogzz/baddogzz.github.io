@@ -174,7 +174,7 @@ float CopySign(float x, float s, bool ignoreNegZero = true)
 
 ### 关于标准管线
 
-**LODDitheringTransition** 是 **SRP** 特有的函数。 
+最后，**LODDitheringTransition** 是 **SRP** 特有的函数。 
 
 回到Unity的 **标准管线**，也有一个类似的操作： **UNITY_APPLY_DITHER_CROSSFADE**，这个留待下文介绍。
 
