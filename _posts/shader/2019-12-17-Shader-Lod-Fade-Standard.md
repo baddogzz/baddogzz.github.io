@@ -7,7 +7,6 @@ header-mask: 0.2
 catalog: true
 tags:
   - Unity
-  - SRP
   - Shader
 ---
 
