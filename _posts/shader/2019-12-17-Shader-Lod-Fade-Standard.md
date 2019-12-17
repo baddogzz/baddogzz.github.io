@@ -19,7 +19,7 @@ tags:
 
 以 [Riko](https://assetstore.unity.com/packages/3d/characters/humanoids/riko-74357?aid=1101l85Tr) 为例，看一下 **UNITY_APPLY_DITHER_CROSSFADE** 的效果：
 
-![img](/img/shader-lod-fade/screenshot6.gif){:height="80%" width="80%"}
+![img](/img/shader-lod-fade/screenshot6.gif){:height="90%" width="90%"}
 
 shader主要添加如下2句即可：
 
@@ -39,7 +39,7 @@ UNITY_APPLY_DITHER_CROSSFADE(i.pos.xy);
 
 #### Fade过渡
 
-![img](/img/shader-lod-fade/screenshot3.gif){:height="30%" width="30%"}
+![img](/img/shader-lod-fade/screenshot3.gif){:height="45%" width="45%"}
 
 ```
 Shader "Custom/CrossFadingLod"
@@ -95,7 +95,7 @@ Shader "Custom/CrossFadingLod"
 
 #### Dither过渡
 
-![img](/img/shader-lod-fade/screenshot4.gif){:height="30%" width="30%"}
+![img](/img/shader-lod-fade/screenshot4.gif){:height="45%" width="45%"}
 
 ```
 Shader "Custom/CrossFadingLod (Dither)"
