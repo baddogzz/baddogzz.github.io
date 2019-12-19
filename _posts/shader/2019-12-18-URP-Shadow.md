@@ -216,6 +216,8 @@ half SampleScreenSpaceShadowmap(float4 shadowCoord)
 
 ### 结尾
 
+很多游戏的实时阴影都不是Unity内置的，如今在 **URP** 开放源码的情况下，我正在考虑把我们游戏的实时阴影切回Unity的内置版本。
+
 去年为了抄 **塞尔达**，我们在移动设备搞过 **全场景的实时阴影**： 
 
 + 2级级联
