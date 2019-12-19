@@ -106,7 +106,7 @@ Unity针对 **GLES** 设备关闭 **屏幕空间阴影**，说明它的渲染开
 
 要生成 **屏幕空间阴影** 贴图，我们需要通过 **屏幕坐标** 和 **当前像素的深度** 还原出屏幕上一个点的 **世界坐标**。
 
-而要获取 **当前像素的深度**，我们就必须写深度贴图 **CameraDepthTexture**，如下：
+而要获取 **当前像素的深度**，我们就必须依靠深度贴图 **CameraDepthTexture**，如下：
 
 ![img](/img/urp-shadow/screenshot3.png){:height="75%" width="75%"}
 
@@ -151,7 +151,7 @@ half4 Fragment(Varyings input) : SV_Target
 
 有了 **屏幕空间阴影贴图**，我们就可以根据 **屏幕坐标** 采样贴图，得到光的 **影衰减**，最终用于光照计算。
 
-主灯实时阴影的相关代码如下：
+相关代码如下：
 
 **顶点着色器：**
 
@@ -219,7 +219,7 @@ half SampleScreenSpaceShadowmap(float4 shadowCoord)
 
 ---
 
-### 结尾
+### 题外话
 
 很多游戏的实时阴影都不是Unity内置的，如今在 **URP** 开放源码的情况下，我正在考虑把我们游戏的实时阴影切回Unity的内置版本。
 
