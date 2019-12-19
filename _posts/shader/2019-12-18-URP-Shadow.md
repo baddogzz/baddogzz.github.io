@@ -80,6 +80,8 @@ half MainLightRealtimeShadow(float4 shadowCoord)
 
 对于大部分使用 **SHADER_API_GLES** 的 **Android** 设备来说，也会关闭 **屏幕空间阴影**。
 
+---
+
 ### 开启屏幕空间阴影的渲染流程
 
 Unity针对 **GLES** 设备关闭 **屏幕空间阴影**，说明它的渲染开销较高。
@@ -214,6 +216,8 @@ half SampleScreenSpaceShadowmap(float4 shadowCoord)
     return attenuation;
 }
 ```
+
+---
 
 ### 结尾
 
