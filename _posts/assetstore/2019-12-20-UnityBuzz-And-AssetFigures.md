@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "unityBUZZ 和 Asset Figures"
+title: "unityBUZZ和Asset Figures"
 subtitle: ""
 author: "恶毒的狗"
 header-mask: 0.2
