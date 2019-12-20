@@ -42,7 +42,7 @@ tags:
 
 ![img](/img/unitybuzz-assetfigures/screenshot3.png){:height="80%" width="80%"}
 
-上图是2019年12月19号排名前十的Asset，我们看到了程序狗们熟悉的 [Dynamic Bone](https://assetstore.unity.com/packages/tools/animation/dynamic-bone-16743?aid=1101l85Tr)， [DOTween](https://assetstore.unity.com/packages/tools/visual-scripting/dotween-pro-32416?aid=1101l85Tr)， [Amplify Shader Editor](https://assetstore.unity.com/packages/tools/visual-scripting/amplify-shader-editor-68570?aid=1101l85Tr) 等。
+上图是2019年12月19号排名前十的Asset，我们看到了程序狗们熟悉的 [Dynamic Bone](https://assetstore.unity.com/packages/tools/animation/dynamic-bone-16743?aid=1101l85Tr)，[DOTween](https://assetstore.unity.com/packages/tools/visual-scripting/dotween-pro-32416?aid=1101l85Tr)，[Amplify Shader Editor](https://assetstore.unity.com/packages/tools/visual-scripting/amplify-shader-editor-68570?aid=1101l85Tr) 等。
 
 不过排名第一的居然是一个 **天空盒资源**，也让我有点差异。
 
@@ -54,7 +54,7 @@ tags:
 
 ### Asset Figures
 
-**Asset Figures** 这个网站似乎只专注Asset排名，还是以哥的 [LWRP SSR Water](https://assetstore.unity.com/packages/vfx/shaders/lwrp-ssr-water-155402?aid=1101l85Tr) 为例，我的历史排名最高到达过 **22**，嗯，还行。
+和 **unityBuzz** 不同，**Asset Figures** 这个网站似乎只专注Asset排名，还是以哥的 [LWRP SSR Water](https://assetstore.unity.com/packages/vfx/shaders/lwrp-ssr-water-155402?aid=1101l85Tr) 为例，我的历史排名最高到达过 **22**，嗯，还行。
 
 ![img](/img/unitybuzz-assetfigures/screenshot5.png){:height="80%" width="80%"}
 
@@ -62,7 +62,7 @@ tags:
 
 ### 其他网站
 
-在分析用户来源的时候，我还发现了一个 [日本人做的网站](http://assetsale.herokuapp.com/)，有兴趣也可一看。
+在分析用户来源的时候，我还发现了一个 [日本人做的Unity资源情报站](http://assetsale.herokuapp.com/)，有兴趣也可一看。
 
 好了，拜拜。
 
