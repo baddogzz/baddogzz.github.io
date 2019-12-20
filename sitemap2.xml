@@ -1,164 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset
-    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-       http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
->
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
 <url>
- <loc>https://baddogzz.github.io</loc>
- <priority>0.5</priority>
- <lastmod>2019-12-20</lastmod>
- <changefreq>weekly</changefreq>
+  <loc>https://baddogzz.github.io/</loc>
+  <lastmod>2019-12-20T08:56:48+00:00</lastmod>
+  <priority>1.00</priority>
 </url>
 <url>
- <loc>https://baddogzz.github.io/</loc>
- <priority>0.5</priority>
- <lastmod>2019-12-20</lastmod>
- <changefreq>weekly</changefreq>
+  <loc>https://baddogzz.github.io/about/</loc>
+  <lastmod>2019-12-20T08:56:48+00:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
- <loc>https://baddogzz.github.io/</loc>
- <priority>0.5</priority>
- <lastmod>2019-12-20</lastmod>
- <changefreq>weekly</changefreq>
+  <loc>https://baddogzz.github.io/archive/</loc>
+  <lastmod>2019-12-20T08:56:48+00:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
- <loc>https://baddogzz.github.io/about/</loc>
- <priority>0.5</priority>
- <lastmod>2019-12-20</lastmod>
- <changefreq>weekly</changefreq>
+  <loc>https://baddogzz.github.io/2019/12/19/URP-Shadow/</loc>
+  <lastmod>2019-12-20T08:56:48+00:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
- <loc>https://baddogzz.github.io/archive/</loc>
- <priority>0.5</priority>
- <lastmod>2019-12-20</lastmod>
- <changefreq>weekly</changefreq>
+  <loc>https://baddogzz.github.io/2019/12/17/Shader-Lod-Fade-Standard/</loc>
+  <lastmod>2019-12-20T08:56:48+00:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
- <loc>https://baddogzz.github.io/2019/12/19/urp-shadow/</loc>
- <priority>0.5</priority>
- <lastmod>2019-12-20</lastmod>
- <changefreq>weekly</changefreq>
+  <loc>https://baddogzz.github.io/2019/12/16/Shader-Lod-Fade/</loc>
+  <lastmod>2019-12-20T08:56:48+00:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
- <loc>https://baddogzz.github.io/2019/12/17/shader-lod-fade-standard/</loc>
- <priority>0.5</priority>
- <lastmod>2019-12-20</lastmod>
- <changefreq>weekly</changefreq>
+  <loc>https://baddogzz.github.io/2019/12/16/GUILayout-Texture/</loc>
+  <lastmod>2019-12-20T08:56:48+00:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
- <loc>https://baddogzz.github.io/2019/12/16/shader-lod-fade/</loc>
- <priority>0.5</priority>
- <lastmod>2019-12-20</lastmod>
- <changefreq>weekly</changefreq>
+  <loc>https://baddogzz.github.io/2019/12/11/Shader-Pow/</loc>
+  <lastmod>2019-12-20T08:56:48+00:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
- <loc>https://baddogzz.github.io/2019/12/16/guilayout-texture/</loc>
- <priority>0.5</priority>
- <lastmod>2019-12-20</lastmod>
- <changefreq>weekly</changefreq>
+  <loc>https://baddogzz.github.io/2019/12/10/Fix-FBX/</loc>
+  <lastmod>2019-12-20T08:56:48+00:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
- <loc>https://baddogzz.github.io/2019/12/11/shader-pow/</loc>
- <priority>0.5</priority>
- <lastmod>2019-12-20</lastmod>
- <changefreq>weekly</changefreq>
+  <loc>https://baddogzz.github.io/2019/12/06/Lux-Wind-Texture/</loc>
+  <lastmod>2019-12-20T08:56:48+00:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
- <loc>https://baddogzz.github.io/2019/12/10/fix-fbx/</loc>
- <priority>0.5</priority>
- <lastmod>2019-12-20</lastmod>
- <changefreq>weekly</changefreq>
+  <loc>https://baddogzz.github.io/2019/12/05/Use-32-Bit-Display-Buffer/</loc>
+  <lastmod>2019-12-20T08:56:48+00:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
- <loc>https://baddogzz.github.io/2019/12/06/lux-wind-texture/</loc>
- <priority>0.5</priority>
- <lastmod>2019-12-20</lastmod>
- <changefreq>weekly</changefreq>
+  <loc>https://baddogzz.github.io/2019/12/04/Self-Shadow-Bug/</loc>
+  <lastmod>2019-12-20T08:56:48+00:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
- <loc>https://baddogzz.github.io/2019/12/05/use-32-bit-display-buffer/</loc>
- <priority>0.5</priority>
- <lastmod>2019-12-20</lastmod>
- <changefreq>weekly</changefreq>
+  <loc>https://baddogzz.github.io/2019/12/03/Lux-Grass-SRP-Batcher/</loc>
+  <lastmod>2019-12-20T08:56:48+00:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
- <loc>https://baddogzz.github.io/2019/12/04/self-shadow-bug/</loc>
- <priority>0.5</priority>
- <lastmod>2019-12-20</lastmod>
- <changefreq>weekly</changefreq>
+  <loc>https://baddogzz.github.io/archive/?tag=Unity</loc>
+  <lastmod>2019-12-20T08:56:48+00:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
- <loc>https://baddogzz.github.io/2019/12/03/lux-grass-srp-batcher/</loc>
- <priority>0.5</priority>
- <lastmod>2019-12-20</lastmod>
- <changefreq>weekly</changefreq>
+  <loc>https://baddogzz.github.io/archive/?tag=Shader</loc>
+  <lastmod>2019-12-20T08:56:48+00:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
- <loc>https://baddogzz.github.io/archive/</loc>
- <priority>0.5</priority>
- <lastmod>2019-12-20</lastmod>
- <changefreq>weekly</changefreq>
+  <loc>https://baddogzz.github.io/archive/?tag=%E5%B0%8F%E7%94%9C%E7%94%9C</loc>
+  <lastmod>2019-12-20T08:56:48+00:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
- <loc>https://baddogzz.github.io/archive/?tag=unity</loc>
- <priority>0.5</priority>
- <lastmod>2019-12-20</lastmod>
- <changefreq>weekly</changefreq>
+  <loc>https://baddogzz.github.io/archive/?tag=Lux</loc>
+  <lastmod>2019-12-20T08:56:48+00:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
- <loc>https://baddogzz.github.io/archive/?tag=shader</loc>
- <priority>0.5</priority>
- <lastmod>2019-12-20</lastmod>
- <changefreq>weekly</changefreq>
+  <loc>https://baddogzz.github.io/archive/?tag=SRP</loc>
+  <lastmod>2019-12-20T08:56:48+00:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
- <loc>https://baddogzz.github.io/archive/?tag=%e5%b0%8f%e7%94%9c%e7%94%9c</loc>
- <priority>0.5</priority>
- <lastmod>2019-12-20</lastmod>
- <changefreq>weekly</changefreq>
+  <loc>https://baddogzz.github.io/archive/?tag=URP</loc>
+  <lastmod>2019-12-20T08:56:48+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
- <loc>https://baddogzz.github.io/archive/?tag=lux</loc>
- <priority>0.5</priority>
- <lastmod>2019-12-20</lastmod>
- <changefreq>weekly</changefreq>
+  <loc>https://baddogzz.github.io/archive/?tag=MotionBuilder</loc>
+  <lastmod>2019-12-20T08:56:48+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
- <loc>https://baddogzz.github.io/archive/?tag=srp</loc>
- <priority>0.5</priority>
- <lastmod>2019-12-20</lastmod>
- <changefreq>weekly</changefreq>
+  <loc>https://baddogzz.github.io/archive/?tag=%E6%89%93%E5%8C%85</loc>
+  <lastmod>2019-12-20T08:56:48+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
-<url>
- <loc>https://github.com/baddogzz</loc>
- <priority>0.5</priority>
- <lastmod>2019-12-20</lastmod>
- <changefreq>weekly</changefreq>
-</url>
-<url>
- <loc>https://fatdogsp.github.io/</loc>
- <priority>0.5</priority>
- <lastmod>2019-12-20</lastmod>
- <changefreq>weekly</changefreq>
-</url>
-<url>
- <loc>https://www.jianshu.com/u/8f5bfc31553e</loc>
- <priority>0.5</priority>
- <lastmod>2019-12-20</lastmod>
- <changefreq>weekly</changefreq>
-</url>
-<url>
- <loc>https://blog.csdn.net/weixin_45979158</loc>
- <priority>0.5</priority>
- <lastmod>2019-12-20</lastmod>
- <changefreq>weekly</changefreq>
-</url>
-<url>
- <loc>https://github.com/baddogzz</loc>
- <priority>0.5</priority>
- <lastmod>2019-12-20</lastmod>
- <changefreq>weekly</changefreq>
-</url>
+
+
 </urlset>
