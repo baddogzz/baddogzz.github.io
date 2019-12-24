@@ -23,7 +23,7 @@ tags:
 
 ### 问题一：关于Surface Shader的alpha指令
 
-首先，我犯了第一个错误，改成 **Surface Shader** 的过程中，我漏掉了 **alpha** 指令的设置，shader变成了 **实体渲染**，表现如下：
+首先，我犯了第一个错误，改 **Surface Shader** 的过程中，我漏掉了 **alpha** 指令的设置，shader变成了 **实体渲染**，表现如下：
 
 ![img](/img/fix-hair-transparent/screenshot2.png){:height="70%" width="70%"}
 
