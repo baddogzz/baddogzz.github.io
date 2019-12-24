@@ -17,7 +17,7 @@ tags:
 
 ![img](/img/fix-hair-transparent/screenshot1.png){:height="70%" width="70%"}
 
-其实，前项目的头发只是有一点 **半透明渲染顺序** 的小瑕疵，但是正如前文 [一个自阴影的Bug](https://baddogzz.github.io/2019/12/04/Self-Shadow-Bug/) 所述，迁移shader的时候因为偷懒，我把头发改成了 **Surface Shader**，从而带来了一些新的问题。
+其实，前项目的头发工作良好，只是有一点 **半透明渲染顺序** 的小瑕疵，但正如前文 [一个自阴影的Bug](https://baddogzz.github.io/2019/12/04/Self-Shadow-Bug/) 所提到的：我在迁移shader的时候因为偷懒，把头发改成了 **Surface Shader**，从而带来了一些新的问题。
 
 ---
 
