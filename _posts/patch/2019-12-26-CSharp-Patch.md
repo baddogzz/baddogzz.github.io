@@ -58,7 +58,7 @@ tags:
 
 对于Android平台的C#热更，我倾向于目前公司所采用的方案：**自己编译libmono.so**。
 
-我们可以在github上找到各个Unity版本对应的 [mono源码](https://github.com/Unity-Technologies/mono)，主要操作如下：
+我们可以在github上找到各个Unity版本对应的 [mono源码](https://github.com/Unity-Technologies/mono)，做如下操作：
 
 + 打开 **image.c** 文件。
 + 找到 **mono_image_open_from_data_with_name** 函数。
