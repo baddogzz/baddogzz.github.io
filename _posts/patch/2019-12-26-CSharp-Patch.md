@@ -26,7 +26,7 @@ tags:
 
 2. **Assembly-CSharp-firstpass.dll** 包括了加载热更代码的代码，不可被热更新，**Assembly-CSharp.dll** 包括主要的游戏逻辑代码，期望可以被热更新。
 
-3. 打包的时候，把 **Assembly-CSharp.dll** 中的代码移动到我们自定的 **GameLogic.dll** 中，并把 **Assembly-CSharp.dll** 的代码清空(namespace颠倒)。
+3. 打包的时候，把 **Assembly-CSharp.dll** 中的代码移动到我们自定的 **GameLogic.dll** 中，并把 **Assembly-CSharp.dll** 清空(namespace颠倒)。
 
 4. 运行的时候，**Assembly-CSharp-firstpass.dll** 中的代码通过 **Assembly.Load** 的方式去加载 **GameLogic.dll**，**GameLogic.dll** 可以从服务器下载获取，以此达到热更新的目的。
 
