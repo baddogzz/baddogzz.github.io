@@ -30,7 +30,7 @@ tags:
 
 4. 运行的时候，**Assembly-CSharp-firstpass.dll** 中的代码通过 **Assembly.Load** 的方式去加载 **GameLogic.dll**，**GameLogic.dll** 可以从服务器下载获取，以此达到热更新的目的。
 
-这样做看起来OK，但是有一个很大的限制： **预设不能挂载非firstpass的脚本**，原因可以参考[这篇帖子](https://blog.csdn.net/gz_huangzl/article/details/52486509)。 当然，我们可以在运行时通过 **AddComponent** 的方式去挂载脚本，但是这样做限制较大。
+这样做看起来OK，但是有一个很大的限制： **预设不能挂载非firstpass目录的脚本**，原因可以参考[这篇帖子](https://blog.csdn.net/gz_huangzl/article/details/52486509)。 当然，我们可以在运行时通过 **AddComponent** 的方式去挂载脚本，但是这样做限制较大。
 
 **骚操作** 之所以被称为 **骚操作**，就是我们可以打破这个限制：即把 **Assembly-CSharp.dll** 换成了 **GameLogic.dll** 后，也要保证预设能够找得到原先引用的脚本。
 
