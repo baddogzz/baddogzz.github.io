@@ -83,17 +83,17 @@ mono_image_open_from_data_with_name (char *data, guint32 data_len, gboolean need
 }
 ```
 
-这里有2个细节要注意：
+这里有几个细节要注意：
 
 1. **Assembly-CSharp-firstpass.dll** 和 **Assembly-CSharp.dll** 我们都做了加密，所以这里有一个步骤是解密。
 
-2. **mono_image_open_from_data_with_name** 函数只拦截了加载 **Assembly-CSharp-firstpass.dll** 的操作。
+2. **mono_image_open_from_data_with_name** 函数只拦截了加载 **Assembly-CSharp-firstpass.dll** 的操作，并未拦截 **Assembly-CSharp.dll**。
 
-3. 至于 **Assembly-CSharp.dll**，我们打包的时候直接把他删了。和 **暗黑血统** 的做法类似，我们还是通过 **Assembly-CSharp-firstpass.dll** 中的代码来加载它。
+3. 至于 **Assembly-CSharp.dll**，我们打包的时候直接把他删了，所以这里不会加载它。和 **暗黑血统** 的做法类似，我们还是通过 **Assembly-CSharp-firstpass.dll** 中的代码来加载它。
 
 改完源码，重新编译生成新的 **libmono.so**，就大功告成了。
 
-这个方案也比较成熟，网上的文章一搜一大把。我之所以倾向于这个方案，主要有以下几点考虑：
+这个方案比较成熟，网上的文章一搜一大把。我之所以倾向于这个方案，主要有以下几点考虑：
 
 1. 这个方案对整个项目的 **侵入性很小**，只需要替换掉 **libmono.so** 即可。
 
@@ -128,7 +128,7 @@ public void doRestartApp()
 ```
 
 
-对于 **非firstpass目录** 下代码无法挂载的问题，我们会把需要挂载的代码统一移动到 **Plugins** 目录下，因为 **Assembly-CSharp-firstpass.dll** 已经可以被热更新了。
+至于 **非firstpass目录** 下代码无法挂载的问题，我们会把需要挂载的代码统一移动到 **Plugins** 目录下，因为 **Assembly-CSharp-firstpass.dll** 已经可以被热更新了。
 
 好了，拜拜。
 
