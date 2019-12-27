@@ -109,7 +109,7 @@ mono_image_open_from_data_with_name (char *data, guint32 data_len, gboolean need
 
 重启进程对用户体验有一点伤害，特别是 **进程不能被快速拉起** 时，可能会影响留存。不过后来我们在sdk里加了一个 **秒启** 的函数，现在重启的代价可以忽略不计了，代码如下：
 
-```
+```java
 public void doRestartApp()
 {
     new Thread()
