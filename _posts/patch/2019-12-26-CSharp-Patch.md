@@ -79,7 +79,11 @@ mono_image_open_from_data_with_name (char *data, guint32 data_len, gboolean need
 }
 ```
 
-注意这里只处理了 **Assembly-CSharp-firstpass.dll**，至于 **Assembly-CSharp.dll**，我们打包的时候直接把他删了，和 **暗黑血统** 的做法类似，我们还是通过 **Assembly-CSharp-firstpass.dll** 中的代码来加载它。
+这里有2个细节要注意：
+
+1. **Assembly-CSharp-firstpass.dll** 和 **Assembly-CSharp.dll** 我们都做了加密，所以这里有一个步骤是解密。
+
+2. **mono_image_open_from_data_with_name** 函数只处理了 **Assembly-CSharp-firstpass.dll**。至于 **Assembly-CSharp.dll**，我们打包的时候直接把他删了。和 **暗黑血统** 的做法类似，我们还是通过 **Assembly-CSharp-firstpass.dll** 中的代码来加载它。
 
 改完源码，重新编译生成新的 **libmono.so**，就大功告成了。
 
