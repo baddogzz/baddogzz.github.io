@@ -58,11 +58,15 @@ tags:
 
 对于Android平台的C#热更，我倾向于目前公司所采用的方案：**自己编译libmono.so**。
 
-我们可以在github上找到各个Unity版本对应的 [mono源码](https://github.com/Unity-Technologies/mono)，打开 **image.c** 文件，找到 **mono_image_open_from_data_with_name** 函数，截住加载 **Assembly-CSharp-firstpass.dll** 的逻辑，做我们自己的操作。
+我们可以在github上找到各个Unity版本对应的 [mono源码](https://github.com/Unity-Technologies/mono)，主要操作如下：
 
-主要代码流程如下：
++ 打开 **image.c** 文件。
++ 找到 **mono_image_open_from_data_with_name** 函数。
++ 截住加载 **Assembly-CSharp-firstpass.dll** 的逻辑，做我们自己的操作。
 
-```
+代码流程如下：
+
+```c
 MonoImage *
 mono_image_open_from_data_with_name (char *data, guint32 data_len, gboolean need_copy, MonoImageOpenStatus *status, gboolean refonly, const char *name)
 {   
@@ -83,7 +87,9 @@ mono_image_open_from_data_with_name (char *data, guint32 data_len, gboolean need
 
 1. **Assembly-CSharp-firstpass.dll** 和 **Assembly-CSharp.dll** 我们都做了加密，所以这里有一个步骤是解密。
 
-2. **mono_image_open_from_data_with_name** 函数只处理了 **Assembly-CSharp-firstpass.dll**。至于 **Assembly-CSharp.dll**，我们打包的时候直接把他删了。和 **暗黑血统** 的做法类似，我们还是通过 **Assembly-CSharp-firstpass.dll** 中的代码来加载它。
+2. **mono_image_open_from_data_with_name** 函数只拦截了加载 **Assembly-CSharp-firstpass.dll** 的操作。
+
+3. 至于 **Assembly-CSharp.dll**，我们打包的时候直接把他删了。和 **暗黑血统** 的做法类似，我们还是通过 **Assembly-CSharp-firstpass.dll** 中的代码来加载它。
 
 改完源码，重新编译生成新的 **libmono.so**，就大功告成了。
 
@@ -101,9 +107,7 @@ mono_image_open_from_data_with_name (char *data, guint32 data_len, gboolean need
 
 2. **Standard Assets** 或者 **Plugins** 目录下的代码可以被挂载，但是 **非firstpass目录** 下的代码不行，因为这里并没有 **暗黑血统改meta** 的那一步骚操作。
 
-重启进程对用户体验有一点伤害，特别是 **进程不能被快速拉起** 时，可能会影响留存。
-
-不过后来我们在sdk里加了一个 **秒启** 的函数，现在重启的代价可以忽略不计了，代码如下：
+重启进程对用户体验有一点伤害，特别是 **进程不能被快速拉起** 时，可能会影响留存。不过后来我们在sdk里加了一个 **秒启** 的函数，现在重启的代价可以忽略不计了，代码如下：
 
 ```
 public void doRestartApp()
@@ -122,6 +126,7 @@ public void doRestartApp()
     finish();
 }
 ```
+
 
 对于 **非firstpass目录** 下代码无法挂载的问题，我们会把需要挂载的代码统一移动到 **Plugins** 目录下，因为 **Assembly-CSharp-firstpass.dll** 已经可以被热更新了。
 
