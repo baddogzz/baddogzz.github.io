@@ -43,7 +43,7 @@ tags:
 
 ### 草随风摆动
 
-草的摆动也很简单：在顶点着色器采样 **Wind Texture**，得到当前位置风的强度，根据风的强度计算出xz偏移，把偏移和顶点位置叠加即可完成摆动。具体细节可以参考前文：[Lux的风和WindTexture](https://baddogzz.github.io/2019/12/06/Lux-Wind-Texture/)。
+草的摆动很简单：在顶点着色器采样 **Wind Texture**，得到当前位置风的强度，根据风的强度计算出xz偏移，把偏移和顶点位置叠加即可完成摆动。具体细节可以参考前文：[Lux的风和WindTexture](https://baddogzz.github.io/2019/12/06/Lux-Wind-Texture/)。
 
 ---
 
