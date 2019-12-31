@@ -43,7 +43,7 @@ tags:
 
 ### 草随风摆动
 
-有了 **Wind Texture**，草的摆动也很简单：在顶点着色器采样 **Wind Texture** 得到当前位置风的强度，根据风的强度计算出xz偏移，和顶点位置叠加即可完成摆动。具体细节可以参考前文：[Lux的风和WindTexture](https://baddogzz.github.io/2019/12/06/Lux-Wind-Texture/)。
+草的摆动也很简单：在顶点着色器采样 **Wind Texture**，得到当前位置风的强度，根据风的强度计算出xz偏移，把偏移和顶点位置叠加即可完成摆动。具体细节可以参考前文：[Lux的风和WindTexture](https://baddogzz.github.io/2019/12/06/Lux-Wind-Texture/)。
 
 ---
 
@@ -74,7 +74,7 @@ PS，注意这里的性能开销。
     public Vector3 m_Force = Vector3.zero;
 ```
 
-我们要做的很简单：根据风向和风力，调整 **m_Force** 的值，剩下的交给 **DynamicBone** 就可以了。
+我们要做的很简单：根据风力，调整 **m_Force** 的值，剩下的交给 **DynamicBone** 就可以了。
 
 这里简单模仿一下 [Lux LWRP Essentials](https://assetstore.unity.com/packages/vfx/shaders/lux-lwrp-essentials-150355?aid=1101l85Tr) 关于 **Wind Texture** 的生成算法：利用多层噪音叠加，合成风的强度变化。
 
