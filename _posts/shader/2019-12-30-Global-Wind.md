@@ -39,7 +39,7 @@ tags:
 
 ### 草随风摆动
 
-有了 **Wind Texture**，草的摆动也很简单：在顶点着色器采样 **Wind Texture** 得到风的强度，计算xz偏移，和顶点位置叠加即可完成摆动。具体细节可以参考前文：[Lux的风和WindTexture](https://baddogzz.github.io/2019/12/06/Lux-Wind-Texture/)。
+有了 **Wind Texture**，草的摆动也很简单：在顶点着色器采样 **Wind Texture** 得到当前位置风的强度，根据风的强度计算出xz偏移，和顶点位置叠加即可完成摆动。具体细节可以参考前文：[Lux的风和WindTexture](https://baddogzz.github.io/2019/12/06/Lux-Wind-Texture/)。
 
 ### 雨雾受风
 
@@ -70,13 +70,13 @@ PS，注意这里的性能开销。
 
 这里简单模仿一下 [Lux LWRP Essentials](https://assetstore.unity.com/packages/vfx/shaders/lux-lwrp-essentials-150355?aid=1101l85Tr) 关于 **Wind Texture** 的生成算法：利用多层噪音叠加，合成风的强度变化。
 
-这里简化一下，用2层噪音合成主风，再外加1层噪音给疾风。噪音的混合方式也简化处理，效果差不多够用，代码如下：
+关于噪音的合成，这里做了简化处理：用2层噪音合成主风，再外加1层噪音给疾风。合成的方式也做了简化处理，效果差不多够用，代码如下：
 
 ```csharp
 using UnityEngine;
 
 [RequireComponent(typeof(WindZone))]
-public class DynamicBoneWind2 : MonoBehaviour
+public class DynamicBoneWind : MonoBehaviour
 {
     public float mainWindScale1;
     public float mainWindScale2;
@@ -89,7 +89,7 @@ public class DynamicBoneWind2 : MonoBehaviour
     {
         m_WindZone = GetComponent<WindZone>();
 
-        m_DynamicBones = FindObjectsOfType<DynamicBone>();
+        UpdateDynamicBones();
     }
 
     public void Update()
@@ -104,6 +104,7 @@ public class DynamicBoneWind2 : MonoBehaviour
         float gustNoise = Mathf.PerlinNoise(Time.time * gustyWindScale, 0);
         gustNoise = Mathf.Lerp(1.0f, gustNoise, turbulence);
         gustNoise = (gustNoise - 0.5f) * (turbulence + 0.5f) + 0.5f;
+        gustNoise = Mathf.Clamp(gustNoise, 0, 1.0f);
 
         float finalWindForce = mainWind * mainWindNoise * (gustNoise * 2 - 0.243f);
 
@@ -111,6 +112,11 @@ public class DynamicBoneWind2 : MonoBehaviour
         {
             m_DynamicBones[i].m_Force = transform.forward * finalWindForce;
         }
+    }
+
+    public void UpdateDynamicBones()
+    {
+        m_DynamicBones = FindObjectsOfType<DynamicBone>();
     }
 }
 ```
