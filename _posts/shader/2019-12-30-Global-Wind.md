@@ -67,7 +67,7 @@ PS，注意这里的性能开销。
 
 查看 **DynamicBone** 的代码，我们可以发现，作者预留了 **受力** 的选项，只是外力的初始值都是 **0**。
 
-```
+```csharp
 #if UNITY_5
     [Tooltip("The force apply to bones.")]
 #endif
