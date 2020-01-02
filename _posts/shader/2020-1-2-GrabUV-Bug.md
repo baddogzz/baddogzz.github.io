@@ -97,7 +97,7 @@ inline float4 ComputeGrabScreenPos (float4 pos) {
 我们知道 **RenderTexture** 的纹理坐标在 **Direct3D-like** 平台和 **OpenGL-like** 平台存在差异：
 
 + Direct3D-like平台，UNITY_UV_STARTS_AT_TOP = 1，纹理坐标0在顶部，并往下增长。
-+ OpenGL-like平台，UNITY_UV_STARTS_AT_TOP = 0，标识纹理坐标0在底部，并往上增长。
++ OpenGL-like平台，UNITY_UV_STARTS_AT_TOP = 0，纹理坐标0在底部，并往上增长。
 
 当渲染到纹理的时，Unity遵从 **OpenGL-like** 平台的约定。当工作在 **Direct3D-like** 平台时，为了向上隐藏这个平台差异，Unity会 **翻转投影矩阵** 从而翻转 **RenderTexture**，这样既遵从了 **OpenGL-like** 平台的约定，又可以获取正确的采样结果。
 
