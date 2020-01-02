@@ -119,7 +119,7 @@ inline float4 ComputeGrabScreenPos (float4 pos) {
 
 对于 **GrabPass**，Unity文档做了特别说明：在 **Direct3D-like** 平台下，**GrabPass** 不会进行 **RenderTexture** 的翻转操作，因此我们需要在shader中手工翻转uv以获取正确的采样结果。
 
-因此，**ComputeGrabScreenPos** 这里只需要判断 **UNITY_UV_STARTS_AT_TOP** 的取值：如果是 **Direct3D-like** 平台(UNITY_UV_STARTS_AT_TOP = 1)，我们就需要手工翻转uv，如果是 **OpenGL-like** 平台(UNITY_UV_STARTS_AT_TOP = 0)，则无需翻转uv。
+**ComputeGrabScreenPos** 这里只需要判断 **UNITY_UV_STARTS_AT_TOP** 的取值：如果是 **Direct3D-like** 平台(UNITY_UV_STARTS_AT_TOP = 1)，我们就需要手工翻转uv，如果是 **OpenGL-like** 平台(UNITY_UV_STARTS_AT_TOP = 0)，则无需翻转uv。
 
 ```
 inline float4 ComputeGrabScreenPos (float4 pos) {
