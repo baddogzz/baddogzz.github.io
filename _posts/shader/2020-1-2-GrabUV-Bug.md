@@ -101,7 +101,7 @@ inline float4 ComputeGrabScreenPos (float4 pos) {
 
 当渲染到纹理的时，Unity遵从 **OpenGL-like** 平台的标准。
 
-当工作在 **Direct3D-like** 平台时，为了向上隐藏这个平台差异，Unity会 **翻转投影矩阵** 从而翻转 **RenderTexture**，这样既遵从了 **OpenGL-like** 平台的约定，又可以获取正确的采样结果。
+当工作在 **Direct3D-like** 平台时，为了兼容这个平台差异，Unity会 **翻转投影矩阵** 从而翻转 **RenderTexture**，这样既遵从了 **OpenGL-like** 平台的约定，又可以获取正确的采样结果。
 
 **_ProjectionParams.x** 标识了投影矩阵是否经过翻转。
 
