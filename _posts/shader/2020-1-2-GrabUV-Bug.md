@@ -154,7 +154,7 @@ bug是修正了，也知道了原因：对于**GrabPass**，我们应该用 **UN
 
 出现问题的相机是 **UI相机2**，此时我们并没有开 **抗锯齿**，并且 **场景相机** 处于 **关闭** 状态。
 
-如果我们打开 **场景相机**，或者把 **UI相机1** 的后处理打开，那么这个bug也不会出现。
+如果我们打开 **场景相机**，或者把 **UI相机1** 的后处理打开，又或者把 **UI相机2** 的后处理打开，这些情况下这个bug都不会出现。
 
 似乎 **多相机** 以及 **Image Effect的开关** 也会影响 **_ProjectionParams.x** 的设值。
 
@@ -164,12 +164,14 @@ bug是修正了，也知道了原因：对于**GrabPass**，我们应该用 **UN
 
 没有源码的情况下，这个问题就比较难说清楚了，反正 **-1** 代表 **投影矩阵翻转**。
 
+在计算屏幕坐标的时候，如果 **投影矩阵翻转**，那么我们也需要在shader中手工翻转uv，这样才能获得正确的屏幕坐标。
+
 早前在写 [Fantastic SSR Water](https://assetstore.unity.com/packages/vfx/shaders/fantastic-ssr-water-154020?aid=1101l85Tr) 这个插件的时候，我也遇到过类似的问题。
 
 [Fantastic SSR Water](https://assetstore.unity.com/packages/vfx/shaders/fantastic-ssr-water-154020?aid=1101l85Tr) 是一款Unity水的插件，用 **屏幕空间反射** 去计算水的反射。
 
-+ 因为需要在屏幕空间计算 **光线步进**，因此我需要屏幕坐标 **screenUV**。
-+ 因为用了 **GrabPass** 去抓取屏幕颜色以计算反射颜色，因此我还需要 **grabUV**。
++ 因为需要在屏幕空间计算 **光线步进**，因此我需要计算屏幕坐标 **screenUV**。
++ 因为用了 **GrabPass** 去抓取屏幕颜色以计算反射颜色，因此我还需要计算 **grabUV**。
 
 当时，我错误的把 **screenUV** 和 **grabUV** 等同了，然后发现只有在特定的设置下渲染才正确，包括：
 
@@ -177,13 +179,11 @@ bug是修正了，也知道了原因：对于**GrabPass**，我们应该用 **UN
 + 前向渲染/延迟渲染的选择
 + 抗锯齿开关的选择
 
-后面，我用 **ComputeScreenPos** 去计算 **screenUV**，用 **ComputeGrabScreenPos** 去计算 **grabUV**，终于在各种设置组合下渲染都正确了。
+后面，我用 **ComputeScreenPos** 去计算 **screenUV**，用 **ComputeGrabScreenPos** 去计算 **grabUV**，问题就修正了，在各种设置组合下渲染都正确了。
 
-所以，尽管Unity文档对 **_ProjectionParams.x** 的说明不够清晰，但是记住以下几点，代码至少可以正常工作：
+最后，附 [Fantastic SSR Water](https://assetstore.unity.com/packages/vfx/shaders/fantastic-ssr-water-154020?aid=1101l85Tr) 截图一张：
 
-+ 尽量用Unity封装好的函数来处理平台差异。
-+ ComputeScreenPos 不等同于 ComputeGrabScreenPos，要正确区分应用场合。
-+ UNITY_UV_STARTS_AT_TOP = 1 代表 **Direct3D-like** 平台，但 **Direct3D-like** 平台下 **_ProjectionParams.x** 未必等于 -1，两者意涵是不同的。
+![img](/img/grabuv-bug/screenshot3.jpg){:height="75%" width="75%"} 
 
 好了，拜拜。
 
