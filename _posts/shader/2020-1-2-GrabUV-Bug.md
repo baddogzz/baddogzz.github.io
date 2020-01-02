@@ -99,7 +99,7 @@ inline float4 ComputeGrabScreenPos (float4 pos) {
 + Direct3D-like平台，UNITY_UV_STARTS_AT_TOP = 1，纹理坐标0在顶部，并往下增长。
 + OpenGL-like平台，UNITY_UV_STARTS_AT_TOP = 0，标识纹理坐标0在底部，并往上增长。
 
-当渲染到纹理的时，Unity遵从 **OpenGL-like** 平台的约定。当工作在 **Direct3D-like** 平台时，为了隐藏这个差异，Unity会 **翻转投影矩阵** 从而翻转 **RenderTexture**，这样遵从了 **OpenGL-like** 平台的约定，并且也可以获取正确的采样结果。
+当渲染到纹理的时，Unity遵从 **OpenGL-like** 平台的约定。当工作在 **Direct3D-like** 平台时，为了向上隐藏这个平台差异，Unity会 **翻转投影矩阵** 从而翻转 **RenderTexture**，这样既遵从了 **OpenGL-like** 平台的约定，又可以获取正确的采样结果。
 
 **_ProjectionParams.x** 标识了投影矩阵是否经过翻转。
 
@@ -113,9 +113,7 @@ inline float4 ComputeGrabScreenPos (float4 pos) {
 + Image Effects + 抗锯齿
 + GrabPass
 
-如果没有翻转 **RenderTexture**，我们就必须在shader里手工翻转uv，这样才能得到正确的采样结果。
-
-对于 **GrabPass**，Unity文档做了特别说明：在 **Direct3D-like** 平台下，**GrabPass** 不会进行 **RenderTexture** 的翻转操作，因此我们需要手工翻转uv以匹配 **OpenGL-like** 平台的约定。
+对于 **GrabPass**，Unity文档做了特别说明：在 **Direct3D-like** 平台下，**GrabPass** 不会进行 **RenderTexture** 的翻转操作，因此我们需要在shader中手工翻转uv以获取正确的采样结果。
 
 因此，**ComputeGrabScreenPos** 这里只需要判断 **UNITY_UV_STARTS_AT_TOP** 的取值：如果是 **Direct3D-like** 平台(UNITY_UV_STARTS_AT_TOP = 1)，我们就需要手工翻转uv，如果是 **OpenGL-like** 平台(UNITY_UV_STARTS_AT_TOP = 0)，则无需翻转uv。
 
@@ -136,7 +134,7 @@ inline float4 ComputeGrabScreenPos (float4 pos) {
 }
 ```
 
-**Direct3D-like** 平台下，如果我们用 **_ProjectionParams.x** 来判断是否需要翻转uv就错了，因为 **RenderTexture** 并未发生翻转，此时 _ProjectionParams.x = 1。
+**Direct3D-like** 平台下，如果我们用 **_ProjectionParams.x** 来判断是否需要手工翻转uv就错了，因为 **RenderTexture** 并未发生翻转，此时 _ProjectionParams.x = 1。
 
 ---
 
@@ -156,16 +154,18 @@ bug是修正了，也知道了原因：对于**GrabPass**，我们应该用 **UN
 
 似乎 **多相机** 以及 **Image Effect的开关** 也会影响 **_ProjectionParams.x** 的设值。
 
-可惜的是，Unity文档对 **_ProjectionParams.x** 就简单的一句解释：
+可惜的是，Unity文档对 **_ProjectionParams.x** 就简单的一句说明：
 
 > x is 1.0 (or –1.0 if currently rendering with a flipped projection matrix)
 
 没有源码的情况下，这个问题就比较难说清楚了，反正 **-1** 代表 **投影矩阵翻转**。
 
-早前在写 [Fantastic SSR Water](https://assetstore.unity.com/packages/vfx/shaders/fantastic-ssr-water-154020?aid=1101l85Tr) 这个插件的时候，我也遇到过类似的问题：
+早前在写 [Fantastic SSR Water](https://assetstore.unity.com/packages/vfx/shaders/fantastic-ssr-water-154020?aid=1101l85Tr) 这个插件的时候，我也遇到过类似的问题。
+
+[Fantastic SSR Water](https://assetstore.unity.com/packages/vfx/shaders/fantastic-ssr-water-154020?aid=1101l85Tr) 是一款Unity水的插件，用 **屏幕空间反射** 去计算水的反射。
 
 + 因为需要在屏幕空间计算 **光线步进**，因此我需要屏幕坐标 **screenUV**。
-+ 因为用了 **GrabPass** 去抓取屏幕颜色以计算反射，因此我还需要 **grabUV** 用于 **GrabTexture** 的采样。
++ 因为用了 **GrabPass** 去抓取屏幕颜色以计算反射颜色，因此我还需要 **grabUV**，用于 **GrabTexture** 的采样。
 
 当时，我错误的把 **screenUV** 和 **grabUV** 等同了，然后发现只有在特定的设置下渲染才正确，包括：
 
