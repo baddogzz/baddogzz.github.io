@@ -92,32 +92,32 @@ inline float4 ComputeGrabScreenPos (float4 pos) {
 }
 ```
 
-通过仔细分析可以发现，这两个函数的主要差别就是 **UNITY_UV_STARTS_AT_TOP** 和 **_ProjectionParams.x** 的差别。
+通过分析可以发现，这两个函数的主要差别就是 **UNITY_UV_STARTS_AT_TOP** 和 **_ProjectionParams.x** 的差别。
 
 我们知道 **RenderTexture** 的纹理坐标在 **Direct3D-like** 平台和 **OpenGL-like** 平台存在差异：
 
 + Direct3D-like平台，UNITY_UV_STARTS_AT_TOP = 1，纹理坐标0在顶部，并往下增长。
 + OpenGL-like平台，UNITY_UV_STARTS_AT_TOP = 0，标识纹理坐标0在底部，并往上增长。
 
-当渲染到纹理的时候，Unity遵从 **OpenGL-like** 平台的约定。当工作在 **Direct3D-like** 平台时，为了隐藏这个差异，Unity会 **翻转投影矩阵** 以翻转渲染结果，这样负负得正，最终还是遵从了 **OpenGL-like** 平台的约定。
+当渲染到纹理的时，Unity遵从 **OpenGL-like** 平台的约定。当工作在 **Direct3D-like** 平台时，为了隐藏这个差异，Unity会 **翻转投影矩阵** 从而翻转 **RenderTexture**，这样负负得正，最终还是遵从了 **OpenGL-like** 平台的约定。
 
-**_ProjectionParams.x** 就标识了投影矩阵是否经过翻转。
+**_ProjectionParams.x** 标识了投影矩阵是否经过翻转。
 
 + _ProjectionParams.x = 1表示没有翻转。
 + _ProjectionParams.x = -1表示翻转。
  
-那么，是不是 **Direct3D-like** 平台一定会进行翻转操作呢？如果没发生翻转，我们是不是要手工翻转uv以匹配 **OpenGL-like** 平台的约定呢？
+那么，是不是 **Direct3D-like** 平台下 **RenderTexture** 一定会进行翻转操作呢？如果没有翻转，而Unity又采用了 **OpenGL-like** 平台的约定，这种情况要怎么处理呢？
 
-Unity在它的帮助文档 **Platform-specific rendering differences** 这一章节列举了几种我们需要手工翻转uv的情况：
+事实上，Unity在一些情况下确实不会翻转 **RenderTexture**，它的帮助文档 **Platform-specific rendering differences** 这一章节列举了 **Direct3D-like** 平台下不翻转 **RenderTexture** 的几种情况：
 
 + Image Effects + 抗锯齿
 + GrabPass
 
-文档对于 **GrabPass** 做了特别说明：在 **Direct3D-like** 平台下，**GrabPass** 不会进行RenderTexture翻转操作，因此我们需要手工翻转uv以匹配 **OpenGL-like** 平台的约定。
+如果没有翻转 **RenderTexture**，我们就必须在shader里手工翻转uv，这样才能得到正确的采样结果。
 
-因此 **ComputeGrabScreenPos** 这里只需要判断 **UNITY_UV_STARTS_AT_TOP**：
+对于 **GrabPass**，Unity文档做了特别说明：在 **Direct3D-like** 平台下，**GrabPass** 不会进行 **RenderTexture** 的翻转操作，因此我们需要手工翻转uv以匹配 **OpenGL-like** 平台的约定。
 
-如果是 **Direct3D-like** 平台，我们就手工翻转uv，这样才能达到负负得正的效果。如果是 **OpenGL-like** 平台，则无需uv翻转操作。
+因此，**ComputeGrabScreenPos** 这里只需要判断 **UNITY_UV_STARTS_AT_TOP** 的取值：如果是 **Direct3D-like** 平台(UNITY_UV_STARTS_AT_TOP = 1)，我们就需要手工翻转uv，如果是 **OpenGL-like** 平台(UNITY_UV_STARTS_AT_TOP = 0)，则无需翻转uv。
 
 ```
 inline float4 ComputeGrabScreenPos (float4 pos) {
@@ -136,7 +136,7 @@ inline float4 ComputeGrabScreenPos (float4 pos) {
 }
 ```
 
-**Direct3D-like** 平台下，如果我们用 **_ProjectionParams.x** 来判断是否翻转uv就错了，因为此时 _ProjectionParams.x = 1。
+**Direct3D-like** 平台下，如果我们用 **_ProjectionParams.x** 来判断是否需要翻转uv就错了，因为 **RenderTexture** 并未发生翻转，此时 _ProjectionParams.x = 1。
 
 ---
 
@@ -150,29 +150,36 @@ bug是修正了，也知道了原因：对于**GrabPass**，我们应该用 **UN
 
 场景相机（开后处理） --> UI相机1（关后处理） --> UI相机2（关后处理）
 
-出现问题的相机是 **UI相机2**，我们并没有开 **抗锯齿**，并且当时 **场景相机** 处于 **关闭** 状态。
+出现问题的相机是 **UI相机2**，此时我们并没有开 **抗锯齿**，并且 **场景相机** 处于 **关闭** 状态。
 
 如果我们打开 **场景相机**，或者把 **UI相机1** 的后处理打开，那么这个bug也不会出现。
 
-似乎 **多相机** 以及 **Image Effect的开关** 也会影响 **_ProjectionParams.x** 的设置。可惜的是，Unity文档对 **_ProjectionParams.x** 就简单的一句解释：
+似乎 **多相机** 以及 **Image Effect的开关** 也会影响 **_ProjectionParams.x** 的设值。
+
+可惜的是，Unity文档对 **_ProjectionParams.x** 就简单的一句解释：
 
 > x is 1.0 (or –1.0 if currently rendering with a flipped projection matrix)
 
-没有源码的话就比较难解释这个了。
+没有源码的情况下，这个问题就比较难说清楚了，反正 **-1** 代表 **投影矩阵翻转**。
 
-早前在写 [Fantastic SSR Water](https://assetstore.unity.com/packages/vfx/shaders/fantastic-ssr-water-154020?aid=1101l85Tr) 这个插件的时候，我也遇到过类似的问题，当时错误的把 **screenUV** 和 **grabUV** 等同了，然后发现只有在特定的设置下渲染才正确。
+早前在写 [Fantastic SSR Water](https://assetstore.unity.com/packages/vfx/shaders/fantastic-ssr-water-154020?aid=1101l85Tr) 这个插件的时候，我也遇到过类似的问题：
 
-这个设置受以下因素的影响：
++ 因为需要在屏幕空间计算 **光线步进**，因此我需要屏幕坐标 **screenUV**。
++ 因为用了 **GrabPass** 去抓取屏幕颜色以计算反射，因此我还需要 **grabUV** 用于 **GrabTexture** 的采样。
+
+当时，我错误的把 **screenUV** 和 **grabUV** 等同了，然后发现只有在特定的设置下渲染才正确，包括：
 
 + 平台的选择
 + 前向渲染/延迟渲染的选择
 + 抗锯齿开关的选择
 
-感觉有一点被Unity绕晕了，不过记住以下几点，至少代码不会出问题：
+后面，我用 **ComputeScreenPos** 去计算 **screenUV**，用 **ComputeGrabScreenPos** 去计算 **grabUV**，终于在各种设置组合下渲染都正确了。
 
-+ _ProjectionParams.x 不等同于 UNITY_UV_STARTS_AT_TOP。
-+ ComputeScreenPos 不等同于 ComputeGrabScreenPos，要正确区分应用场合。
+所以，尽管Unity文档对 **_ProjectionParams.x** 的说明不够清晰，但是记住以下几点，代码至少不会出错：
+
 + 尽量用Unity封装好的函数来处理平台差异。
++ ComputeScreenPos 不等同于 ComputeGrabScreenPos，要正确区分应用场合。
++ UNITY_UV_STARTS_AT_TOP = 1 代表 **Direct3D-like** 平台，但 **Direct3D-like** 平台下 **_ProjectionParams.x** 未必等于 -1，两者意涵是不同的。
 
 好了，拜拜。
 
