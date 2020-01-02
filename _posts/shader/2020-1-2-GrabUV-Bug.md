@@ -165,7 +165,7 @@ bug是修正了，也知道了原因：对于**GrabPass**，我们应该用 **UN
 [Fantastic SSR Water](https://assetstore.unity.com/packages/vfx/shaders/fantastic-ssr-water-154020?aid=1101l85Tr) 是一款Unity水的插件，用 **屏幕空间反射** 去计算水的反射。
 
 + 因为需要在屏幕空间计算 **光线步进**，因此我需要屏幕坐标 **screenUV**。
-+ 因为用了 **GrabPass** 去抓取屏幕颜色以计算反射颜色，因此我还需要 **grabUV**，用于 **GrabTexture** 的采样。
++ 因为用了 **GrabPass** 去抓取屏幕颜色以计算反射颜色，因此我还需要 **grabUV**。
 
 当时，我错误的把 **screenUV** 和 **grabUV** 等同了，然后发现只有在特定的设置下渲染才正确，包括：
 
@@ -175,7 +175,7 @@ bug是修正了，也知道了原因：对于**GrabPass**，我们应该用 **UN
 
 后面，我用 **ComputeScreenPos** 去计算 **screenUV**，用 **ComputeGrabScreenPos** 去计算 **grabUV**，终于在各种设置组合下渲染都正确了。
 
-所以，尽管Unity文档对 **_ProjectionParams.x** 的说明不够清晰，但是记住以下几点，代码至少不会出错：
+所以，尽管Unity文档对 **_ProjectionParams.x** 的说明不够清晰，但是记住以下几点，代码至少可以正常工作：
 
 + 尽量用Unity封装好的函数来处理平台差异。
 + ComputeScreenPos 不等同于 ComputeGrabScreenPos，要正确区分应用场合。
