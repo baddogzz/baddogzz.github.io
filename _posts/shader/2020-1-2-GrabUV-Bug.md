@@ -112,8 +112,10 @@ inline float4 ComputeGrabScreenPos (float4 pos) {
 
 事实上，Unity在一些情况下确实不会翻转 **RenderTexture**，它的帮助文档 **Platform-specific rendering differences** 这一章节列举了 **Direct3D-like** 平台下不翻转 **RenderTexture** 的几种情况：
 
-+ Image Effects + 抗锯齿
-+ GrabPass
++ Image Effects
+	+ Image Effects + 抗锯齿
+	+ GrabPass
++ Rendering in UV space
 
 对于 **GrabPass**，Unity文档做了特别说明：在 **Direct3D-like** 平台下，**GrabPass** 不会进行 **RenderTexture** 的翻转操作，因此我们需要在shader中手工翻转uv以获取正确的采样结果。
 
