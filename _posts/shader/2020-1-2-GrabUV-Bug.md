@@ -25,7 +25,7 @@ tags:
 这里用的 **扭曲shader** 是我们的美术同学从他们前项目搬过来的，代码很简单：
 
 + 用 **GrabPass** 抓取当前屏幕做为扭曲背景。
-+ 添加 **UV扰动** 后再采样屏幕，即可达到扭曲效果。
++ 添加 **UV扰动** 后再采样屏幕背景，即可达到扭曲效果。
 
 问题是，这里采样 **GrabTexture** 的时候用的是 **screenUV** 而非 **grabUV**，代码如下：
 
@@ -58,7 +58,9 @@ o.screenPos = ComputeGrabScreenPos (o.pos);
 
 ### 关于ComputeScreenPos和ComputeGrabScreenPos的差别
 
-修正容易，但是搞清楚 **ComputeScreenPos** 和 **ComputeGrabScreenPos** 的差别却要费一些功夫。我们看一下相关代码：
+修正容易，但是搞清楚 **ComputeScreenPos** 和 **ComputeGrabScreenPos** 的差别却要费一些功夫。
+
+我们看一下相关代码：
 
 ```
 inline float4 ComputeNonStereoScreenPos(float4 pos) {
@@ -112,10 +114,8 @@ inline float4 ComputeGrabScreenPos (float4 pos) {
 
 事实上，Unity在一些情况下确实不会翻转 **RenderTexture**，它的帮助文档 **Platform-specific rendering differences** 这一章节列举了 **Direct3D-like** 平台下不翻转 **RenderTexture** 的几种情况：
 
-+ Image Effects
-	+ Image Effects + 抗锯齿
-	+ GrabPass
-+ Rendering in UV space
++ Image Effects + 抗锯齿
++ GrabPass
 
 对于 **GrabPass**，Unity文档做了特别说明：在 **Direct3D-like** 平台下，**GrabPass** 不会进行 **RenderTexture** 的翻转操作，因此我们需要在shader中手工翻转uv以获取正确的采样结果。
 
@@ -158,22 +158,25 @@ bug是修正了，也知道了原因：对于**GrabPass**，我们应该用 **UN
 
 似乎 **多相机** 以及 **Image Effect的开关** 也会影响 **_ProjectionParams.x** 的设值。
 
-可惜的是，Unity文档对 **_ProjectionParams.x** 就简单的一句说明：
+可惜的是，Unity文档对 **投影矩阵的翻转** 语焉不详，只是告诉你 _ProjectionParams.x = -1 即代表了翻转：
 
 > x is 1.0 (or –1.0 if currently rendering with a flipped projection matrix)
 
-没有源码的情况下，这个问题就比较难说清楚了，反正 **-1** 代表 **投影矩阵翻转**。
+没有源码的情况下，何时翻转投影矩阵就比较难说清楚了。
 
-在计算屏幕坐标的时候，如果 **投影矩阵翻转**，那么我们也需要在shader中手工翻转uv，这样才能获得正确的屏幕坐标。
+不过我们只需要记得：
+
++ _ProjectionParams.x = -1 代表翻转了投影矩阵，在计算 **屏幕坐标** 的时候，如果发生了 **投影矩阵翻转**，那么我们也需要在shader中手工翻转uv，这样才能获得正确的 **屏幕坐标**。
++ Unity的 **ComputeScreenPos** 帮我们处理好了这个过程。
 
 早前在写 [Fantastic SSR Water](https://assetstore.unity.com/packages/vfx/shaders/fantastic-ssr-water-154020?aid=1101l85Tr) 这个插件的时候，我也遇到过类似的问题。
 
-[Fantastic SSR Water](https://assetstore.unity.com/packages/vfx/shaders/fantastic-ssr-water-154020?aid=1101l85Tr) 是一款Unity水的插件，用 **屏幕空间反射** 去计算水的反射。
+[Fantastic SSR Water](https://assetstore.unity.com/packages/vfx/shaders/fantastic-ssr-water-154020?aid=1101l85Tr) 是一款Unity水的插件，用 **屏幕空间反射** 实现水的反射。
 
 + 因为需要在屏幕空间计算 **光线步进**，因此我需要计算屏幕坐标 **screenUV**。
 + 因为用了 **GrabPass** 去抓取屏幕颜色以计算反射颜色，因此我还需要计算 **grabUV**。
 
-当时，我错误的把 **screenUV** 和 **grabUV** 等同了，然后发现只有在特定的设置下渲染才正确，设置包括：
+当时，我错误的把 **screenUV** 和 **grabUV** 等同了，然后发现只有在特定的设置选项下渲染才正确，设置选项包括：
 
 + 平台的选择
 + 前向渲染/延迟渲染的选择
