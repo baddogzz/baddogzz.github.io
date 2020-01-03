@@ -119,7 +119,10 @@ inline float4 ComputeGrabScreenPos (float4 pos) {
 
 对于 **GrabPass**，Unity文档做了特别说明：在 **Direct3D-like** 平台下，**GrabPass** 不会进行 **RenderTexture** 的翻转操作，因此我们需要在shader中手工翻转uv以获取正确的采样结果。
 
-**ComputeGrabScreenPos** 这里只需要判断 **UNITY_UV_STARTS_AT_TOP** 的取值：如果是 **Direct3D-like** 平台(UNITY_UV_STARTS_AT_TOP = 1)，我们就需要手工翻转uv，如果是 **OpenGL-like** 平台(UNITY_UV_STARTS_AT_TOP = 0)，则无需翻转uv。
+**ComputeGrabScreenPos** 这里只需要判断 **UNITY_UV_STARTS_AT_TOP** 的取值：
+
++ 如果是 **Direct3D-like** 平台(UNITY_UV_STARTS_AT_TOP = 1)，我们就需要手工翻转uv。
++ 如果是 **OpenGL-like** 平台(UNITY_UV_STARTS_AT_TOP = 0)，则无需翻转uv。
 
 ```
 inline float4 ComputeGrabScreenPos (float4 pos) {
@@ -171,7 +174,7 @@ bug是修正了，也知道了原因：对于**GrabPass**，我们应该用 **UN
 
 早前在写 [Fantastic SSR Water](https://assetstore.unity.com/packages/vfx/shaders/fantastic-ssr-water-154020?aid=1101l85Tr) 这个插件的时候，我也遇到过类似的问题。
 
-[Fantastic SSR Water](https://assetstore.unity.com/packages/vfx/shaders/fantastic-ssr-water-154020?aid=1101l85Tr) 是一款Unity水的插件，用 **屏幕空间反射** 实现水的反射。
+[Fantastic SSR Water](https://assetstore.unity.com/packages/vfx/shaders/fantastic-ssr-water-154020?aid=1101l85Tr) 是一款关于水的插件，用 **屏幕空间反射** 实现水的反射。
 
 + 因为需要在屏幕空间计算 **光线步进**，因此我需要计算屏幕坐标 **screenUV**。
 + 因为用了 **GrabPass** 去抓取屏幕颜色以计算反射颜色，因此我还需要计算 **grabUV**。
@@ -182,7 +185,7 @@ bug是修正了，也知道了原因：对于**GrabPass**，我们应该用 **UN
 + 前向渲染/延迟渲染的选择
 + 抗锯齿开关的选择
 
-后面，我用 **ComputeScreenPos** 去计算 **screenUV**，用 **ComputeGrabScreenPos** 去计算 **grabUV**，问题就修正了，在各种设置组合下渲染都正确了。
+后面，我用 **ComputeScreenPos** 去计算 **screenUV**，用 **ComputeGrabScreenPos** 去计算 **grabUV**，问题就解决了，在各种设置组合下渲染都正确。
 
 最后，附 [Fantastic SSR Water](https://assetstore.unity.com/packages/vfx/shaders/fantastic-ssr-water-154020?aid=1101l85Tr) 截图一张：
 
