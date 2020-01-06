@@ -28,7 +28,7 @@ tags:
 
 没错了，指望 [ShaderOne](https://assetstore.unity.com/packages/tools/visual-scripting/shaderone-beta-120661?aid=1101l85Tr&utm_source=aff) 的 **体积雾** 能在手机上跑得飞起是有点强人所难的，因为计算涉及到 **射线步进** 和 **3d纹理采样**。
 
-不过如果把光线数设置的不那么高，高端手机还是可以一战的，文章的最后会给出一个测试。
+不过如果光线数设置的不那么高，高端手机还是可以一战的，文章的最后会给出一个测试。
 
 在介绍 **体积雾** 之前，我们先看一下 [ShaderOne](https://assetstore.unity.com/packages/tools/visual-scripting/shaderone-beta-120661?aid=1101l85Tr&utm_source=aff) 提供的全部雾效类型，应用雾效的入口代码如下：
 
