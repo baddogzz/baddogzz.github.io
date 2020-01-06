@@ -218,6 +218,8 @@ heightIntensity  = 1.0 - min ( ( fogYLength / _FogHeightSize ), 1.0 );
 
 ## 移动设备的帧率
 
+体积雾就介绍到这里了。
+
 最后，看看哥的 **小米MIX2** 是否可以一战。
 
 24条射线，Roughness不开很高的情况下，稳稳60帧，效果也能接受，如下图：
