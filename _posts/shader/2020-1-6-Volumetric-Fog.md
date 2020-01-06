@@ -61,7 +61,7 @@ inline void FogApply ( inout SOLightingData i_sold, in v2f i )
 
 ### FogApplySolid
 
-**FogApplySolid** 就是最简单的**线性雾**，提供的参数就三个：颜色、开始距离、结束距离。
+**FogApplySolid** 就是最简单的 **线性雾**，提供的参数就三个：颜色、开始距离、结束距离。
 
 ![img](/img/volumetric-fog/screenshot2.png){:height="35%" width="35%"} 
 
@@ -129,7 +129,7 @@ i_sold.finalRGBA.rgb = lerp ( i_sold.finalRGBA.rgb, _FogColorFade, distFade );
 
 ![img](/img/volumetric-fog/screenshot8.png){:height="75%" width="75%"} 
 
-两者的计算流程也非常相似，指数雾的公式如下：
+两者的计算流程也非常相似，指数雾部分的公式如下：
 
 ```
 fogAmount = 1.0 - exp ( -dist * fogAmount );
