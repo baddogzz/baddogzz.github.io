@@ -61,7 +61,7 @@ inline void FogApply ( inout SOLightingData i_sold, in v2f i )
 
 ### FogApplySolid
 
-**FogApplySolid** 就是最简单的线性雾，提供的参数就三个：颜色、开始距离、结束距离。
+**FogApplySolid** 就是最简单的**线性雾**，提供的参数就三个：颜色、开始距离、结束距离。
 
 ![img](/img/volumetric-fog/screenshot2.png){:height="35%" width="35%"} 
 
@@ -86,7 +86,7 @@ inline void FogApplySolid ( inout SOLightingData i_sold, in v2f i )
 
 ### FogApplyVolumetric
 
-**FogApplyVolumetric** 是指数高度雾再混合之前的线性雾。
+**FogApplyVolumetric** 是 **指数高度雾** 再混合之前的 **线性雾**。
 
 ![img](/img/volumetric-fog/screenshot4.png){:height="35%" width="35%"} 
 
@@ -119,7 +119,7 @@ i_sold.finalRGBA.rgb = lerp ( i_sold.finalRGBA.rgb, _FogColorFade, distFade );
 
 ### FogApplyVolumetric3D
 
-最后来看一下 **FogApplyVolumetric3D**，也就是体积雾。
+最后来看一下 **FogApplyVolumetric3D**，也就是 **体积雾**。
 
 **FogApplyVolumetric3D** 和 **FogApplyVolumetric** 的设置差不多，多了一些体积雾相关的参数，还有一个全局的射线数量需要设置：
 
@@ -129,7 +129,7 @@ i_sold.finalRGBA.rgb = lerp ( i_sold.finalRGBA.rgb, _FogColorFade, distFade );
 
 ![img](/img/volumetric-fog/screenshot8.png){:height="75%" width="75%"} 
 
-两者的计算流程也非常相似，最终是一个指数雾公式：
+两者的计算流程也非常相似，指数雾的公式如下：
 
 ```
 fogAmount = 1.0 - exp ( -dist * fogAmount );
