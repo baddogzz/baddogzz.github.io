@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "状态同步之移动预测"
+title: "位置同步之移动预测"
 subtitle: ""
 author: "恶毒的狗"
 header-mask: 0.2
