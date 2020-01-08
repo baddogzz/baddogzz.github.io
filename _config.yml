@@ -106,7 +106,11 @@ friends: [
         href: "https://www.jianshu.com/u/8f5bfc31553e"
     },
     {
-        title: "csdn|baddogzz",
+        title: "csdn|恶毒的狗",
         href: "https://blog.csdn.net/weixin_45979158"     
+    },
+    {
+        title: "掘金|恶毒的狗",
+        href: "https://juejin.im/user/5e15402cf265da5d1805f646"      
     }
 ]
