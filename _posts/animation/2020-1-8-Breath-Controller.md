@@ -31,7 +31,7 @@ tags:
 
 ## 实现原理
 
-这里是程序控制的呼吸动画，作者区分了 **吸气**，**呼气**，**休息** 三个状态，我们可以调整这3个状态的持续时长：
+**Breath Controller** 是程序控制的呼吸动画，作者区分了 **吸气**，**呼气**，**休息** 三个状态，我们可以调整这3个状态的持续时长：
 
 ![img](/img/breath-controller/screenshot6.png)
 
@@ -91,7 +91,7 @@ void RotateBone()
 
 好了，下面看一下 **旋转骨骼** 的实现细节。
 
-作者给出的旋转参数不多，最主要的参数是每根骨骼 **吸气** 和 **呼气** 的最大旋转角度，如下图：
+作者给出的旋转参数不多，最主要的是每根骨骼 **吸气** 和 **呼气** 的最大旋转角度，如下图：
 
 ![img](/img/breath-controller/screenshot5.png)
 
@@ -141,9 +141,9 @@ for (int i = 0; i < this.Segments.Length; i++)
 }
 ```
 
-这里的代码比较简单，唯一要注意的是这里区分了是否有 **Animator**，如果有，**Animator** 的 **Update** 会复位动作，所以这时旋转角度不用减去 **lastEaseValue**。
+代码比较简单，唯一要注意的是这里区分了是否有 **Animator**，如果有，**Animator** 的 **Update** 会复位动作，所以这时旋转角度不用减去 **lastEaseValue**。
 
-最后，对于吸气和呼气旋转角度的插值，作者给出了不同的插值算法，并且开放了吸气的插值算法给我们选择：
+最后，对于旋转角度的插值，作者给出了不同的插值算法，并且开放了吸气的插值算法给我们选择：
 
 *正弦插值*
 
@@ -188,9 +188,9 @@ float easeInOutQuad(float t, float b, float c, float d)
 
 **Breath Controller** 目前的版本只支持 **人形动画**，如果需要支持 **Generic动画**，我们可以手动指定呼吸计算所需要的骨骼。
 
-这里偷个懒，我在所有 **Animator.GetBoneTransform** 逻辑的后面都加一个判断，如果取不到就用手动指定的骨骼来计算。
+这里偷个懒，我在所有 **Animator.GetBoneTransform** 逻辑的后面都加一个判断，如果取不到就用手动指定的骨骼即可。
 
-最后，代码如下：
+修改后的代码如下：
 
 ```
 using UnityEngine;
