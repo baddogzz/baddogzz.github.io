@@ -101,7 +101,7 @@ void RotateBone()
 
 > Applies a rotation of eulerAngles.z degrees around the z-axis, eulerAngles.x degrees around the x-axis, and eulerAngles.y degrees around the y-axis (in that order).
 
-旋转主要围绕 **Transform.right** 进行，也就是下图的 **红色轴**：
+这里用 **欧拉角** 来描述旋转，如果骨骼朝向和角色的朝向完全重合，那么旋转就绕 **Transform.right** 进行，也就是下图的 **红色轴**：
 
 ![img](/img/breath-controller/screenshot7.gif)
 
