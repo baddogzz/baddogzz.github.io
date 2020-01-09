@@ -107,7 +107,7 @@ void RotateBone()
 
 旋转的核心代码如下：
 
-```
+```csharp
 // Rotate Spine, Cheast, Neck, Head
 int finishCnt = 0;
 for (int i = 0; i < this.Segments.Length; i++) 
@@ -149,7 +149,7 @@ for (int i = 0; i < this.Segments.Length; i++)
 
 ![img](/img/breath-controller/screenshot8.png)
 
-```
+```csharp
 float easeOutSine(float t, float b, float c, float d) 
 {
     if (t >= d) return c + b;
@@ -192,7 +192,7 @@ float easeInOutQuad(float t, float b, float c, float d)
 
 修改后的代码如下：
 
-```
+```csharp
 using UnityEngine;
 using System.Collections;
 
