@@ -176,11 +176,21 @@ float easeInOutQuad(float t, float b, float c, float d)
 
 ![img](/img/breath-controller/screenshot10.gif)
 
+## 和DynamicBone一起工作
+
+**Breath Controller** 和 [DynamicBone](https://assetstore.unity.com/packages/tools/animation/dynamic-bone-16743?aid=1101l85Tr) 一样，都是在 **LateUpdate** 里去更新骨骼，如果两者一起工作的时候，我们必须保证 **Breath Controller** 先更新，**DynamicBone** 后更新，不然 **DynamicBone** 就不会对呼吸生效了。
+
+这里我们人为的指定一下脚本执行顺序即可：
+
+![img](/img/breath-controller/screenshot11.png){:height="70%" width="70%"}
+
 ## 非人形动画的支持
 
-这里偷个懒，在所有 **Animator.GetBoneTransform** 的代码后面都加一个判断，如果取不到就用指定的即可。
+**Breath Controller** 目前的版本只支持 **人形动画**，如果需要支持 **Generic动画**，我们可以手动指定呼吸计算所需要的骨骼。
 
-代码如下：
+这里偷个懒，我在所有 **Animator.GetBoneTransform** 逻辑的后面都加一个判断，如果取不到就用手动指定的骨骼来计算。
+
+最后，代码如下：
 
 ```
 using UnityEngine;
