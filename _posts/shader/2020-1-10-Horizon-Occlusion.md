@@ -72,7 +72,7 @@ g.reflUVW   = reflect(-worldViewDir, Normal);
 
 ![img](/img/horizon-occlusion/screenshot2.png)
 
-**Horizon Occlusion** 就是为了处理这种 **漏光** 表现，加了 **Horizon Occlusion** 后效果如下：
+**Horizon Occlusion** 就是针对这种 **漏光** 的处理，加了 **Horizon Occlusion** 后效果如下：
 
 ![img](/img/horizon-occlusion/screenshot3.png)
 
