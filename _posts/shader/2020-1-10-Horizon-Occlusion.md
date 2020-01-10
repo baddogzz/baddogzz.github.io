@@ -96,7 +96,7 @@ float GetHorizonOcclusion(float3 V, float3 normalWS, float3 vertexNormal, float 
 
 我们把 **反射向量** 和 **顶点法线** 做 **点乘**，如果是一个负值，就表明反射向量指向了表面下方，这个时候，我们就需要做反射光遮蔽了。
 
-代码还是很简单的。
+作者这里给了一个参数 **horizonFade** 来控制遮蔽强度，代码还是很简单的。
 
 ## 结尾
 
