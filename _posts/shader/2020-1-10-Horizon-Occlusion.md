@@ -14,7 +14,7 @@ tags:
 
 第一次看到 **Horizon Occlusion** 是在读 [Lux Plus](https://assetstore.unity.com/packages/vfx/shaders/lux-plus-physically-based-shader-framework-74897?aid=1101l85Tr) 源码的时候。
 
-**Horizon Occlusion** 主要是关于 **间接高光水平遮蔽** 的计算，典型的代码如下：
+**Horizon Occlusion** 是关于 **间接高光** 的 **水平遮蔽的计算**，典型的代码如下：
 
 ```
 // Horizon Occlusion
