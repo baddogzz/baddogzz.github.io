@@ -52,7 +52,7 @@ float GetHorizonOcclusion(float3 V, float3 normalWS, float3 vertexNormal, float 
 
 作者 **forst** 有很多经典的插件，确实让我学到了很多，这里给他做一个广告：[forst的商店主页](https://assetstore.unity.com/publishers/408)。
 
-好，现在回归主题，那么什么是 **间接高光水平遮蔽** 呢？
+好，现在回归主题，那么什么是 **间接高光的水平遮蔽** 呢？
 
 ## 原理和实现
 
