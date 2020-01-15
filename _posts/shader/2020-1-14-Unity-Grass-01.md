@@ -55,7 +55,7 @@ Unity的地形给我们提供了一个接口用于获取刷草信息：
 
 > public int[,] GetDetailLayer(int xBase, int yBase, int width, int height, int layer);
 
-这里 **GetDetailLayer** 返回的是一个二维数组，数组的长宽和 **Detail Resolution** 是对应的。
+这里 **GetDetailLayer** 返回的是一个二维数组，数组长宽的最大值和 **Detail Resolution** 是对应的。
 
 考虑到大面积草的渲染，如果以每个格子里的单株草为单位，那 **drawcall** 会非常高。
 
