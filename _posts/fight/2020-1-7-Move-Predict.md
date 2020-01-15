@@ -123,7 +123,7 @@ tags:
 
 > 我想起那天下午夕阳下的奔跑，
 
-> 那是我失去的青春。
+> 那是我逝去的青春。
 
 ![img](/img/move-predict/screenshot6.gif){:height="60%" width="60%"}
 
