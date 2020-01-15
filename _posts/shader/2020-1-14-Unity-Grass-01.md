@@ -63,7 +63,7 @@ Unity的地形给我们提供了一个接口用于获取刷草信息：
 
 比如我们把 **Detail Resolution Per Patch** 设为 **16**，那么每个 **Patch** 就包含了 16 * 16 = 256 个格子，Unity会把这 **256** 格里的草合并成一个大的Mesh，用于最终的渲染。
 
-这个时候，你可能和我一样有疑问，**GPU Instancing** 跑哪去了？
+这个时候，你可能和我有一样的疑问，**GPU Instancing** 跑哪去了？
 
 按照Unity的实现方案，每个 **Patch** 生成的Mesh是 **独立且各不相同** 的，**GPU Instancing** 的条件并不满足......
 
