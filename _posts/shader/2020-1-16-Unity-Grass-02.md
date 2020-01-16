@@ -31,7 +31,7 @@ Unity内置的刷草工具还是很好用的，[Advanced Terrain Grass](https://
 
 沿用 **Terrain** 的刷草方式有兼容性上的好处，但是这里就强迫你必须选择 **Terrain** 来做地表了。
 
-[uNature](https://assetstore.unity.com/packages/vfx/shaders/unature-gpu-grass-and-interactable-trees-43129?aid=1101l85Tr) 和上面两个插件不太一样，他自己写了刷草工具，刷草的对象不局限于 **Terrain**，也可以是 **普通模型**。
+[uNature](https://assetstore.unity.com/packages/vfx/shaders/unature-gpu-grass-and-interactable-trees-43129?aid=1101l85Tr) 和上面两个插件不太一样，作者自己提供了刷草工具，刷草的对象不局限于 **Terrain**，也可以是 **普通模型**。
 
 比如下图，我不但在地表刷了草，也在Cube上刷了草。
 
