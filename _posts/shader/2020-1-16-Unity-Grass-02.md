@@ -54,7 +54,7 @@ Unity内置的刷草工具还是很好用的，[Advanced Terrain Grass](https://
 
 既然要求 **相同的Mesh**，那我们可以 **把Mesh的计算从CPU移到GPU**：把影响 Mesh差异 的因素 ( 比如 Noise 和 高度 ) 编码到纹理，然后在 顶点着色器 采样纹理再把这些差异应用到顶点。
 
-这样我们就可以用相同的Mesh来渲染，即满足 **GPU Instancing** 的开启条件，又可以满足表现上的多样性，顺带把前文提到的 **运行时生成Mesh造成的CPU峰值** 也优化掉了。 
+这样我们就可以用相同的Mesh来渲染，即满足 **GPU Instancing** 的开启条件，又可以满足表现上的多样性，顺带把前文提到的 **运行时合并Mesh产生的CPU峰值** 也优化掉了。 
 
 以 **uNature** 为例，场景依然会被栅格化，如下图：
 
@@ -74,7 +74,7 @@ Unity内置的刷草工具还是很好用的，[Advanced Terrain Grass](https://
 
 > When enabled, Unity transforms all of the heavy terrain data, like height maps and splat maps, into textures on the GPU. Instead of constructing a custom mesh for each terrain patch on the CPU, we can use GPU instancing to replicate a single mesh and sample the height map texture to produce the correct geometry. This reduces the terrain CPU workload by orders of magnitude, as a few instanced draw calls replace potentially thousands of custom mesh draws.
 
-不过，一直到我目前在用的版本 **2019.3**，Unity关于 **Terrain刷草** 的渲染方式还是老样子......
+不过，一直到我目前在用的版本 **2019.3**，Unity对于 **地形草(Terrain Detail)** 的渲染方式还是老样子......
 
 ## GPU Instancing 的 API
 
