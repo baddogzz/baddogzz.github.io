@@ -27,11 +27,7 @@ tags:
 
 Unity内置的刷草工具还是很好用的，[Advanced Terrain Grass](https://assetstore.unity.com/packages/tools/terrain/advanced-terrain-grass-100014?aid=1101l85Tr) 和 [Nature Renderer](https://assetstore.unity.com/packages/tools/terrain/nature-renderer-153552?aid=1101l85Tr) 沿用 **Terrain** 的刷草，只是接管了渲染。
 
-参考一下 **TerrainData** 的API，我们是可以通过脚本获取刷草信息：
-
-> public int[,] GetDetailLayer(int xBase, int yBase, int width, int height, int layer);
-
-> public float GetHeight(int x, int y);
+参考一下 **TerrainData** 的API，我们可以通过脚本获取刷草信息，然后自己来做渲染。
 
 沿用 **Terrain** 的刷草方式有兼容性上的好处，但是这里就强迫你必须选择 **Terrain** 来做地表了。
 
