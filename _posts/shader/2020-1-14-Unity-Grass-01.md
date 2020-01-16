@@ -51,7 +51,7 @@ tags:
 
 比如我们把 **Detail Resolution** 设置成 **512**，那么地表会被划分成 **512 x 512** 个格子，每个格子是刷草的最基本单位，草的 **密度** 决定了每个格子草的数量。
 
-Unity的地形给我们提供了一个接口用于获取刷草信息：
+Unity的 **TerrainData** 给我们提供了一个接口用于获取刷草信息：
 
 > public int[,] GetDetailLayer(int xBase, int yBase, int width, int height, int layer);
 
@@ -97,9 +97,9 @@ Unity的地形给我们提供了一个接口用于获取刷草信息：
 
 3. [Nature Renderer](https://assetstore.unity.com/packages/tools/terrain/nature-renderer-153552?aid=1101l85Tr)
 
-当然这几个插件各有各的限制，我们是需要做二次开发的。
+当然这几个插件也并非十全十美，我们是需要做二次开发的。
 
-下篇文章会介绍一下这几个插件的实现原理，以及我们最终采用的方案。
+下篇文章会介绍一下这几个插件的实现原理，以及我们的选择。
 
 拜拜！
 
