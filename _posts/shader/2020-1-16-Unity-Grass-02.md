@@ -78,7 +78,7 @@ Unity内置的刷草工具还是很好用的，[Advanced Terrain Grass](https://
 
 > When enabled, Unity transforms all of the heavy terrain data, like height maps and splat maps, into textures on the GPU. Instead of constructing a custom mesh for each terrain patch on the CPU, we can use GPU instancing to replicate a single mesh and sample the height map texture to produce the correct geometry. This reduces the terrain CPU workload by orders of magnitude, as a few instanced draw calls replace potentially thousands of custom mesh draws.
 
-不过一直到我目前在用的 **2019.3** 版本，**Terrain刷草** 的渲染方式还是老样子。 
+不过，一直到我目前在用的版本 **2019.3**，Unity关于 **Terrain刷草** 的渲染方式还是老样子......
 
 ## 接口
 
