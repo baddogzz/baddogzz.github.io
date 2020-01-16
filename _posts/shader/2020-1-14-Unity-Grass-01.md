@@ -61,7 +61,7 @@ Unity的 **TerrainData** 给我们提供了一个接口用于获取刷草信息�
 
 对此，Unity做了它的优化：把一定数量的格子合并成一个 **Patch**，以 **Patch** 为单位来渲染，这样 **drawcall** 就能大幅度降低，**Detail Resolution Per Patch** 决定了每个Patch包含的格子数量。
 
-比如我们把 **Detail Resolution Per Patch** 设为 **16**，那么每个 **Patch** 就包含了 16 * 16 = 256 个格子，Unity会把这 **256** 格里的草合并成一个大的Mesh，用于最终的渲染。
+比如我们把 **Detail Resolution Per Patch** 设为 **16**，那么每个 **Patch** 就包含了 **16 * 16 = 256** 个格子，Unity会把这 **256** 格里的草合并成一个大的Mesh，用于最终的渲染。
 
 这个时候，你可能和我有一样的疑问，**GPU Instancing** 跑哪去了？
 
