@@ -108,7 +108,7 @@ Unity内置的刷草工具还是很好用的，[Advanced Terrain Grass](https://
 
 最后，说一下我们的选择：基于 [uNature](https://assetstore.unity.com/packages/vfx/shaders/unature-gpu-grass-and-interactable-trees-43129?aid=1101l85Tr) 做改进。
 
-+ 不选择 [Advanced Terrain Grass](https://assetstore.unity.com/packages/tools/terrain/advanced-terrain-grass-100014?aid=1101l85Tr)，主要因为它是基于 **Graphics.DrawMeshInstancedIndirect** 的实现。此外，如果你想实现类似塞尔达的割草功能，整个 **ComputeBuffer** 的数据都要重建，这个开销在运行时难以承受。
++ 不选择 [Advanced Terrain Grass](https://assetstore.unity.com/packages/tools/terrain/advanced-terrain-grass-100014?aid=1101l85Tr)，主要因为它是基于 **Graphics.DrawMeshInstancedIndirect** 的实现。此外，如果你想实现类似 **塞尔达的割草** 效果，整个 **ComputeBuffer** 的数据都要重建，这个开销在运行时难以承受。
 
 + 不选择 [Nature Renderer](https://assetstore.unity.com/packages/tools/terrain/nature-renderer-153552?aid=1101l85Tr) 的原因则更简单，作者并不提供源码。
 
@@ -120,7 +120,7 @@ Unity内置的刷草工具还是很好用的，[Advanced Terrain Grass](https://
 
 无论如何，二次开发是必不可少的。
 
-不过，有了 **GPU Instancing**，大面积的草海已经变得可行了。下面会继续介绍草海的其他渲染技巧以及高仿塞尔达的一些好玩的效果。
+不过，有了 **GPU Instancing**，大面积的草海已经变得可行了。下面会继续介绍草海的其他渲染技巧以及模仿 **塞尔达** 的一些好玩的效果。
 
 好了，拜拜！
 
