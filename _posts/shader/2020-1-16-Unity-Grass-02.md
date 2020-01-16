@@ -25,7 +25,7 @@ tags:
 
 ## 如何刷草
 
-Unity内置的刷草工具还是很好用的，[Advanced Terrain Grass](https://assetstore.unity.com/packages/tools/terrain/advanced-terrain-grass-100014?aid=1101l85Tr) 和 [Nature Renderer](https://assetstore.unity.com/packages/tools/terrain/nature-renderer-153552?aid=1101l85Tr) 沿用 **Terrain** 的刷草数据，只是接管了渲染。
+Unity内置的刷草工具还是很好用的，[Advanced Terrain Grass](https://assetstore.unity.com/packages/tools/terrain/advanced-terrain-grass-100014?aid=1101l85Tr) 和 [Nature Renderer](https://assetstore.unity.com/packages/tools/terrain/nature-renderer-153552?aid=1101l85Tr) 沿用 **Terrain** 的刷草，只是接管了渲染。
 
 参考一下 **TerrainData** 的API，我们是可以通过脚本获取刷草信息：
 
