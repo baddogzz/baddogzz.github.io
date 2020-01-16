@@ -92,7 +92,7 @@ Unity内置的刷草工具还是很好用的，[Advanced Terrain Grass](https://
 
 [Advanced Terrain Grass](https://assetstore.unity.com/packages/tools/terrain/advanced-terrain-grass-100014?aid=1101l85Tr) 就是这么做的，所以最后他用了 **Graphics.DrawMeshInstancedIndirect** 接口。
 
-[uNature](https://assetstore.unity.com/packages/vfx/shaders/unature-gpu-grass-and-interactable-trees-43129?aid=1101l85Tr) 则是对草先做一定程度的 **Mesh合并**，回想一下这张图的 **蓝色格子**，我们可以通过控制格子的粒度，从而把每个 **紫色格子** 内的 **蓝色格子** 数控制在 **1023** 以内，然后就可以通过 **Graphics.DrawMeshInstanced** 接口一次完成渲染。
+[uNature](https://assetstore.unity.com/packages/vfx/shaders/unature-gpu-grass-and-interactable-trees-43129?aid=1101l85Tr) 则是对草先做一定程度的 **Mesh合并**，回想一下下图的 **蓝色格子**，我们可以通过控制格子的粒度，从而把每个 **紫色格子** 内的 **蓝色格子** 数控制在 **1023** 以内，然后就可以通过 **Graphics.DrawMeshInstanced** 接口一次完成渲染。
 
 ![img](/img/unity-grass2/screenshot1.png)
 
