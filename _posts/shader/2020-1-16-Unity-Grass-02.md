@@ -80,9 +80,9 @@ Unity内置的刷草工具还是很好用的，[Advanced Terrain Grass](https://
 
 不过，一直到我目前在用的版本 **2019.3**，Unity关于 **Terrain刷草** 的渲染方式还是老样子......
 
-## 接口
+## GPU Instancing 的 API
 
-Unity提供了如下2个接口，让我们能在脚本中启用 **GPU Instancing**：
+关于 **GPU Instancing**，如果通过脚本来操作，Unity提供了如下2个接口：
 
 + Graphics.DrawMeshInstanced
 
