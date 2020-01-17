@@ -60,7 +60,7 @@ public static void CreateRenderingQueue(RenderingQueueReceiver receiver, bool th
 
 上面的 **UNThreadManager** 就是 [uNature](https://assetstore.unity.com/packages/vfx/shaders/unature-gpu-grass-and-interactable-trees-43129?aid=1101l85Tr) 基于 **ThreadPool** 实现的一个多线程任务管理器，不过 **多线程** 的东西不是本文的重点，大家有兴趣可以去看源码。
 
-在介绍 **提升渲染表现** 和 **类似塞尔达的场景交互** 功能之前，还有一些性能相关的问题需要注意。
+在介绍 **提升摆动表现** 和 **提升光照表现** 之前，还有一些性能相关的问题需要注意。
 
 ## 面片草 vs 模型草
 
