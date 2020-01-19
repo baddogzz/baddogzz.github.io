@@ -136,7 +136,7 @@ public static void CreateRenderingQueue(RenderingQueueReceiver receiver, bool th
 
 + 总格子数越多，遍历的开销就越高，需要的内存也越多。
 
-事实上，如果格子数很多，[uNature](https://assetstore.unity.com/packages/vfx/shaders/unature-gpu-grass-and-interactable-trees-43129?aid=1101l85Tr) 在更新视野的时候还有明显的 **GC负担**。
+事实上，如果格子数很多，[uNature](https://assetstore.unity.com/packages/vfx/shaders/unature-gpu-grass-and-interactable-trees-43129?aid=1101l85Tr) 还有明显的 **GC负担**。
 
 这里我们需要对 **uNature** 的代码做优化，同时权衡好 **Patch** 的尺寸。
 
