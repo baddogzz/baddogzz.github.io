@@ -134,7 +134,7 @@ public static void CreateRenderingQueue(RenderingQueueReceiver receiver, bool th
 
 + **Patch Size** 越小，总格子数越多，但是 **DrawMeshInstanced** 有最大数量 **1023** 的限制。
 
-+ 总格子数越多，遍历或者管理的开销就越高，需要的内存也越多。
++ 总格子数越多，遍历的开销就越高，需要的内存也越多。
 
 事实上，如果格子数很多，[uNature](https://assetstore.unity.com/packages/vfx/shaders/unature-gpu-grass-and-interactable-trees-43129?aid=1101l85Tr) 在更新视野的时候还有明显的 **GC负担**。
 
