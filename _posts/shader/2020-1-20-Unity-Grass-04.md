@@ -59,6 +59,10 @@ inline float4 CalculateTouchBending(float4 vertex)
 
 **割草** 是另外一个好玩的东西，自从玩过 **塞尔达**，看到什么都想砍两刀，：）
 
+下图是我们游戏的割草效果：
+
+![img](/img/unity-grass4/screenshot3.gif)
+
 **割草** 的原理也很简单：在运行时修改 **草的密度**。
 
 前文提过，Unity内置的 **Terrain** 提供了一个 **GetDetailLayer** 接口，这个接口返回一个二维数组，这个二维数组和 **栅格化** 后的地表网格是相对应的，数组每个元素的值即当前格的密度。
@@ -79,15 +83,11 @@ inline float4 CalculateTouchBending(float4 vertex)
 
 + [uNature Cutter](https://assetstore.unity.com/packages/tools/integration/unature-cutter-156603?aid=1101l85Tr&utm_source=aff)
 
-![img](/img/unity-grass4/screenshot3.jpg)
-
-![img](/img/unity-grass4/screenshot4.jpg)
-
 ## 烧草
 
 下图是我们仿照 **塞尔达** 的烧草效果，火势还会蔓延，：）
 
-![img](/img/unity-grass4/screenshot5.gif)
+![img](/img/unity-grass4/screenshot4.gif)
 
 原理上，**烧草** 和 **割草** 类似，不同的是，割草需要 **密度**，而烧草需要 **燃烧度**。
 
