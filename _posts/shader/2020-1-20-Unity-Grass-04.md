@@ -103,9 +103,99 @@ inline float4 CalculateTouchBending(float4 vertex)
 
 比如 **密度** 的最大值我们定为 **10**，**燃烧度** 的最大值我们定为 **23**，**10 * 23 + 22 = 252** 还是在 **255以内**，这样 **GrassMap** 的一个通道就能保存，表现上也足够。
 
+这样，无论是 **割草** 还是 **烧草**，我们要做的都是 **更新密度**，即更新 **GrassMap** 的 **像素信息**：
+
+```
+public Color32[] mapPixels
+{
+    get
+    {
+        if (_mapPixels == null)
+        {
+            _mapPixels = map.GetPixels32();
+        }
+
+        return _mapPixels;
+    }
+
+    internal set
+    {
+        _mapPixels = value;
+    }
+}
+```
+
+小贴士：这里用 **Texture2D.GetPixels32** 接口和 **Color32** 来计算，速度更快，：）
+
+> For most textures, even faster is to use GetPixels32 which returns low precision color data without costly integer-to-float conversions.
+
+
 ## 随风摆动
 
-草的 **随风摆动**，我在前文 [Lux的风和WindTexture](https://baddogzz.github.io/2019/12/06/Lux-Wind-Texture/) 讲过了，这里略过。
+**uNature** 草的摆动算法如下：
+
+```
+void FastSinCos(float4 val, out float4 s, out float4 c) 
+{
+    val = val * 6.408849 - 3.1415927;
+    float4 r5 = val * val;
+    float4 r6 = r5 * r5;
+    float4 r7 = r6 * r5;
+    float4 r8 = r6 * r5;
+    float4 r1 = r5 * val;
+    float4 r2 = r1 * r5;
+    float4 r3 = r2 * r5;
+    float4 sin7 = { 1, -0.16161616, 0.0083333, -0.00019841 };
+    float4 cos8 = { -0.5, 0.041666666, -0.0013888889, 0.000024801587 };
+    s = val + r1 * sin7.y + r2 * sin7.z + r3 * sin7.w;
+    c = 1 + r5 * cos8.x + r6 * cos8.y + r7 * cos8.z + r8 * cos8.w;
+}
+
+float4 ApplyFastWind(float4 vertex, float texCoordY)
+{
+    if (_WindSpeed == 0) return vertex;
+
+    float speed = _WindSpeed;
+
+    float4 _waveXmove = float4 (0.024, 0.04, -0.12, 0.096);
+    float4 _waveZmove = float4 (0.006, .02, -0.02, 0.1);
+
+    const float4 waveSpeed = float4 (1.2, 2, 1.6, 4.8);
+
+    float4 waves;
+    waves = vertex.x * _WindBending;
+    waves += vertex.z * _WindBending;
+
+    waves += _Time.x * (1 - 0.4) * waveSpeed * speed;
+
+    float4 s, c;
+    waves = frac(waves);
+    FastSinCos(waves, s, c);
+
+    float waveAmount = texCoordY * (1 + 0.4);
+    s *= waveAmount;
+
+    s *= normalize(waveSpeed);
+
+    s = s * s;
+    float fade = dot(s, 1.3);
+    s = s * s;
+
+    float3 waveMove = float3 (0, 0, 0);
+    waveMove.x = dot(s, _waveXmove);
+    waveMove.z = dot(s, _waveZmove);
+
+    vertex.xz -= waveMove.xz;
+
+    //vertex -= mul(_World2Object, float3(_WindSpeed, 0, _WindSpeed)).x * _WindBending * _SinTime;
+
+    return vertex;
+}
+```
+
+上面的代码和Unity内置的 **WavingGrass** 版本差不多，也是自己摆自己的，不受 **WindZone** 影响。
+
+我们项目并未采用上述算法，而是选择了 [Lux LWRP Essentials](https://assetstore.unity.com/packages/vfx/shaders/lux-lwrp-essentials-150355?aid=1101l85Tr&utm_source=aff) 的方案，请参考前文 [Lux的风和WindTexture](https://baddogzz.github.io/2019/12/06/Lux-Wind-Texture/)，这里略过。
 
 需要注意的是，添加了 **碰撞弯曲** 后，我们应该先计算 **随风摆动**，后计算 **碰撞弯曲**。
 
@@ -114,13 +204,13 @@ v.vertex = CalculateTouchBending(v.vertex);
 v.vertex = ApplyFastWind(v.vertex, v.texcoord.y);
 ```
 
-如果颠倒，风会把草吹到 **碰撞体** 里面去了。
+如果颠倒，风会把草吹到 **碰撞体** 的肚子里去，：）
 
 ## 一个浮点数比较的Bug
 
 最后说一个 [uNature](https://assetstore.unity.com/packages/vfx/shaders/unature-gpu-grass-and-interactable-trees-43129?aid=1101l85Tr) 的bug。
 
-第一次在手机上跑 **uNature** 的时候，我发现部分 **Mali GPU** 的手机 **看不到草**，追了半天，最后发现是下面这个函数：
+第一次在手机上跑 **uNature** 的时候，我发现部分 **Mali GPU** 的手机 **草不见了**，追了半天，最后发现是下面这个函数导致的：
 
 ```
 float GetDensity(float4 pixel)
@@ -133,7 +223,7 @@ float GetDensity(float4 pixel)
 }
 ```
 
-这个函数根据 **GrassMap** 的纹理信息获取 **特定类型草的密度**，这里的 **_PrototypeID** 即 **草的类型ID**。
+这个函数根据 **GrassMap** 的获取 **指定类型草的密度**，这里的 **_PrototypeID** 即 **草的类型ID**。
 
 这里关于ID的 **浮点数比较** 直接用了 **==**，违背了老师对我们的教导，十分的可疑。
 
@@ -144,8 +234,8 @@ float GetDensity(float4 pixel)
 {
     pixel *= 255;
 
-    if(abs(pixel.r - _PrototypeID) < 0.001f) return pixel.g;
-    if(abs(pixel.b - _PrototypeID) < 0.001f) return pixel.a;
+    if(abs(pixel.r - _PrototypeID) < 0.01f) return pixel.g;
+    if(abs(pixel.b - _PrototypeID) < 0.01f) return pixel.a;
 
     return 0;
 }
