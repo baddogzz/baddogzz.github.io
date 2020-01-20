@@ -101,7 +101,9 @@ inline float4 CalculateTouchBending(float4 vertex)
 
 我们可以对 **密度** 做一个编码，让他 **即能表示密度，也能表示燃烧度**。
 
-比如 **密度** 的最大值我们定为 **10**，**燃烧度** 的最大值我们定为 **23**，**10 * 23 + 22 = 252** 还是在 **255以内**，这样 **GrassMap** 的一个通道就能保存，表现上也足够。
+比如 **密度** 的最大值我们定为 **10**，**燃烧度** 的最大值我们定为 **23**，**10 * 23 + 22 = 252** 还是在 **255以内**，这样 **GrassMap** 的一个通道就能保存这个信息，表现上也足够。
+
+举个例子，比如当前格的密度是 **3**，燃烧度是 **12**，那么编码后的值就是 **3 * 23 + 12 = 81**。
 
 这样，无论是 **割草** 还是 **烧草**，我们要做的都是 **更新密度**，即更新 **GrassMap** 的 **像素信息**：
 
@@ -125,7 +127,7 @@ public Color32[] mapPixels
 }
 ```
 
-小贴士：这里用 **Texture2D.GetPixels32** 接口和 **Color32** 来计算，速度更快，：）
+小贴士：用 **Texture2D.GetPixels32** 接口和 **Color32** 来计算，速度更快，：）
 
 > For most textures, even faster is to use GetPixels32 which returns low precision color data without costly integer-to-float conversions.
 
@@ -223,7 +225,7 @@ float GetDensity(float4 pixel)
 }
 ```
 
-这个函数根据 **GrassMap** 的获取 **指定类型草的密度**，这里的 **_PrototypeID** 即 **草的类型ID**。
+这个函数根据 **GrassMap** 获取 **指定类型草的密度**，这里的 **_PrototypeID** 即 **草的类型ID**。
 
 这里关于ID的 **浮点数比较** 直接用了 **==**，违背了老师对我们的教导，十分的可疑。
 
