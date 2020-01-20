@@ -65,7 +65,7 @@ inline float4 CalculateTouchBending(float4 vertex)
 
 **割草** 的原理也很简单：在运行时修改 **草的密度**。
 
-前文提过，Unity内置的 **Terrain** 提供了一个 **GetDetailLayer** 接口，这个接口返回一个二维数组，这个二维数组和 **栅格化** 后的地表网格是相对应的，数组每个元素的值即当前格草的密度。
+前文提过，Unity内置的 **Terrain** 提供了一个 **GetDetailLayer** 接口，这个接口返回一个二维数组，这个二维数组和 **栅格化** 后的地表网格是相对应的，数组每个元素的值即当前格 **草的密度**。
 
 [uNature](https://assetstore.unity.com/packages/vfx/shaders/unature-gpu-grass-and-interactable-trees-43129?aid=1101l85Tr) 的实现方式和 **Terrain** 类似，场景依然会被 **栅格化**，不同的是，**uNature** 用一张纹理 **GrassMap** 来存贮密度。
 
