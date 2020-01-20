@@ -107,7 +107,7 @@ inline float4 CalculateTouchBending(float4 vertex)
 
 这样，无论是 **割草** 还是 **烧草**，我们要做的都是 **更新密度**，即更新 **GrassMap** 的 **像素信息**：
 
-```
+```csharp
 public Color32[] mapPixels
 {
     get
@@ -197,16 +197,7 @@ float4 ApplyFastWind(float4 vertex, float texCoordY)
 
 上面的代码和Unity内置的 **WavingGrass** 版本差不多，也是自己摆自己的，不受 **WindZone** 影响。
 
-我们项目并未采用上述算法，而是选择了 [Lux LWRP Essentials](https://assetstore.unity.com/packages/vfx/shaders/lux-lwrp-essentials-150355?aid=1101l85Tr&utm_source=aff) 的方案，请参考前文 [Lux的风和WindTexture](https://baddogzz.github.io/2019/12/06/Lux-Wind-Texture/)，这里略过。
-
-需要注意的是，添加了 **碰撞弯曲** 后，我们应该先计算 **随风摆动**，后计算 **碰撞弯曲**。
-
-```
-v.vertex = CalculateTouchBending(v.vertex);
-v.vertex = ApplyFastWind(v.vertex, v.texcoord.y);
-```
-
-如果颠倒，风会把草吹到 **碰撞体** 的肚子里去，：）
+我们项目并未采用上述算法，而是选择了 [Lux LWRP Essentials](https://assetstore.unity.com/packages/vfx/shaders/lux-lwrp-essentials-150355?aid=1101l85Tr&utm_source=aff) 的方案，细节请参考前文 [Lux的风和WindTexture](https://baddogzz.github.io/2019/12/06/Lux-Wind-Texture/)，这里略过。
 
 ## 一个浮点数比较的Bug
 
