@@ -87,7 +87,9 @@ inline float4 CalculateTouchBending(float4 vertex)
 
 ## 烧草
 
-下图是我们仿照 **塞尔达** 的烧草效果，火势还会蔓延，：）
+**塞尔达** 的草不但可以割，还可以烧。
+
+下图是我们模仿 **塞尔达** 的烧草效果，包括火势蔓延，：）
 
 ![img](/img/unity-grass4/screenshot4.gif)
 
