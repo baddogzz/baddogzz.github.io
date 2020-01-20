@@ -77,11 +77,13 @@ inline float4 CalculateTouchBending(float4 vertex)
 
 ![img](/img/unity-grass4/screenshot2.png)
 
-趁着年前有空，我把 **割草** 的代码整理了一翻，丢到 **Asset Store** 了，**Terrain版本** 和 **uNature版本** 的割草都有哦： 
+趁着年前有空，我把 **割草** 的代码整理了一翻，丢到 **Asset Store** 赚点小钱，**Terrain版本** 和 **uNature版本** 的割草都有：
 
 + [Easy Grass Cutter](https://assetstore.unity.com/packages/tools/particles-effects/easy-grass-cutter-156255?aid=1101l85Tr&utm_source=aff)
 
 + [uNature Cutter](https://assetstore.unity.com/packages/tools/integration/unature-cutter-156603?aid=1101l85Tr&utm_source=aff)
+
+欢迎参考。
 
 ## 烧草
 
