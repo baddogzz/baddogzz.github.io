@@ -23,7 +23,7 @@ tags:
 
 [uNature](https://assetstore.unity.com/packages/vfx/shaders/unature-gpu-grass-and-interactable-trees-43129?aid=1101l85Tr) 的实现方式 **类似用一个球体压迫草面，使得草的顶点远离球体中心**。
 
-**uNature** 一共支持 **20个碰撞源**，不过手游的话只计算 **主角的碰撞** 就够了。
+[uNature](https://assetstore.unity.com/packages/vfx/shaders/unature-gpu-grass-and-interactable-trees-43129?aid=1101l85Tr) 一共支持 **20个碰撞源**，不过手游的话只计算 **主角的碰撞** 就够了。
 
 我们可以在 **顶点着色器** 中添加如下代码：
 
@@ -53,13 +53,15 @@ inline float4 CalculateTouchBending(float4 vertex)
 
 上面代码中的 **_InteractionTouchBendedInstances** 存贮的是 **碰撞源** 的信息，其 **xyz** 分量是 **球心的世界坐标**， **w** 分量是球的 **半径**，**_InteractionTouchBendedInstances** 的值由脚本传入。
 
+这里的代码很简单，不废话。
+
 ## 割草
 
 **割草** 是另外一个好玩的东西，自从玩过 **塞尔达**，看到什么都想砍两刀，：）
 
-割草的原理也很简单：在运行时修改 **草的密度**。
+**割草** 的原理也很简单：在运行时修改 **草的密度**。
 
-前文提过，Unity内置的 **Terrain** 提供了一个 **GetDetailLayer** 接口，这个接口返回一个二维数组，这个二维数组和 **栅格化** 后的地表网格是相对应的，数组每个元素的值即当前格的密度信息。
+前文提过，Unity内置的 **Terrain** 提供了一个 **GetDetailLayer** 接口，这个接口返回一个二维数组，这个二维数组和 **栅格化** 后的地表网格是相对应的，数组每个元素的值即当前格的密度。
 
 [uNature](https://assetstore.unity.com/packages/vfx/shaders/unature-gpu-grass-and-interactable-trees-43129?aid=1101l85Tr) 的实现方式和 **Terrain** 类似，场景依然会被 **栅格化**，不同的是，**uNature** 用一张纹理 **GrassMap** 来存贮密度。
 
@@ -69,11 +71,17 @@ inline float4 CalculateTouchBending(float4 vertex)
 
 ![img](/img/unity-grass4/screenshot2.png)
 
-趁着之前有空，我把割草的代码整理了一翻，丢到 **Asset Store** 了，**Terrain版本** 和 **uNature版本** 的割草都有哦： 
+常见的技能攻击形状包括：圆形攻击，扇形攻击，矩形攻击等。
+
+趁着年前有空，我把 **割草** 的代码整理了一翻，丢到 **Asset Store** 了，**Terrain版本** 和 **uNature版本** 的割草都有哦： 
 
 + [Easy Grass Cutter](https://assetstore.unity.com/packages/tools/particles-effects/easy-grass-cutter-156255?aid=1101l85Tr&utm_source=aff)
 
 + [uNature Cutter](https://assetstore.unity.com/packages/tools/integration/unature-cutter-156603?aid=1101l85Tr&utm_source=aff)
+
+![img](/img/unity-grass4/screenshot3.jpg)
+
+![img](/img/unity-grass4/screenshot4.jpg)
 
 ## 烧草
 
@@ -89,7 +97,7 @@ inline float4 CalculateTouchBending(float4 vertex)
 
 我们可以对 **密度** 做一个编码，让他 **即能表示密度，也能表示燃烧度**。
 
-比如 **密度** 的最大值我们定为 **10**，**燃烧度** 的最大值我们定为 **23**，**10 * 23 + 22 = 252** 还是在 **255以内**，这样 **GrassMap** 的一个通道就能存贮，表现上也足够。
+比如 **密度** 的最大值我们定为 **10**，**燃烧度** 的最大值我们定为 **23**，**10 * 23 + 22 = 252** 还是在 **255以内**，这样 **GrassMap** 的一个通道就能保存，表现上也足够。
 
 ## 随风摆动
 
@@ -102,7 +110,7 @@ v.vertex = CalculateTouchBending(v.vertex);
 v.vertex = ApplyFastWind(v.vertex, v.texcoord.y);
 ```
 
-如果颠倒，风会把草吹到 **碰撞体** 内部去了。
+如果颠倒，风会把草吹到 **碰撞体** 里面去了。
 
 ## 一个浮点数比较的Bug
 
