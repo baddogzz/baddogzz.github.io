@@ -96,7 +96,7 @@ float D=((((((((NoH)*(m2)))-(NoH)))*(NoH)))+(1));
 
 ![img](/img/unity-grass5/screenshot12.png) 
 
-此外，作者根据 [这篇文章](https://colinbarrebrisebois.com/2012/04/09/approximating-translucency-revisited-with-simplified-spherical-gaussian/) 对上面的算法做了优化，主要是优化点是关于 **pow** 的，很有意思，值得一看。
+此外，作者根据 [这篇文章](https://colinbarrebrisebois.com/2012/04/09/approximating-translucency-revisited-with-simplified-spherical-gaussian/) 对上面的算法做了优化，主要的优化点是关于 **pow** 的，很有意思，值得一看。
  
 这里直接附上代码： 
 
@@ -126,7 +126,7 @@ c.rgb += s.Albedo * 4.0 * s.Translucency * lightScattering /* mask trans by spec
 
 **烘培的AO** 对于 **非静态的** 的草来说有点不合适，**后处理的AO** 则过于昂贵，对于手游来说更不合适。
 
-我们可以通过 **顶点色** 来记录 **AO**，或者直接草的贴图增加一个 **AO通道**，性价比还是很高的。
+我们可以通过 **顶点色** 来记录 **AO强度**，或者直接草的贴图增加一个 **AO通道**，性价比还是很高的。
 
 以 [Lux LWRP Essentials](https://assetstore.unity.com/packages/vfx/shaders/lux-lwrp-essentials-150355?aid=1101l85Tr) 的草为例，我把 **阴影** 和 **AO** 全都关闭，效果如下：
 
