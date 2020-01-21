@@ -15,7 +15,7 @@ tags:
 
 前文介绍了草海的一些有趣的动态效果，本文是关于 **提升光照表现** 的一些做法。
 
-Unity内置草的光照表现普普通通，经常会成为一些插件作者嘲讽的对象，下图是 **Unity** 和 [Advanced Terrain Grass](https://assetstore.unity.com/packages/tools/terrain/advanced-terrain-grass-100014?aid=1101l85Tr) 的草海对比：
+Unity内置草的光照表现普普通通，经常会成为一些插件作者嘲讽的对象，下图是 **Unity** 和 [Advanced Terrain Grass](https://assetstore.unity.com/packages/tools/terrain/advanced-terrain-grass-100014?aid=1101l85Tr) 草海的光照对比：
 
 *Unity的草*
 
@@ -25,31 +25,33 @@ Unity内置草的光照表现普普通通，经常会成为一些插件作者嘲
 
 ![img](/img/unity-grass5/screenshot2.png) 
 
-下面就介绍一下提升草海光照表现的一些做法。
+没有对比就没有伤害，下面介绍一下提升 **光照表现** 的一些做法。
 
 ## 添加高光
 
-Unity内置的草是没有 **高光** 计算的，如果没有影子，就会非常的平。
+Unity内置的草是没有 **高光** 的，如果没有影子，就显得没有立体感，非常的平。
 
-当然，即便没有高光，依然能做出非常漂亮的效果，比如大家可以参考一下这个场景 [The Illustrated Nature](https://assetstore.unity.com/packages/3d/vegetation/the-illustrated-nature-153939?aid=1101l85Tr) 的做法。
+当然，即便没有 **高光**，依然能做出非常漂亮的草海效果，比如大家可以参考一下这个场景 [The Illustrated Nature](https://assetstore.unity.com/packages/3d/vegetation/the-illustrated-nature-153939?aid=1101l85Tr) 的做法： **纯色贴图 + Lambert漫反射 + Color Grading**。
 
-不过，我还是喜欢高光。
+![img](/img/unity-grass5/screenshot11.jpg) 
+
+**风格化** 其实蛮难做的，另外，我喜欢 **高光**。
 
 #### 我们的高光
 
-我们游戏场景的光照还是传统的 **Blinn-Phong** 光照模型，为了模仿 **塞尔达** 草海的高光，我们会把草的法线 **全部向上**，草的 **光滑度** 可以控制高光的整体范围，再加上 **法线贴图** 就更好了。
+我们游戏场景的光照还是传统的 **Blinn-Phong** 光照模型，为了模仿 **塞尔达** 草海的高光，我们会把草的法线 **全部向上**，草的 **光滑度** 可以控制高光的整体范围，再加上 **法线贴图** 表现就很好了。
 
-此外，为了让水平视角下的高光 **更远离脚底** 从而更多的出现在镜头内，我们会对高光的位置做一定的 **偏移**，如下图：
+此外，为了让水平视角下的高光 **更远离脚底** 从而更多的 **出现在镜头** 内，我们会对高光的位置做一定的 **偏移**，如下图：
 
 ![img](/img/unity-grass/screenshot2.png) 
 
-最后，即便是 **Blinn-Phong** 光照模型，转到 **线性空间** 也比 **Gamma空间** 更容易出效果。
+题外话，即便是 **Blinn-Phong** 光照模型，转到 **线性空间** 也比 **Gamma空间** 更容易出效果。
 
-我们游戏的高光我是满意的，下面介绍一些其他做法。
+上图的高光我是满意的，下面介绍一些其他做法。
 
 #### 楚留香的高光
 
-**楚留香** 的代码一直是我参考的对象，下面看一下 **楚留香** 的草。
+**楚留香** 的代码一直是我参考的对象，下面看一下楚留香 **草的高光**。
 
 *雨天*
 
@@ -59,9 +61,9 @@ Unity内置的草是没有 **高光** 计算的，如果没有影子，就会非
 
 ![img](/img/unity-grass5/screenshot4.png) 
 
-上图是楚留香 **草的高光** 截图，整体氛围还是很好的，不过第一张 **潮湿草的高光** 有点失真了。
+**楚留香** 场景的水准还是非常高的，不过就草的高光而言，可能是 **面片草** 没有 **法线贴图** 的缘故，表现不是太好。
 
-**楚留香** 的渲染是全 **PBR** 的，草的高光部分做了相当程度的简化，没有 **IBL**，**BRDF** 也简化了，**直接高光** 的计算如下：
+追了一下代码，**楚留香** 的渲染是全 **PBR** 的，草的高光计算做了相当程度的简化，没有 **IBL**，**BRDF** 也简化了，**直接高光** 的计算公式如下：
 
 ```
 half3 sunSpec=half3(0,0,0);
@@ -82,7 +84,7 @@ float D=((((((((NoH)*(m2)))-(NoH)))*(NoH)))+(1));
 
 楚留香 **草的高光计算** 是简化的 **BRDF**，比如 **菲涅尔项** 直接省略掉了，当然这个效果手机上已经足够了。
 
-回到Unity引擎，[Advanced Terrain Grass](https://assetstore.unity.com/packages/tools/terrain/advanced-terrain-grass-100014?aid=1101l85Tr) 的高光基本采用了Unity内置的 **BRDF1** 算法，也就是最高效果的 **BRDF**，如下图：
+回到Unity引擎，大部分草的插件都支持 **PBR**，以 [Advanced Terrain Grass](https://assetstore.unity.com/packages/tools/terrain/advanced-terrain-grass-100014?aid=1101l85Tr) 为例，**ATG** 的高光基本沿用了Unity内置的 **BRDF1** 算法，也就是最高效果的 **BRDF**，如下图：
 
 ![img](/img/unity-grass5/screenshot5.png) 
 
@@ -90,41 +92,35 @@ float D=((((((((NoH)*(m2)))-(NoH)))*(NoH)))+(1));
 
 ![img](/img/unity-grass5/screenshot6.png) 
 
-这里关于 **Light Scattering** 的计算，可以参考 [这篇文章](https://www.slideshare.net/colinbb/colin-barrebrisebois-gdc-2011-approximating-translucency-for-a-fast-cheap-and-convincing-subsurfacescattering-look-7170855)，这个算法计算量不大，也可以用它来模拟 **次表面散射** 的效果。
+关于 **Light Scattering** 的计算方式，可以参考 [这篇文章](https://www.slideshare.net/colinbb/colin-barrebrisebois-gdc-2011-approximating-translucency-for-a-fast-cheap-and-convincing-subsurfacescattering-look-7170855)，这个算法的计算量不大，也可以用它来模拟 **次表面散射**。
 
-作者代码里还给出了 [一个参考链接](https://colinbarrebrisebois.com/2012/04/09/approximating-translucency-revisited-with-simplified-spherical-gaussian/)，是关于 **优化pow** 的，很有意思，值得一看。
+![img](/img/unity-grass5/screenshot12.png) 
+
+此外，作者代码里还给出了一篇 [关于pow的优化](https://colinbarrebrisebois.com/2012/04/09/approximating-translucency-revisited-with-simplified-spherical-gaussian/) 的文章链接，很有意思，值得一看。
  
 这里直接附上代码： 
 
 ```
-half4 c = BRDF1_ATG_PBS (s.Albedo, s.Specular, oneMinusReflectivity, s.Smoothness, /*NdotLDirect, */s.Normal, viewDir, gi.light, gi.indirect, specularIntensity);
-
-//  For gi lighting we simply use the built in BRDF
-c.rgb += UNITY_BRDF_GI (s.Albedo, s.Specular, oneMinusReflectivity, s.Smoothness, s.Normal, viewDir, s.Occlusion, gi);
-
-//  Add Translucency – needs light dir and intensity: so real time only
-#if !defined(LIGHTMAP_ON)
-    //  Best for grass as the normal counts less
-    //  //  https://colinbarrebrisebois.com/2012/04/09/approximating-translucency-revisited-with-simplified-spherical-gaussian/
-    half3 transLightDir = gi.light.dir + s.Normal * 0.01;
-    half transDot = dot( -transLightDir, viewDir ); // sign(minus) comes from eyeVec
-    transDot = exp2(saturate(transDot) * s.TranslucencyPower - s.TranslucencyPower);
-    half3 lightScattering = transDot * gi.light.color * 
-    #if !defined(ISGRASS)
-        (1.0 - NdotLDirect)
-    #else
-        1.0
-    #endif
-    ;
-    c.rgb += s.Albedo * 4.0 * s.Translucency * lightScattering /* mask trans by spec */  * (1.0 - saturate(c.a));
-#endif
+//  Best for grass as the normal counts less
+//  https://colinbarrebrisebois.com/2012/04/09/approximating-translucency-revisited-with-simplified-spherical-gaussian/
+half3 transLightDir = gi.light.dir + s.Normal * 0.01;
+half transDot = dot( -transLightDir, viewDir ); // sign(minus) comes from eyeVec
+transDot = exp2(saturate(transDot) * s.TranslucencyPower - s.TranslucencyPower);
+half3 lightScattering = transDot * gi.light.color;
+c.rgb += s.Albedo * 4.0 * s.Translucency * lightScattering /* mask trans by spec */  * (1.0 - saturate(c.a));
 ```
+
+最后，无论是 **Blinn-Phong** 还是 **PBR**，我们都可以通过调整 **光滑度**，**金属度**，**漫反射颜色**，**高光颜色** 来调整高光的表现。
+
+下图是我模拟 **雨天湿滑** 的效果，程序员的审美，将就看，：）
+
+![img](/img/unity-grass5/screenshot13.png) 
 
 ## 添加AO
 
 添加 **环境光遮蔽（AO）** 对草整体表现的提升还是很大的。
 
-我们可以 **烘培环境光** 同时 **烘培AO**，不过因为草会摆动，这里烘培并不合适。
+**烘培AO** 对于 **非静态的** 的草来说有点不合适，后处理的 **AO** 则过于昂贵，对于手游来说更不合适。
 
 我们可以通过 **顶点色** 来记录 **AO**，或者直接草的贴图增加一个 **AO通道**，性价比还是蛮高的。
 
@@ -132,23 +128,25 @@ c.rgb += UNITY_BRDF_GI (s.Albedo, s.Specular, oneMinusReflectivity, s.Smoothness
 
 ![img](/img/unity-grass5/screenshot7.png) 
 
-有点平的样子，如果我们开了 **AO**，就好不少：
+很平有没有？
+
+如果我们开了 **AO**，但是依然 **关闭阴影**，表现就好不少：
 
 ![img](/img/unity-grass5/screenshot8.png) 
 
-如果再开了自阴影，就舒服了：
+如果再开阴影，就立体多了：
 
 ![img](/img/unity-grass5/screenshot9.png)
 
 ## 结尾
 
-关于提升草海的 **光照表现**，大约就是以上的内容了。
+关于提升草海的 **光照表现**，大致就是以上的内容了，整个 **移动端草海的渲染方案** 也就写到这里。
 
-最后附一张我们游戏草原的截图，用 **主美哥** 的话说，*放到今天，还能一战*：
+最后附一张我们前项目草原的截图，2018年做的东西，用 **主美哥** 的话说，*放到今天，还能一战*，：）
 
 ![img](/img/unity-grass5/screenshot10.jpg)
 
-哈哈，拜拜！
+好了，拜拜！
 
 
 
