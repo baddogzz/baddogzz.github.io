@@ -96,7 +96,7 @@ float D=((((((((NoH)*(m2)))-(NoH)))*(NoH)))+(1));
 
 ![img](/img/unity-grass5/screenshot12.png) 
 
-此外，作者代码里还给出了一篇 [关于pow的优化](https://colinbarrebrisebois.com/2012/04/09/approximating-translucency-revisited-with-simplified-spherical-gaussian/) 的文章链接，很有意思，值得一看。
+此外，作者根据 [这篇文章](https://colinbarrebrisebois.com/2012/04/09/approximating-translucency-revisited-with-simplified-spherical-gaussian/) 对上面的算法做了优化，主要是优化点是关于 **pow** 的，很有意思，值得一看。
  
 这里直接附上代码： 
 
@@ -110,7 +110,7 @@ half3 lightScattering = transDot * gi.light.color;
 c.rgb += s.Albedo * 4.0 * s.Translucency * lightScattering /* mask trans by spec */  * (1.0 - saturate(c.a));
 ```
 
-最后，无论是 **Blinn-Phong** 还是 **PBR**，我们都可以通过调整 **光滑度**，**金属度**，**漫反射颜色**，**高光颜色** 来调整高光的表现。
+最后，无论是 **Blinn-Phong** 还是 **PBR**，我们都可以通过调整 **光滑度**，**金属度**，**漫反射颜色**，**高光颜色** 来实现特定的效果需求。
 
 下图是我模拟 **雨天湿滑** 的效果，程序员的审美，将就看，：）
 
@@ -118,29 +118,35 @@ c.rgb += s.Albedo * 4.0 * s.Translucency * lightScattering /* mask trans by spec
 
 ## 添加AO
 
-添加 **环境光遮蔽（AO）** 对草整体表现的提升还是很大的。
+各个插件对草的光照改进，主要还是 **高光** 部分。
+
+此外，不开 **自阴影** 的前提下，**环境光遮蔽（AO）** 对草海整体表现的提升还是很明显的。
+
+关于 **AO** 有几种做法。
 
 **烘培AO** 对于 **非静态的** 的草来说有点不合适，后处理的 **AO** 则过于昂贵，对于手游来说更不合适。
 
-我们可以通过 **顶点色** 来记录 **AO**，或者直接草的贴图增加一个 **AO通道**，性价比还是蛮高的。
+我们可以通过 **顶点色** 来记录 **AO**，或者直接草的贴图增加一个 **AO通道**，性价比还是很高的。
 
-下图是 **[Lux LWRP Essentials](https://assetstore.unity.com/packages/vfx/shaders/lux-lwrp-essentials-150355?aid=1101l85Tr)** 的草 **关闭阴影** 后的效果：
+以 [Lux LWRP Essentials](https://assetstore.unity.com/packages/vfx/shaders/lux-lwrp-essentials-150355?aid=1101l85Tr) 的草为例，我把 **阴影** 和 **AO** 全都关闭，效果如下：
 
 ![img](/img/unity-grass5/screenshot7.png) 
 
 很平有没有？
 
-如果我们开了 **AO**，但是依然 **关闭阴影**，表现就好不少：
+如果打开 **AO**，但是依然 **关闭阴影**，表现就好了不少：
 
 ![img](/img/unity-grass5/screenshot8.png) 
 
-如果再开阴影，就立体多了：
+当然，提升最大的还是 **自阴影**，如下图：
 
 ![img](/img/unity-grass5/screenshot9.png)
 
 ## 结尾
 
 关于提升草海的 **光照表现**，大致就是以上的内容了，整个 **移动端草海的渲染方案** 也就写到这里。
+
+在写这些文章的过程中，难免会 **怀个旧**。
 
 最后附一张我们前项目草原的截图，2018年做的东西，用 **主美哥** 的话说，*放到今天，还能一战*，：）
 
