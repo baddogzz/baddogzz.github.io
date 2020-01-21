@@ -120,9 +120,59 @@ c.rgb += UNITY_BRDF_GI (s.Albedo, s.Specular, oneMinusReflectivity, s.Smoothness
 #endif
 ```
 
-## 添加AO 
+## 添加AO
 
-卧槽，下班了！
+添加 **环境光遮蔽（AO）** 对草整体表现的提升还是很大的。
+
+我们可以 **烘培环境光** 同时 **烘培AO**，不过因为草会摆动，这里烘培并不合适。
+
+我们可以通过 **顶点色** 来记录 **AO**，或者直接草的贴图增加一个 **AO通道**，性价比还是蛮高的。
+
+下图是 **[Lux LWRP Essentials](https://assetstore.unity.com/packages/vfx/shaders/lux-lwrp-essentials-150355?aid=1101l85Tr)** 的草 **关闭阴影** 后的效果：
+
+![img](/img/unity-grass5/screenshot7.png) 
+
+有点平的样子，如果我们开了 **AO**，就好不少：
+
+![img](/img/unity-grass5/screenshot8.png) 
+
+如果再开了自阴影，就舒服了：
+
+![img](/img/unity-grass5/screenshot9.png)
+
+## 结尾
+
+关于提升草海的 **光照表现**，大约就是以上的内容了。
+
+最后附一张我们游戏草原的截图，用 **主美哥** 的话说，*放到今天，还能一战*：
+
+![img](/img/unity-grass5/screenshot10.jpg)
+
+哈哈，拜拜！
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
