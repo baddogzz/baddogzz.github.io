@@ -126,7 +126,17 @@ public void Unload(bool unloadAllLoadedObjects);
 
 最后，在实际项目中，并非 **AssetBundle** 卸载得越及时就越好，比如反复打开关闭一个UI，我们不需要一关闭UI就销毁 **资源** 进而卸载 **AssetBundle**，而是需要在 **资源** 上层做一些缓存策略，一般就是各种池子了。
 
-## 结尾
+## 总结
+
+当前项目的方案在 **资源回收的及时性** 上要优于 **暗黑血统** 的方案，但是 **暗黑血统** 因为 **提前卸载Bundle** 的策略，**Bundle数量** 会更少一点。
+
+其实早期 **暗黑血统** 在 **提前卸载Bundle** 的方案上做得更加激进：只有 **被共享的Bundle** 才不会被提前卸载，而非我上文所说的 **叶子节点**，当然，要堵不少bug。
+
+考虑到目前 **LZ4** 的压缩策略，以及 **AssetBundle.LoadFromFile** 的加载方式，多一点 **Bundle** 的内存占用不会很高，但是多一点 **资源** 内存占用就比较高了。
+
+题外话，下图是 **UWA** 关于 **LZ4** 和 **LZMA** 的总结，留图备忘：
+
+![img](/img/unload-resources/screenshot8.png)
 
 本文就到这里，今年有机会也可以试试Unity推荐的 [Addressable Assets](https://docs.unity3d.com/Packages/com.unity.addressables@1.6/manual/index.html)。
 
