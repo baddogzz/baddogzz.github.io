@@ -68,7 +68,7 @@ public void Unload(bool unloadAllLoadedObjects);
 
 ![img](/img/unload-resources/screenshot3.png)
 
-最后，Unity也提供了一个 **Resources.UnloadUnusedAssets** 接口来帮助我们销毁失去引用的 **野资源**，不过这个函数会扫描游戏内的全部对象，开销较大，一般只在 **切场景** 时调用。
+最后，Unity也提供了一个 **Resources.UnloadUnusedAssets** 接口来帮助我们销毁没有被任何对象引用的 **野资源**，不过这个函数会扫描全部对象，开销较大，一般只在 **切场景** 时调用。
 
 ## 卸载AssetBundle的策略
 
