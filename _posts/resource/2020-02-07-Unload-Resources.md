@@ -76,7 +76,7 @@ public void Unload(bool unloadAllLoadedObjects);
 
 #### 暗黑血统的策略
 
-最早做 **暗黑血统** 的时候，我们卸载 **AssetBundle** 的策略其实挺好，主要包括如下几点：
+最早做 **暗黑血统** 的时候，我们卸载 **AssetBundle** 的策略如下：
 
 + 用 **AssetBundle.Unload(false)** 来卸载 **Bundle**。
 
@@ -90,23 +90,27 @@ public void Unload(bool unloadAllLoadedObjects);
 
 红框标注的 **Bundle** 是可以在加载完 **资源** 后立刻卸载的。
 
-我们看一下包含 **资源A和B** 的那个 **Bundle**，如果我们只加载了 **A**，然后就把 **Bundle** 卸载了，然后我们再加载 **B**，这个时候 **Bundle** 又要被重新加载，如果我再从这个 **Bundle** 加载 **A**，这个时候不是就有 **2个A** 了？
+我们看一下包含 **资源A和B的Bundle**，如果我们只加载了 **A**，然后就把 **Bundle** 卸载了，然后我们再加载 **B**，这个时候 **Bundle** 又要被重新加载，如果我再从这个 **Bundle** 加载 **A**，这个时候不是就有 **2个A** 了？
 
-事实上，因为 **第一个A** 依然还被我们的 **AssetManager** 管理着，上层逻辑不会直接从 **Bundle** 中去加载 **A**，而是从缓存中去拿，所以上述场景不会出现。
+事实上，因为 **第一个A** 依然还被我们的 **AssetManager** 管理着，上层逻辑不会直接从 **Bundle** 中去加载 **A**，而是从缓存中去拿，所以上述情况并不会出现。
 
-我们再看一下包含 **资源C** 的那个 **Bundle**，如果我们加载完 **C** 后就把 **Bundle** 卸载了，然后我们再去加载 **G**，由于 **G依赖C**，**C所在的Bundle** 会再次被加载，同时加载出一个 **新的C**，这个 **新的C** 是被 **间接加载**的，并不受我们的 **AssetManager** 管理，这就是真正的 **资源重复** 了。
+我们再看一下包含 **资源C的Bundle**，如果我们加载完 **C** 后就把 **Bundle** 卸载了，然后我们再去加载 **G**，由于 **G依赖C**，**C所在的Bundle** 会再次被加载，同时加载出一个 **新的C**，这就是真正的 **资源重复** 了。
 
-最后，我们再看一下 **资源G**，**G依赖C，而C又依赖D和H**，所以用户去加载 **G**，其实也会 **间接** 加载 **D和H**，但是我们的 **AssetManager** 只会管理 **直接加载的资源**，对 **D和H** 是无感的。
+此外，因为我们的 **AssetManager** 只会管理 **直接加载的资源**，假设我们先加载了 **G**，**C** 做为 **G** 的依赖被 **间接加载**，此时我们再去直接加载 **C**，就无法命中 **AssetManager** 的缓存了。对于这种情况，我们必须 **额外记录** 这种类型的 **资源**，稍微有点蛋疼。
 
-现在考虑一下 **引用计数**，假设我们已经销毁了 **G**，**那么Ｇ依赖的所有Bunlde引用计数会-1**，假设 **包含D的Bundle** 以及 **包含H的Bundle** 引用计数都已经为 **０** 了，这时我们会通过 **AssetBundle.Unload(false)** 来卸载它们，而然 **D和H** 在 **Bundle** 卸载后依然存活着，我们的 **AssetManager** 并没有管理到它们，它们变成了 **野资源**。
+最后，考虑一下 **引用计数**，假设我们已经销毁了 **G**，那么 **Ｇ** 依赖的所有Bunlde引用计数会-1，假设 **包含D的Bundle** 以及 **包含H的Bundle** 引用计数都为 **０** 了，选择 **AssetBundle.Unload(false)** 卸载的结果是 **被间接加载的D和H** 在 **Bundle卸载** 后依然存活着，我们的 **AssetManager** 并没有管理到它们，它们变成了 **野资源**。
 
-这一类 **野资源** 最终就得依靠 **Resources.UnloadUnusedAssets** 来卸载了，一般我们在 **场景切换** 时做这个操作。
+这一类 **野资源** 最终得依靠 **Resources.UnloadUnusedAssets** 来卸载，一般我们在 **场景切换** 时做这个操作。
 
 #### 当前项目的策略
 
-暗黑血统的策略在线上工作良好，一般来说 **切场景时 full gc** 的策略也是足够用的。
+暗黑血统的策略在线上工作良好，不过因为 **AssetManager** 只会管理 **直接加载** 的资源，**AssetBundle.Unload(false)** 必须配合 **Resources.UnloadUnusedAssets** 才能完成一次彻底的资源清除。
 
-当前项目，我尝试了一下 **AssetBundle.Unload(true)** 的策略：这里不再区分 **Bundle是否是叶子节点**，一切卸载的依据都是 **引用计数**，以下图为例：
+当前项目，**AssetManager** 依然只管理 **直接加载** 的资源，不过我选择了 **AssetBundle.Unload(true)** 的策略，并且不再区分 **Bundle是否是叶子节点**，一切卸载的依据都是 **引用计数**。
+
+正所谓 **Bundle在，资源在，Bundle亡，资源亡**，：）
+
+以下图为例，最左边一列会标记出每个 **Bundle** 的引用计数：
 
 ![img](/img/unload-resources/screenshot5.png)
 
@@ -117,6 +121,8 @@ public void Unload(bool unloadAllLoadedObjects);
 当我们再销毁 **资源B**，部分 **Bundle** 的引用计数变为0，调用 **AssetBundle.Unload(true)** 就能把资源及时清理干净了，如下图：
 
 ![img](/img/unload-resources/screenshot7.png)
+
+只要引用计数没问题，理论上 **Resources.UnloadUnusedAssets** 也就不用了。
 
 最后，在实际项目中，并非 **AssetBundle** 卸载得越及时就越好，比如反复打开关闭一个UI，我们不需要一关闭UI就销毁 **资源** 进而卸载 **AssetBundle**，而是需要在 **资源** 上层做一些缓存策略。
 
