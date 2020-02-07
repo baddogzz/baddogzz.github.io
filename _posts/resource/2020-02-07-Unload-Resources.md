@@ -20,7 +20,7 @@ tags:
 
 ![img](/img/unload-resources/screenshot1.png)
 
-这里的 **Bundle** 在加载完 **资源A** 后就没用了，我们可以通过 **AssetBundle.Unload(false)** 把 **Bundle** 卸掉，只保留住 **资源A**。
+这里的 **Bundle** 在加载完 **资源A** 后就没用了，我们可以通过 **AssetBundle.Unload(false)** 把它卸掉，只保留住 **资源A**。
 
 如果 **资源A** 也没用了，我们可以通过 **Destroy** 接口或者 **Resources.UnloadAsset** 接口销毁它。
 
