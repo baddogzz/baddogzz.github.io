@@ -114,7 +114,7 @@ public void Unload(bool unloadAllLoadedObjects);
 
 ![img](/img/unload-resources/screenshot6.png)
 
-当我们再销毁 **资源B**，部分 **Bundle** 的引用计数变为0，调用 **AssetBundle.Unload(true)** 就能清理干净了。
+当我们再销毁 **资源B**，部分 **Bundle** 的引用计数变为0，调用 **AssetBundle.Unload(true)** 就能把资源及时清理干净了，如下图：
 
 ![img](/img/unload-resources/screenshot7.png)
 
