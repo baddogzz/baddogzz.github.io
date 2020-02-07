@@ -98,7 +98,7 @@ public void Unload(bool unloadAllLoadedObjects);
 
 此外，因为我们的 **AssetManager** 只会管理 **直接加载的资源**，假设我们先加载了 **G**，**C** 做为 **G** 的依赖被 **间接加载**，此时我们再去直接加载 **C** 就无法命中 **AssetManager** 的缓存了。对于这种情况，**AssetManager** 必须做一些额外记录，稍微有点蛋疼。
 
-最后，考虑一下 **引用计数**，假设我们已经销毁了 **G**，那么 **G** 依赖的所有Bundle引用计数会减 **1**，假设 **包含D的Bundle** 以及 **包含H的Bundle** 引用计数都为 **０** 了，选择 **AssetBundle.Unload(false)** 卸载的结果是被 **间接加载** 的 **D和H** 在 **Bundle卸载** 后依然存活着，我们的 **AssetManager** 并没有管理到它们，它们变成了 **野资源**。
+最后，考虑一下 **引用计数**，假设我们已经销毁了 **G**，那么 **G** 依赖的所有Bundle引用计数会减 **1**，假设 **包含D的Bundle** 以及 **包含H的Bundle** 引用计数都为 **０** 了，选择 **AssetBundle.Unload(false)** 的结果是被 **间接加载** 的 **D和H** 在 **Bundle卸载** 后依然存活着，我们的 **AssetManager** 并没有管理到它们，它们变成了 **野资源**。
 
 这一类 **野资源** 最终得依靠 **Resources.UnloadUnusedAssets** 来卸载，一般我们在 **场景切换** 时做这个操作。
 
