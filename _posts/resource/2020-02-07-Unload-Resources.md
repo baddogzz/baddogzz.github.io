@@ -104,7 +104,7 @@ public void Unload(bool unloadAllLoadedObjects);
 
 #### 当前项目的策略
 
-暗黑血统的策略在线上工作良好，一般来说 **切场景完全销毁** 的策略也是足够用的。
+暗黑血统的策略在线上工作良好，一般来说 **切场景时full gc** 的策略也是足够用的。
 
 当前项目，我尝试了一下 **AssetBundle.Unload(true)** 的策略：这里不再区分 **Bundle是否是叶子节点**，一切卸载的依据都是 **引用计数**，以下图为例：
 
