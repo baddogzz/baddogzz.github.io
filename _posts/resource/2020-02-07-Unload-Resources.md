@@ -88,7 +88,7 @@ public void Unload(bool unloadAllLoadedObjects);
 
 ![img](/img/unload-resources/screenshot4.png)
 
-红框标注的 **Bundle** 是可以在加载完 **资源** 后立刻卸载的。
+红框标注的 **Bundle** 可以在加载完 **资源** 后立刻卸载。
 
 我们看一下包含 **资源A和B的Bundle**，如果我们只加载了 **A**，然后就把 **Bundle** 卸载了，然后我们再加载 **B**，这个时候 **Bundle** 又要被重新加载，如果我再从这个 **Bundle** 加载 **A**，这个时候不是就有 **2个A** 了？
 
