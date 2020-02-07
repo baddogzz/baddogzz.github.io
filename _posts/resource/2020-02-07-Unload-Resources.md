@@ -124,7 +124,7 @@ public void Unload(bool unloadAllLoadedObjects);
 
 只要引用计数没问题，理论上 **Resources.UnloadUnusedAssets** 也就不用了。
 
-最后，在实际项目中，并非 **AssetBundle** 卸载得越及时就越好，比如反复打开关闭一个UI，我们不需要一关闭UI就销毁 **资源** 进而卸载 **AssetBundle**，而是需要在 **资源** 上层做一些缓存策略。
+最后，在实际项目中，并非 **AssetBundle** 卸载得越及时就越好，比如反复打开关闭一个UI，我们不需要一关闭UI就销毁 **资源** 进而卸载 **AssetBundle**，而是需要在 **资源** 上层做一些缓存策略，一般就是各种池子了。
 
 ## 结尾
 
