@@ -78,7 +78,7 @@ public void Unload(bool unloadAllLoadedObjects);
 
 + 用 **AssetBundle.Unload(false)** 来卸载 **Bundle**。
 
-+ 加载完资源后立即卸载 **叶子节点的Bunlde**，这里 **叶子节点** 表示 **没有被其他Bundle依赖**。
++ 加载完资源后立即卸载 **叶子节点的Bunlde**，这里 **叶子节点** 表示 **该Bundle没有被其他Bundle依赖**。
 
 + **非叶子节点Bundle** 的卸载完全依赖 **引用计数**。
 
