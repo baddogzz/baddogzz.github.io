@@ -100,7 +100,7 @@ public void Unload(bool unloadAllLoadedObjects);
 
 最后，考虑一下 **引用计数**，假设我们已经销毁了 **G**，那么 **G** 依赖的所有Bundle引用计数会减 **1**，假设 **包含D的Bundle** 以及 **包含H的Bundle** 引用计数都为 **０** 了，选择 **AssetBundle.Unload(false)** 的结果是被 **间接加载** 的 **D和H** 在 **Bundle卸载** 后依然存活着，我们的 **AssetManager** 并没有管理到它们，它们变成了 **野资源**。
 
-这一类 **野资源** 最终得依靠 **Resources.UnloadUnusedAssets** 来卸载，一般我们在 **场景切换** 时做这个操作。
+这一类 **野资源** 最终得依靠 **Resources.UnloadUnusedAssets** 来卸载，一般我们在 **场景切换** 时才做这个操作。
 
 #### 当前项目的策略
 
@@ -123,8 +123,6 @@ public void Unload(bool unloadAllLoadedObjects);
 ![img](/img/unload-resources/screenshot7.png)
 
 只要引用计数没问题，理论上 **Resources.UnloadUnusedAssets** 也就不用了。
-
-最后，在实际项目中，并非 **AssetBundle** 卸载得越及时就越好，比如反复打开关闭一个UI，我们不需要一关闭UI就销毁 **资源** 进而卸载 **AssetBundle**，而是需要在 **资源** 上层做一些缓存策略，一般就是各种池子了。
 
 ## 总结
 
