@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "关于 Unity Object.name 的内存分配"
+title: "关于Unity的Object.name的内存分配"
 subtitle: ""
 author: "恶毒的狗"
 header-mask: 0.2
