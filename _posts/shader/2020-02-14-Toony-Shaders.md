@@ -249,7 +249,7 @@ inline half3 StylizedFresnel(half nv, half roughness, UnityLight light, half3 no
 
 边缘的计算主要依靠 **法线向量** 和 **视线向量** 的 **点积**，值越小，越边缘。
 
-这里又是 **点积**，作者也继续 **smoothstep** 大法，让边缘光的过渡也可以线条化。
+这里又是 **点积**，作者也理所当然的继续 **smoothstep** 大法，让边缘光的过渡也可以线条化。
 
 最后上图，下图是 **小甜甜** 开关 **边缘光** 的效果对比：
 
