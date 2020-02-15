@@ -217,7 +217,7 @@ inline half StylizedSpecular(half specularTerm, fixed specSmoothness)
 }
 ```
 
-**StylizedSpecular** 函数的 **specSmoothness** 参数控制高光拖尾的长度，这个值越大，高光拖尾越小，线条感越强，如下图：
+**StylizedSpecular** 函数的 **specSmoothness** 参数控制高光拖尾的长度，这个值越大，高光拖尾越短，线条感越强，如下图：
 
 ![img](/img/toony-shaders/screenshot10.png)
 
