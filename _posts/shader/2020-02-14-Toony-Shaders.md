@@ -152,7 +152,7 @@ inline half WrapRampNL(half nl, fixed threshold, fixed smoothness)
 
 + **smoothness** 越低，则明暗过渡越快，线条感越强。
 
-下图是开关 **smoothstep** 的对比，这里的 **threshold设为0.6**，**smoothness设为0.17**：
+下图是 **smoothstep** 映射前后的对比，这里的 **threshold设为0.6**，**smoothness设为0.17**：
 
 ![img](/img/toony-shaders/screenshot6.png)
 
