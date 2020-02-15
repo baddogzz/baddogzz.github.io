@@ -199,7 +199,7 @@ half3 diffuseTermRGB = lerp(tcp2ShadowColor.rgb, tcp2HighlightColor.rgb, diffuse
 
 ![img](/img/toony-shaders/screenshot9.png)
 
-为了风格化高光，作者提供了高光项 **specularTerm** 的处理方式，还是 **smoothstep** 大法，原理和前面类似，这里我直接贴代码：
+为了风格化高光，作者提供了高光项 **specularTerm** 的风格化处理方式，还是 **smoothstep** 大法，原理和前面类似，这里我直接贴代码：
 
 ```
 #if TCP2_SPEC_TOON
