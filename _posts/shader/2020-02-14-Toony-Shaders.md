@@ -162,9 +162,9 @@ inline half WrapRampNL(half nl, fixed threshold, fixed smoothness)
 
 对于美术来说，更直接的方式是调贴图，作者提供了 **Ramp贴图** 的映射方式，这也是 **卡通渲染** 常用的方法。
 
-涉及的代码就是上一节 **WrapRamlNL** 函数的 **TCP2_RAMPTEXT** 分支，直接拿 **nl** 作为 **uv** 坐标去采样 **Ramp贴图**。 
+涉及的代码就是上一节 **WrapRamlNL** 函数的 **TCP2_RAMPTEXT** 分支，直接拿 **nl** 作为 **uv** 坐标去采样 **Ramp贴图**，就完成了映射。
 
-下图是把 **smoothstep** 换成 **Ramp贴图** 后的效果，这里我故意做了多段映射，可以看到明暗的带状过渡：
+下图是把 **smoothstep** 换成 **Ramp贴图** 后的效果，这里我故意做了多段映射，可以看到明暗的 **带状** 过渡：
 
 ![img](/img/toony-shaders/screenshot7.png)
 
