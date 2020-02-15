@@ -259,9 +259,9 @@ inline half3 StylizedFresnel(half nv, half roughness, UnityLight light, half3 no
 
 关于 [Toony Colors Pro](https://assetstore.unity.com/packages/vfx/shaders/toony-colors-pro-2-8105?aid=1101l85Tr) 的 **Stylized PBS** 就介绍到这里。
 
-可以看到，作者风格化处理的部分，主要是针对 **直接光照**，**间接光照** 还是Unity原先的流程。 
+可以看到，作者的风格化处理主要是针对 **直接光照**，**间接光照** 还是走Unity原先的流程。 
 
-[Toony Colors Pro](https://assetstore.unity.com/packages/vfx/shaders/toony-colors-pro-2-8105?aid=1101l85Tr) 的内容远不止于此，我也学到了不少新鲜玩意，比如暗部区域的素描效果，有空再写。
+此外，[Toony Colors Pro](https://assetstore.unity.com/packages/vfx/shaders/toony-colors-pro-2-8105?aid=1101l85Tr) 的内容远不止于此，还有很多有意思的效果，有空再写。
 
 好了，拜拜！
 
