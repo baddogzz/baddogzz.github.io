@@ -172,7 +172,7 @@ inline half WrapRampNL(half nl, fixed threshold, fixed smoothness)
 
 **Ramp Shading** 可以重新调整光照的 **明暗区域**，此外我们还可以对 **亮色** 和 **暗色** 进行 **偏色**，以实现一些更风格化的效果。
 
-下图是我对身体和皮肤的明暗做不同偏色后的结果：
+下图是我对身体和皮肤的明暗分别偏色后的结果：
 
 ![img](/img/toony-shaders/screenshot8.png)
 
