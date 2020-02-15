@@ -146,7 +146,11 @@ inline half WrapRampNL(half nl, fixed threshold, fixed smoothness)
 }
 ```
 
-我们可以暂时忽略 **WrapRampNL** 中的 **TCP2_DISABLE_WRAPPED_LIGHT** 和 **TCP2_RAMPTEXT** 分支，这里其实就是对 **nl** 用 **smoothstep** 做一个映射：**threshold** 越低，则亮色区域越大，**smoothness** 越低，则明暗过渡越快，线条感越强。
+我们可以暂时忽略 **WrapRampNL** 函数中的 **TCP2_DISABLE_WRAPPED_LIGHT** 和 **TCP2_RAMPTEXT** 分支，这里其实就是对 **nl** 用 **smoothstep** 做一个映射：
+
++ **threshold** 越低，则亮色区域越大
+
++ **smoothness** 越低，则明暗过渡越快，线条感越强。
 
 下图是开关 **smoothstep** 的对比，这里的 **threshold设为0.6**，**smoothness设为0.17**：
 
