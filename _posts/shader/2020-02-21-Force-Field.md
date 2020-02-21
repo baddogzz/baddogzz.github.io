@@ -115,7 +115,7 @@ fixed4 frag (fixed facing : VFACE) : SV_Target
 }
 ```
 
-可恼的是，**surface shader** 我没找到类似的设值，所以我只能通过 **dot(IN.viewDir, IN.worldNormal) 的正负** 来判断正面背面了。
+可恼的是，**surface shader** 我没找到类似的设值，这里我通过 **dot(IN.viewDir, IN.worldNormal)** 的 **正负** 来判断正面背面。
 
 当然，这样判断有一定的瑕疵，具体可以参考 [这篇帖子](https://forum.unity.com/threads/using-vface-in-surface-shader.460941/)，不过做为示例，这样已经OK了，下面贴代码：
 
