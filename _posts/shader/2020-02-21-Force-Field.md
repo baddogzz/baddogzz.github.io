@@ -97,7 +97,7 @@ inline half ComputeDepthDelta(Input IN)
 }
 ```
 
-这里提供一个 **_DepthOffset**，可以对 **深度距离** 做额外的偏移，从而调整 **交界** 区域的大小。
+这里提供一个 **_DepthOffset**，可以对 **深度距离** 做额外偏移，从而调整 **交界** 区域的大小。
 
 ## ComputeFresnel
 
