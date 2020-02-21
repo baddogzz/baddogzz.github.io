@@ -16,15 +16,9 @@ tags:
 
 ![img](/img/force-field/screenshot0.jpg)
 
-我做了一个类似的实现，丢到 **github** 上去了，地址：[https://github.com/fatdogsp/Unity-Force-Field-Effect](https://github.com/fatdogsp/Unity-Force-Field-Effect)。
+趁着有空，我做了一个类似的实现，丢到 **github** 上去了，地址：[https://github.com/fatdogsp/Unity-Force-Field-Effect](https://github.com/fatdogsp/Unity-Force-Field-Effect)。
 
-这个效果不难做，主要代码包括：
-
-+ 检测护盾的边缘
-
-+ 检测护盾和场景的交界
-
-**边缘** 和 **交界** 共同决定了护盾的 **透明度**。
+这个效果不难做，我们只需要检测出护盾的 **边缘** 以及护盾和场景的 **交界**，并依此来调整护盾的 **透明度** 即可。
 
 下图是我的第一版实现：
 
