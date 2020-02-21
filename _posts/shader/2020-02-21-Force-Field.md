@@ -26,7 +26,9 @@ tags:
 
 和 **异界锁链** 相比，三角形背面的交界没了。
 
-如果需要显示背面交界，我们首先需要 **Cull Off**，然后背面的边缘我们无需计算，下图是我添加背面交界后的效果：
+如果需要显示背面交界，我们首先需要 **Cull Off**，然后把背面的 **边缘强度** 设置为 **0**，只保留背面的 **交界强度**。
+
+下图是我添加背面交界后的效果：
 
 ![img](/img/force-field/screenshot1.png)
 
@@ -34,11 +36,11 @@ tags:
 
 ## 透明度的计算公式
 
-我们需要一个 **半透明** 的shader，**边缘** 和 **交界** 处的透明度低，其他地方透明度高。
+我们需要一个 **半透明** 的shader，**边缘** 和 **交界** 的透明度低，其他地方透明度高。
 
 这里 **透明度** 的计算方式有参考 [Brackeys的教程](https://www.youtube.com/watch?v=NiOGWZXBg4Y)，有兴趣的可以先看一下视频。
 
-用 **surface shader** 来写的话，大概的代码如下：
+整体流程用 **surface shader** 来写的话，代码如下：
 
 ```
 void surf (Input IN, inout SurfaceOutputStandard o)
@@ -69,17 +71,17 @@ half ForceFieldAlpha(Input IN, inout SurfaceOutputStandard o)
 }
 ```
 
-涉及到的三个函数如下：
+这里涉及到的如下三个函数：
 
-+ ComputeDepthDelta：计算 **交界** 强度。
++ ComputeDepthDelta：计算 **交界强度**。
 
-+ ComputeFresnel：计算 **边缘** 强度。
++ ComputeFresnel：计算 **边缘强度**。
 
-+ ComputePattern：采样透明度贴图，有了它，我们就能实现各种形状，并且做UV动画。
++ ComputePattern：计算 **整体强度** 的贴图效果和UV动画。
 
-## 计算交界
+## ComputeDepthDelta
 
-我们可以用 **当前像素的深度** 和 **背景像素的深度** 做比较，深度相距较近，则可以认为是 **交界**，代码如下：
+我们可以用 **当前像素的深度** 和 **背景像素的深度** 做比较，如果深度相距较近，则可以认为是 **交界**，代码如下：
 
 ```
 inline half ComputeDepthDelta(Input IN)
@@ -95,11 +97,13 @@ inline half ComputeDepthDelta(Input IN)
 }
 ```
 
-这里提供一个 **_DepthOffset**，可以做一些额外的调节。
+这里提供一个 **_DepthOffset**，可以对 **深度距离** 做额外的偏移，从而调整 **交界** 区域的大小。
 
-## 计算边缘
+## ComputeFresnel
 
-关于边缘的计算，我们要区分是正面还是背面，如果是 **fragment shader**，我们可以通过 **VFace** 来区分：
+关于 **边缘强度** 的计算，我们要区分是正面还是背面，背面的 **边缘强度** 永远为 **0**。
+
+如果是 **fragment shader**，我们可以通过 **VFace** 来区分正面背面：
 
 ```
 fixed4 frag (fixed facing : VFACE) : SV_Target
@@ -111,7 +115,7 @@ fixed4 frag (fixed facing : VFACE) : SV_Target
 }
 ```
 
-可恼的是，**surface shader** 我没找到类似的设置，所以我只能通过 **dot(IN.viewDir, IN.worldNormal)** 的正负来判断正面背面了。
+可恼的是，**surface shader** 我没找到类似的设值，所以我只能通过 **dot(IN.viewDir, IN.worldNormal) 的正负** 来判断正面背面了。
 
 当然，这样判断有一定的瑕疵，具体可以参考 [这篇帖子](https://forum.unity.com/threads/using-vface-in-surface-shader.460941/)，不过做为示例，这样已经OK了，下面贴代码：
 
@@ -144,17 +148,15 @@ inline half ComputeFresnel(Input IN)
 }
 ```
 
-这里如果是背面，我们的边缘强度为 **0** 即可。
-
 ## ComputePattern
 
-计算出 **边缘** 和 **边界** 后，我们把这2个值相加，就可以得到整体的 **透明度**。
+计算出 **边缘强度** 和 **边界强度** 后，我们把这2个值相加，就可以得到 **整体透明度**。
 
-这里我们还可以对 **透明度** 做一些贴图效果，比如下图：
+这里我们还可以对 **整体透明度** 做一些贴图效果，比如下图：
 
 ![img](/img/force-field/screenshot3.png)
 
-原理很简单，把 **ComputePattern** 的结果和整体 **透明度** 做 **乘法** 即可，**ComputePattern** 的代码如下：
+原理很简单，把 **ComputePattern** 的结果和 **整体透明度** 做 **乘法** 即可，**ComputePattern** 的代码如下：
 
 ```
 inline half ComputePattern(Input IN)
@@ -166,7 +168,7 @@ inline half ComputePattern(Input IN)
 
 ## 结尾
 
-实现细节就介绍到这里。
+只要明白原理，代码还是很简单的。
 
 当然，这只是基础功能，如果需要更多特性，可以参考Unity商店的 [ForceField Effects](https://assetstore.unity.com/packages/vfx/particles/spells/forcefield-effects-123431?aid=1101l85Tr&utm_source=aff) 这个插件。
 
