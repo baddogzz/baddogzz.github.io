@@ -71,7 +71,7 @@ half ForceFieldAlpha(Input IN, inout SurfaceOutputStandard o)
 }
 ```
 
-这里涉及到的如下三个函数：
+这里涉及到如下三个函数：
 
 + ComputeDepthDelta：计算 **交界强度**。
 
