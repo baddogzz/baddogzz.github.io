@@ -105,7 +105,7 @@ float pow(float x, float n)
 }
 ```
 
-下图是 **pow(cos(x), 2)** 的模拟结果，红色曲线是近似曲线，可以看到，近似效果可以接受： 
+下图是添加常数后 **pow(cos(x), 2)** 的近似效果对比，红色曲线是近似曲线，可以看到，近似效果还不错： 
 
 ![](/img/sga-pow-opt/screenshot2.png)
 
