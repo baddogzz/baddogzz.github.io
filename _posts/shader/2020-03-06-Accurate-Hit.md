@@ -10,7 +10,7 @@ tags:
   - Shader
 ---
 
-## Unreal的屏幕空间反射
+## Unreal的反射交点计算
 
 关于 **屏幕空间反射**，参考文章很多，我觉得这篇写得还是蛮好的：[Screen Space Glossy Reflections](http://roar11.com/2015/07/screen-space-glossy-reflections/)，借个图用用：
 
@@ -60,11 +60,11 @@ tags:
 
 > Find more accurate hit using line segment intersection 
 
-在判断出射线和场景相交后，这里并不着急返回当前射线对应的 **屏幕坐标**，而是根据上一段射线和当前射线相对于场景深度的偏移插值出一个更加准确的 **屏幕坐标**。
+在判断出射线和场景相交后，这里并不着急返回当前射线终点对应的 **屏幕坐标**，而是根据上一段射线和当前射线相对于场景的深度偏移 **插值** 出一个更加准确的 **屏幕坐标**。
 
 有点绕口，画个图就明了了：
 
-![](/img/accurate-hit/screenshot1.jpg)
+![](/img/accurate-hit/screenshot2.jpg)
 
 上图的 **CurrentDiff** 是正数，**LastDiff** 是负数，如果考虑正负号，则交点的屏幕坐标计算公式如下：
 
@@ -82,15 +82,17 @@ HitScreenUV = lerp(LastScreenUV, CurrentScreenUV, LastDiff / (LastDiff - Current
 
 这样就和 **Unreal** 的代码对应上了。
 
-## 改进效果
+## 效果对比
 
-我原先在 [LWRP/URP SSR Water](https://assetstore.unity.com/packages/vfx/shaders/lwrp-urp-ssr-water-155402?aid=1101l85Tr) 的交点计算中并没有上面的 **插值** 那一步，之前效果也不错，主要因为分辨率设置的比较高时候表现不会太差，此外也加了 **抖动**。
+我原先在 [LWRP/URP SSR Water](https://assetstore.unity.com/packages/vfx/shaders/lwrp-urp-ssr-water-155402?aid=1101l85Tr) 的交点计算中并没有上面的 **插值** 那一步，而是直接返回当前射线终点对应的屏幕坐标。
+
+之前效果也不错，主要是因为分辨率设置的比较高时表现不会太差，此外还加了 **抖动**。
 
 当我把分辨率调到 **1200 x 600** 时候，之前的表现就一般般了，如下图：
 
 ![](/img/accurate-hit/screenshot3.png)
 
-添加插值后：
+添加插值后，还是 **1200 x 600** 的分辨率表现就好多了：
 
 ![](/img/accurate-hit/screenshot4.png)
 
@@ -98,7 +100,7 @@ HitScreenUV = lerp(LastScreenUV, CurrentScreenUV, LastDiff / (LastDiff - Current
 
 ![](/img/accurate-hit/screenshot5.png)
 
-做为一个水的shader，这样就差不多了，因为加上水波纹，一切都是浮云：
+做为一个水的shader，这样就差不多了，因为加上水波纹后，一切都是浮云：
 
 ![](/img/accurate-hit/screenshot6.png)
 
