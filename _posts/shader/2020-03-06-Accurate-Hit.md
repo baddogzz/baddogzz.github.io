@@ -86,7 +86,7 @@ HitScreenUV = lerp(LastScreenUV, CurrentScreenUV, LastDiff / (LastDiff - Current
 
 我在 [LWRP/URP SSR Water](https://assetstore.unity.com/packages/vfx/shaders/lwrp-urp-ssr-water-155402?aid=1101l85Tr) 的光线步进交点计算中并没有上面的 **插值** 操作，而是判断出相交后直接返回当前射线终点对应的屏幕坐标。
 
-配合 **抖动**，在 **采样Step** 和 **屏幕分辨率** 比较高时，这样的做法表现其实也还不错。
+配合 **抖动**，在 **采样Step数** 和 **屏幕分辨率** 比较高时，这样的做法表现其实也还不错。
 
 不过，当我把分辨率调到 **1200 x 600** 时候，之前的表现就一般般了，如下图：
 
