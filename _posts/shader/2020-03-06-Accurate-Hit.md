@@ -88,7 +88,7 @@ HitScreenUV = lerp(LastScreenUV, CurrentScreenUV, LastDiff / (LastDiff - Current
 
 配合 **抖动**，在 **采样Step数** 和 **屏幕分辨率** 比较高时，这样的做法表现其实也还不错。
 
-不过，当我把分辨率调到 **1200 x 600** 时候，之前的表现就一般般了，如下图：
+不过，当我把分辨率调到 **1200 x 600** 时，之前的表现就一般般了，如下图：
 
 ![](/img/accurate-hit/screenshot3.png)
 
