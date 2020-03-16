@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "用ShaderGraph的Flipbook节点实现水花效果"
+title: "用Shader Graph的Flipbook节点实现水花效果"
 subtitle: ""
 author: "恶毒的狗"
 header-mask: 0.2
@@ -12,9 +12,9 @@ tags:
 
 ## 一个有趣的教程
 
-昨天看了一个老外的视频教程：[Rain Drop Ripples](https://www.youtube.com/watch?v=R6EX6dN1BOs&t=818s)，教程用 **ShaderGraph** 实现了游戏中常见的下雨天地面的水花效果。
+昨天看了一个老外的视频教程：[Rain Drop Ripples](https://www.youtube.com/watch?v=R6EX6dN1BOs&t=818s)，教程用 **Shader Graph** 实现了游戏中常见的下雨天地面的水花效果。
 
-视频中水花动画的实现和我们游戏的实现方式有所不同，他通过 **ShaderGraph** 的 **Flipbook** 节点实现了水花的 **序列图** 动画：
+视频中水花动画的实现和我们游戏的实现方式有所不同，他通过 **Shader Graph** 的 **Flipbook** 节点实现了水花的 **序列图** 动画：
 
 ![](/img/flipbook-ripples/screenshot1.png)
 
