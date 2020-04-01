@@ -104,11 +104,9 @@ envColor.rgb = DecodeHDR(envColor, _EnvCubemap_HDR).rgb;
 
 最后，需要注意的是，环境图是需要经过 **烘培** 的，不要直接把 **Skybox** 指给角色材质。
 
-## 固定尼玛
+## 题外话
 
-好了，你不是在做小甜甜。
-
-还好，哥的新地板快写好了，舒服一下：
+题外话，哥的新地板快写好了，得瑟一下：
 
 ![](/img/fix-indirect-lighting/screenshot5.png)
 
