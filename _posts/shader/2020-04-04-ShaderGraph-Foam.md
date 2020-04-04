@@ -24,7 +24,7 @@ tags:
 
 ## 泡沫的实现细节
 
-[The Illustrated Nature](https://assetstore.unity.com/packages/3d/vegetation/the-illustrated-nature-153939?aid=1101l85Tr) 是风格化渲染，水的shader其实还是比较简单的，并没有常见的 **反射** 或者 **折射**，这里主要记录一下 **泡沫** 部分的实现细节。
+[The Illustrated Nature](https://assetstore.unity.com/packages/3d/vegetation/the-illustrated-nature-153939?aid=1101l85Tr) 是风格化渲染，水的shader其实还是比较简单的，并没有常见的 **反射** 或者 **折射**，本文主要记录一下 **泡沫** 部分的实现细节。
 
 这里并不需要任何 **泡沫贴图**，只提供了一个 **泡沫颜色**，而泡沫的形状主要由如下两个部分组成：
 
