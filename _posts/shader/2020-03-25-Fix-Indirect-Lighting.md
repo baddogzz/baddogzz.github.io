@@ -102,7 +102,7 @@ envColor.rgb = DecodeHDR(envColor, _EnvCubemap_HDR).rgb;
 
 用上面代码的计算结果 **envColor** 替代Unity全局光照的 **gi.indirect.specular** 就大功告成了。
 
-最后，需要注意的是，环境图是需要经过 **烘培** 的，不要直接把 **Skybox** 指给角色材质。
+最后，需要注意的是，环境图是需要勾选 **Generate Mip Maps** 的，否则 **粗糙度** 的表现就错误了。
 
 ## 题外话
 
