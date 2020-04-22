@@ -144,6 +144,10 @@ Whitepaper](http://cdn.imgtec.com/sdk-documentation/Dual+Paraboloid+Environment+
 Unity会根据粗糙度来计算mipmap level，粗糙度越高mipmap level就越高，反射也就越模糊，代码如下：
 
 ```
+#ifndef UNITY_SPECCUBE_LOD_STEPS
+#define UNITY_SPECCUBE_LOD_STEPS (6)
+#endif
+
 half perceptualRoughnessToMipmapLevel(half perceptualRoughness)
 {
     return perceptualRoughness * UNITY_SPECCUBE_LOD_STEPS; 
