@@ -161,7 +161,7 @@ half3 Unity_GlossyEnvironment (UNITY_ARGS_TEXCUBE(tex), half4 hdr, Unity_GlossyE
 
 ![](/img/probe-reflection/screenshot9.png)
 
-之前写过一个 [屏幕空间反射的材质插件](https://assetstore.unity.com/packages/vfx/shaders/forward-ssr-floor-165465?aid=1101l85Tr&utm_source=aff)，同样是0.7的光滑度，通过多条反射射线采样平均，反射颜色的细节可以得到更多的保留，如下图：
+之前写过一个 [屏幕空间反射的材质插件](https://assetstore.unity.com/packages/vfx/shaders/forward-ssr-floor-165465?aid=1101l85Tr&utm_source=aff)，同样是0.7的光滑度，通过多条反射射线采样平均，反射颜色的细节可以得到更多保留，如下图：
 
 ![](/img/probe-reflection/screenshot10.png)
 
