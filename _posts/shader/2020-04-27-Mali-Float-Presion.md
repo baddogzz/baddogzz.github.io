@@ -41,7 +41,7 @@ half D = GGXTerm(NoH, roughness);
 half specularTerm = V * D * UNITY_PI;
 ```
 
-这里 **PBR** 的高光计算直接摘了Unity的 **BRDF1** 算法，去掉了 **菲涅尔项**，上述代码中 **roughness** 的 **精度** 影响了最终高光的计算结果。
+这里 **PBR** 的高光项计算直接摘了Unity的 **BRDF1** 算法，去掉了 **菲涅尔项**，上述代码中 **roughness** 的 **精度** 影响了最终高光的计算结果。
 
 我们看一下法线分布函数 **GGXTerm** 的代码：
 
