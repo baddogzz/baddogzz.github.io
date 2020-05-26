@@ -77,7 +77,7 @@ public class LightMapMenu : MonoBehaviour
 }
 ```
 
-这里，我们选择 **MaterialGlobalIlluminationFlags.BakedEmissive** 即可。
+这里的GI属性，我们选择 **MaterialGlobalIlluminationFlags.BakedEmissive** 即可。
 
 关于 **MaterialGlobalIlluminationFlags.BakedEmissive**，官方文档说明如下：
 
