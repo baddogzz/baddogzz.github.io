@@ -20,7 +20,7 @@ tags:
 
 ![img](/img/emission-bake/screenshot2.png)
 
-右边这个球用的是我们自定义的shader，在 **Meta Pass** 我们同样设置了 **Emission**，并且为了调试，我们把 **Albedo** 设置成了纯黑色，但是烘培的结果，自发光并未对地面产生影响。
+右边这个球用的是我们自定义的shader，在 **Meta Pass** 我们同样设置了 **Emission**，并且为了调试，我们把 **Albedo** 设置成了纯黑色，并且简化了自发光的计算，但是烘培的结果，自发光并未对地面产生影响。
 
 ![img](/img/emission-bake/screenshot3.png)
 
