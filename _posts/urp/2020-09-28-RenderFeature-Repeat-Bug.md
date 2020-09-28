@@ -42,7 +42,7 @@ tags:
 
 ![img](/img/renderfeature-repeat-bug/screenshot6.png)
 
-当然，我们也可以对不同相机设置不同的 **Renderer**，不过这里不想维护多个 **Renderer**，所以还是直接代码加个判断就好了。
+当然，我们也可以对不同相机设置不同的 **Renderer**，不过这里我不想维护多个 **Renderer**，所以还是直接代码加个判断就好了。
 
 修正后一切正常了：
 
