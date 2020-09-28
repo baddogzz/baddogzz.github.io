@@ -34,7 +34,7 @@ tags:
 
 上图的 **Setup** 流程会执行到 **RenderFeature** 的 **AddRenderPasses** 函数，而 **Execute** 流程会执行到 **RenderPass** 的 **Execute** 函数。
 
-由此可见，如果我们不对相机进行区分，所有相机都会执行一遍 **径向模糊** 这个 **RenderFeature**，这就导致了在播放这个效果时帧率显著下降。
+由此可见，如果我们不对相机进行区分，所有相机都会执行一遍 **径向模糊** 这个 **RenderFeature**，这就导致了在播放这个效果时帧率显著下降，同时UI也跟着糊掉了...
 
 ## 修正
 
