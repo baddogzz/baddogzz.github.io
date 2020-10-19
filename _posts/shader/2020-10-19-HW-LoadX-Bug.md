@@ -56,7 +56,7 @@ tags:
 
 ## 修正
 
-这里不再区分 **SHADER_API_GLES**，统一走 **SAMPLE_TEXTURE** 的方式，如下：
+修正的方式也简单，这里不再区分 **SHADER_API_GLES**，统一走 **SAMPLE_TEXTURE** 即可，如下：
 
 ```
 float refractedSceneDepth = SAMPLE_DEPTH_TEXTURE_LOD(_CameraDepthTexture, sampler_CameraDepthTexture, screenUV + offset, 0);
@@ -66,9 +66,7 @@ float refractedSceneDepth = SAMPLE_DEPTH_TEXTURE_LOD(_CameraDepthTexture, sample
 
 ![](/img/hw-loadx-bug/screenshot2.jpg)
 
-此外，我发现如果 **Graphics APIs** 选 **Vulkan**，我的华为手机表现也正常，好吧，我服了。
-
-好了，拜拜。
+此外，我发现如果 **Graphics APIs** 选 **Vulkan**，我的华为手机也正常，好吧，我服了，拜拜。
 
 
 
