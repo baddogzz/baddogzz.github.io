@@ -30,7 +30,7 @@ tags:
 
 **SHADER_API_GLES** 代表的是 **gles2.0** 设备，走的是 **SAMPLE_TEXUTRE** 的分支。
 
-而我们工程的 **Graphics APIs** 首选项是 **OpenGLES3**，并且我的华为手机也支持，所以最终代码走的是 **LOAD_TEXTURE** 这个分支。
+而我们工程的 **Graphics APIs** 首选项是 **OpenGLES3**，并且我的华为手机也支持 **gles3.0**，所以最终代码走的是 **LOAD_TEXTURE** 这个分支。
 
 ## Texture Sample Vs Texture Load
 
