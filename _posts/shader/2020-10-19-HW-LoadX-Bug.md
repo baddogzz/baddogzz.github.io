@@ -54,6 +54,20 @@ tags:
 
 道理上，作者希望 **gles3.0** 以上的设备都用 **LOAD_TEXTURE** 的方式来获取深度值，但是偏偏遇到华为手机就跪了。
 
+## 原因
+
+华为手机的 **浮点数** 问题我不是第一次遇到了，之前也写过，[https://baddogzz.github.io/2020/04/27/Mali-Float-Presion/](https://baddogzz.github.io/2020/04/27/Mali-Float-Presion/)。
+
+这次这个问题应该还是浮点数计算的问题，使用 **Texture Load** 方式，我们需要根据 **UV坐标** 计算出 **texel坐标**，代码如下：
+
+```
+_CameraDepthTexture_TexelSize.zw * saturate(screenUV + offset) * 0.9999f
+```
+
+如果 **texel坐标** 超出纹理范围，**LOAD_TEXTURE2D** 会返回 **0**。
+
+针对这种情况，作者已经对 **screenUV + offset** 做了 **saturate** 保护并且还乘了 **0.9999f**，想必也是为了规避浮点数计算的误差，但是华为手机依然还是跪了。
+
 ## 修正
 
 修正的方式也简单，这里不再区分 **SHADER_API_GLES**，统一走 **SAMPLE_TEXTURE** 即可，如下：
